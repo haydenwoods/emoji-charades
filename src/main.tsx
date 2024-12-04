@@ -1,32 +1,10 @@
 import { Devvit, useState } from "@devvit/public-api";
 
-import { Message, WebViewMountedResponse } from "@shared/types/message.js";
+import { Menu } from "@/pages/Menu.js";
+import { Create } from "@/pages/Create.js";
 
-import { WEBVIEW_ID } from "@/constants/webview.js";
-
-import { sendMessage } from "@/utils/message.js";
-
-const onWebViewMountedRequest = async (context: Devvit.Context): Promise<void> => {
-  if (!context.userId) return;
-
-  const data: WebViewMountedResponse["data"] = {};
-
-  if (context.userId) {
-    const user = await context.reddit.getUserById(context.userId);
-
-    if (user) {
-      data.user = {
-        id: user?.id,
-        username: user?.username,
-      };
-    }
-  }
-
-  sendMessage(context, {
-    type: "WEBVIEW_MOUNTED_RESPONSE",
-    data,
-  });
-};
+import { Page, PageComponent, State } from "@/types/page.js";
+import { Topic } from "@shared/types/topic.js";
 
 Devvit.configure({
   redditAPI: true,
@@ -52,51 +30,34 @@ Devvit.addMenuItem({
   },
 });
 
+const PAGE_TO_PAGE_COMPONENT: Partial<Record<Page, PageComponent>> = {
+  [Page.MENU]: Menu,
+  [Page.CREATE]: Create,
+}
+
+// TODO: Replace with a real not found page
+const NOT_FOUND_PAGE_COMPONENT: PageComponent = Menu
+
+const renderPage = (page: Page, context: Devvit.Context, state: State): JSX.Element => {
+  const component = PAGE_TO_PAGE_COMPONENT[page] ?? NOT_FOUND_PAGE_COMPONENT
+  return component(context, state)
+};
+
 Devvit.addCustomPostType({
   name: "Emoji Game",
   height: "tall",
   render: (context) => {
-    const [showWebview, setShowWebview] = useState(false);
+    // console.log(context.uiEnvironment)
+    // console.log(context.dimensions)
+    console.log(context.debug.metadata)
 
-    return (
-      <zstack height="100%" width="100%">
-        <webview
-          id={WEBVIEW_ID}
-          url="index.html"
-          height={showWebview ? "100%" : "0%"}
-          width={showWebview ? "100%" : "0%"}
-          onMessage={async (event) => {
-            const message = event as Message;
-            console.log(`Received message (${message.type})`, message);
+    const [page, setPage] = useState<Page>(Page.MENU);
+    const [createTopic, setCreateTopic] = useState<Topic | null>(null)
 
-            switch (message.type) {
-              case "WEBVIEW_MOUNTED_REQUEST":
-                return onWebViewMountedRequest(context);
-            }
-          }}
-        />
-
-        {!showWebview && (
-          <vstack height="100%" width="100%" gap="large" alignment="center middle">
-            <text style="heading" size="xxlarge" alignment="center">
-              🔥 Emoji Game
-            </text>
-
-            <vstack gap="medium">
-              <button appearance="primary" onPress={() => setShowWebview(true)}>
-                🎉 New Emoji Post
-              </button>
-
-              <hstack gap="medium">
-                <button appearance="secondary">🏆</button>
-                <button appearance="secondary">⚙️</button>
-                <button appearance="secondary">📖</button>
-              </hstack>
-            </vstack>
-          </vstack>
-        )}
-      </zstack>
-    );
+    return renderPage(page, context, {
+      page,
+      setPage,
+    })
   },
 });
 

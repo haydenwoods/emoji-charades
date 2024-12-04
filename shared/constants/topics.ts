@@ -1,5 +1,5 @@
-import { Category } from "../types/category.js";
-import { Topic } from "../types/topic.js";
+import { Category } from "@shared/types/category.js";
+import { Topic } from "@shared/types/topic.js";
 
 export const TOPICS: Topic[] = [
   {
@@ -11,7 +11,7 @@ export const TOPICS: Topic[] = [
     category: Category.TV_SHOW,
   },
   {
-    name: "Farming Simulator 22",
+    name: "Farming Simulator",
     category: Category.VIDEO_GAME,
   },
   {
