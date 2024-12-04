@@ -1,10 +1,10 @@
 import { Devvit } from "@devvit/public-api";
 
-import { Page, PageComponent } from "@/types/page.js";
+import { PageComponent } from "@/types/page.js";
 
-export const Menu: PageComponent = (context, state) => {
+export const Menu: PageComponent = ({ context, app }) => {
   const onCreatePress = () => {
-    state.setPage(Page.CREATE)
+    app.setShowWebview(true)
   }
 
   return (

@@ -4,3 +4,9 @@ export enum Category {
   VIDEO_GAME,
   BOOK,
 }
+
+export type CategoryData = {
+  name: string;
+  emoji: string;
+  color: "blue" | "orange" | "red" | "emerald";
+};

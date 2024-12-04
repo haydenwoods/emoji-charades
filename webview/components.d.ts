@@ -7,7 +7,16 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CreateChooseTopicPage: typeof import('./pages/CreateChooseTopicPage.vue')['default']
+    CreateTypePage: typeof import('./pages/CreateTypePage.vue')['default']
     GameTopicPage: typeof import('./pages/GameTopicPage.vue')['default']
+    IMaterialSymbolsArrowUpRounded: typeof import('~icons/material-symbols/arrow-up-rounded')['default']
+    IMaterialSymbolsArrowUpwardRounded: typeof import('~icons/material-symbols/arrow-upward-rounded')['default']
+    IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
+    IMaterialSymbolsBackspaceRounded: typeof import('~icons/material-symbols/backspace-rounded')['default']
+    IMaterialSymbolsBackspaceRoundedOutline: typeof import('~icons/material-symbols/backspace-rounded-outline')['default']
     UiButton: typeof import('./components/UiButton.vue')['default']
+    UiEmojiKeyboard: typeof import('./components/UiEmojiKeyboard.vue')['default']
+    UiEmojiKeyboardButton: typeof import('./components/UiEmojiKeyboardButton.vue')['default']
   }
 }

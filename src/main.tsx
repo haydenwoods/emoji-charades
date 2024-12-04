@@ -1,10 +1,12 @@
 import { Devvit, useState } from "@devvit/public-api";
 
 import { Menu } from "@/pages/Menu.js";
-import { Create } from "@/pages/Create.js";
 
-import { Page, PageComponent, State } from "@/types/page.js";
-import { Topic } from "@shared/types/topic.js";
+import { WEBVIEW_ID } from "@/constants/webview.js";
+
+import { sendMessage } from "@/utils/message.js";
+
+import { Message, WebViewMountedResponse } from "@shared/types/message.js";
 
 Devvit.configure({
   redditAPI: true,
@@ -30,34 +32,57 @@ Devvit.addMenuItem({
   },
 });
 
-const PAGE_TO_PAGE_COMPONENT: Partial<Record<Page, PageComponent>> = {
-  [Page.MENU]: Menu,
-  [Page.CREATE]: Create,
-}
+const onWebViewMountedRequest = async (context: Devvit.Context): Promise<void> => {
+  if (!context.userId) return;
 
-// TODO: Replace with a real not found page
-const NOT_FOUND_PAGE_COMPONENT: PageComponent = Menu
+  const data: WebViewMountedResponse["data"] = {};
 
-const renderPage = (page: Page, context: Devvit.Context, state: State): JSX.Element => {
-  const component = PAGE_TO_PAGE_COMPONENT[page] ?? NOT_FOUND_PAGE_COMPONENT
-  return component(context, state)
+  if (context.userId) {
+    const user = await context.reddit.getUserById(context.userId);
+
+    if (user) {
+      data.user = {
+        id: user?.id,
+        username: user?.username,
+      };
+    }
+  }
+
+  sendMessage(context, {
+    type: "WEBVIEW_MOUNTED_RESPONSE",
+    data,
+  });
 };
 
 Devvit.addCustomPostType({
   name: "Emoji Game",
   height: "tall",
   render: (context) => {
-    // console.log(context.uiEnvironment)
-    // console.log(context.dimensions)
-    console.log(context.debug.metadata)
+    const [showWebview, setShowWebview] = useState(false);
 
-    const [page, setPage] = useState<Page>(Page.MENU);
-    const [createTopic, setCreateTopic] = useState<Topic | null>(null)
+    return (
+      <zstack width="100%" height="100%">
+        <webview
+          id={WEBVIEW_ID}
+          url="index.html"
+          height={showWebview ? "100%" : "0%"}
+          width={showWebview ? "100%" : "0%"}
+          onMessage={async (event) => {
+            const message = event as Message;
+            console.log(`Received message (${message.type})`, message);
 
-    return renderPage(page, context, {
-      page,
-      setPage,
-    })
+            switch (message.type) {
+              case "WEBVIEW_MOUNTED_REQUEST":
+                return onWebViewMountedRequest(context);
+            }
+          }}
+        />
+
+        { !showWebview &&
+          <Menu context={context} app={{ showWebview, setShowWebview }} />
+        }
+      </zstack>
+    )
   },
 });
 
