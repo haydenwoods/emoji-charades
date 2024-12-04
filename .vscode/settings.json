@@ -1,0 +1,12 @@
+{
+  // Formatting
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Search
+  "search.exclude": {
+    "**/webroot/**": true
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "extends": "@devvit/public-api/devvit.tsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext", "dom", "DOM.Iterable"],
+    "target": "esnext",
+    "esModuleInterop": true,
+    "noEmit": true,
+
+    // Aliases
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@webview/*": ["./webview/*"],
+      "@shared/*": ["./shared/*"]
+    }
+  },
+  "include": ["./src/**/*", "./shared/**/*"]
+}
