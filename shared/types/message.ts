@@ -1,3 +1,4 @@
+import { PostData } from "./post-data.js";
 import { Topic } from "./topic.js";
 
 // Events
@@ -5,13 +6,18 @@ export type MountedEvent = {
   type: "MOUNTED_EVENT";
 };
 
-export type UserDataEvent = {
-  type: "USER_DATA_EVENT";
+export type LoadedEvent = {
+  type: "LOADED_EVENT";
+};
+
+export type InitialDataEvent = {
+  type: "INITIAL_DATA_EVENT";
   data: {
     user?: {
       id: string;
       username: string;
     };
+    postData?: PostData;
   };
 };
 
@@ -25,7 +31,11 @@ export type CreateRequest = {
 };
 export type CreateResponse = {
   type: "CREATE_RESPONSE";
-  data: {};
 };
 
-export type Message = MountedEvent | UserDataEvent | CreateRequest | CreateResponse;
+export type Message =
+  | MountedEvent
+  | LoadedEvent
+  | InitialDataEvent
+  | CreateRequest
+  | CreateResponse;

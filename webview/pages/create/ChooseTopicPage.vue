@@ -22,15 +22,14 @@
     </div>
 
     <div class="flex items-end gap-x-4">
-      <div class="flex flex-col items-center gap-y-1">
-        <ui-button
-          label="I don't know it"
-          emoji="🤷‍♂️"
-          variant="secondary"
-          :disabled="!hasTopicsRemaining"
-          @click="onNewTopicClicked"
-        />
-      </div>
+      <ui-button
+        label="I don't know it"
+        emoji="🤷‍♂️"
+        variant="secondary"
+        :disabled="!hasTopicsRemaining"
+        @click="onNewTopicClicked"
+      />
+
       <ui-button label="Let's start!" emoji="▶️" variant="primary" @click="onStartClicked" />
     </div>
   </div>

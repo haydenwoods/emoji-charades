@@ -4,19 +4,24 @@ import { Menu } from "@/pages/Menu.js";
 
 import { WEBVIEW_ID } from "@/constants/webview.js";
 
+import { Loading } from "./components/Loading.js";
+
 import { Message } from "@shared/types/message.js";
 import { MessageHandler } from "./types/message.js";
 
 import { onMountedEvent } from "./messages/onMountedEvent.js";
+import { onLoadedEvent } from "./messages/onLoadedEvent.js";
 import { onCreateRequest } from "./messages/onCreateRequest.js";
 
 const MESSAGE_TYPE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
   MOUNTED_EVENT: onMountedEvent,
+  LOADED_EVENT: onLoadedEvent,
   CREATE_REQUEST: onCreateRequest,
 };
 
 Devvit.configure({
   redditAPI: true,
+  redis: true,
 });
 
 Devvit.addMenuItem({
@@ -24,18 +29,14 @@ Devvit.addMenuItem({
   location: "subreddit",
   forUserType: "moderator",
   onPress: async (_event, context) => {
-    const { reddit, ui } = context;
-    const subreddit = await reddit.getCurrentSubreddit();
-    await reddit.submitPost({
-      title: "Main emoji game post",
+    const subreddit = await context.reddit.getCurrentSubreddit();
+    const post = await context.reddit.submitPost({
+      title: "Emoji Game",
       subredditName: subreddit.name,
-      preview: (
-        <vstack height="100%" width="100%" alignment="middle center">
-          <text size="large">Loading ...</text>
-        </vstack>
-      ),
+      preview: <Loading />,
     });
-    ui.showToast({ text: "Created post!" });
+    context.ui.showToast({ text: "Created Emoji Game post!" });
+    context.ui.navigateTo(post);
   },
 });
 
@@ -43,6 +44,7 @@ Devvit.addCustomPostType({
   name: "Emoji Game",
   height: "tall",
   render: (context) => {
+    const [loading, setLoading] = useState(true);
     const [showWebview, setShowWebview] = useState(false);
 
     return (
@@ -50,18 +52,33 @@ Devvit.addCustomPostType({
         <webview
           id={WEBVIEW_ID}
           url="index.html"
-          height={showWebview ? "100%" : "0%"}
-          width={showWebview ? "100%" : "0%"}
+          height={showWebview && !loading ? "100%" : "0%"}
+          width={showWebview && !loading ? "100%" : "0%"}
           onMessage={async (event) => {
             const message = event as Message;
             console.log(`Received message (${message.type})`, message);
 
             const messageHandler = MESSAGE_TYPE_TO_HANDLER[message.type];
-            await messageHandler?.(message, context);
+            if (messageHandler) {
+              await messageHandler({
+                message,
+                context,
+                app: {
+                  loading,
+                  setLoading,
+                  showWebview,
+                  setShowWebview,
+                },
+              });
+            }
           }}
         />
 
-        {!showWebview && <Menu context={context} app={{ showWebview, setShowWebview }} />}
+        {!showWebview && !loading && (
+          <Menu context={context} app={{ showWebview, setShowWebview }} />
+        )}
+
+        {loading && <Loading />}
       </zstack>
     );
   },

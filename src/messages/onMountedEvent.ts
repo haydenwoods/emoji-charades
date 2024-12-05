@@ -1,23 +1,37 @@
-import { MountedEvent } from "@shared/types/message.js";
+import { InitialDataEvent, MountedEvent } from "@shared/types/message.js";
 
 import { sendMessage } from "@/utils/message.js";
 
 import { MessageHandler } from "@/types/message.js";
+import { PostData } from "@shared/types/post-data.js";
 
-export const onMountedEvent: MessageHandler<MountedEvent> = async (message, context) => {
+export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, app }) => {
+  const { postId, userId } = context;
+
+  let data: InitialDataEvent["data"] = {};
+
   // Send user data event if there is a valid user in the context
-  if (context.userId) {
-    const user = await context.reddit.getUserById(context.userId);
+  if (userId) {
+    const user = await context.reddit.getUserById(userId);
     if (user) {
-      sendMessage(context, {
-        type: "USER_DATA_EVENT",
-        data: {
-          user: {
-            id: user.id,
-            username: user.username,
-          },
-        },
-      });
+      data.user = {
+        id: user.id,
+        username: user.username,
+      };
     }
   }
+
+  // Send the post data if there is valid post in the context
+  if (postId) {
+    const postData = (await context.redis.hGetAll(`post:${postId}`)) as PostData;
+    if (Object.keys(postData).length > 0) {
+      data.postData = postData;
+      app.setShowWebview(true);
+    }
+  }
+
+  sendMessage(context, {
+    type: "INITIAL_DATA_EVENT",
+    data,
+  });
 };

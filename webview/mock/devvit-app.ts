@@ -1,4 +1,6 @@
-import { Message } from "@shared/types/message";
+import { TOPICS } from "@shared/constants/topics";
+
+import { Message, InitialDataEvent } from "@shared/types/message";
 
 const sendMessage = (message: Message) => {
   window.postMessage({
@@ -15,14 +17,28 @@ export const mockMessages = () => {
 
     switch (message.type) {
       case "MOUNTED_EVENT":
-        return sendMessage({
-          type: "USER_DATA_EVENT",
+        const user: InitialDataEvent["data"]["user"] = {
+          id: "t2_12345",
+          username: "Username",
+        };
+        const topic = TOPICS[0];
+
+        sendMessage({
+          type: "INITIAL_DATA_EVENT",
           data: {
-            user: {
-              id: "t2_12345",
-              username: "Username",
+            user,
+            postData: {
+              topicName: topic.name,
+              topicCategory: topic.category.toString(),
+              sentence: "🌾🚜🎮",
+              createdBy: user.id,
             },
           },
+        });
+        break;
+      case "CREATE_REQUEST":
+        return sendMessage({
+          type: "CREATE_RESPONSE",
         });
     }
   });

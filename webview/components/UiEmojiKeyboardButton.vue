@@ -41,7 +41,7 @@ const cvaButton = cva(
       variant: {
         key: [
           "bg-white",
-          "inset-ring-2 inset-ring-neutral-200",
+          "inset-ring-2 inset-ring-neutral-300",
           "inset-shadow-sm inset-shadow-neutral-200/20",
         ],
         action: [
