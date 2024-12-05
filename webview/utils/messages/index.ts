@@ -1,4 +1,4 @@
-import { Message } from "@shared/types/message";
+import { Message } from "../../../shared/types/message";
 
 export const sendMessage = (message: Message) => {
   console.log(`Sending message (${message.type})`, message);

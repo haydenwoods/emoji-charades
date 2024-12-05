@@ -29,8 +29,8 @@ withDefaults(
 
 const cvaButton = cva(
   [
-    "flex items-center gap-x-2",
-    "py-2 px-4",
+    "flex items-center gap-x-2.5",
+    "py-2.5 px-5",
     "rounded-full",
     "not-disabled:shadow-md",
     "transition-all",
@@ -41,9 +41,8 @@ const cvaButton = cva(
       variant: {
         primary: [
           "bg-blue-300",
-          "inset-shadow-sm inset-shadow-white/10",
-          "ring ring-blue-400",
-          "inset-ring inset-ring-white/10",
+          "inset-shadow-sm inset-shadow-blue-400/20",
+          "ring-2 ring-blue-400",
         ],
         secondary: ["ring ring-neutral-700 disabled:ring-neutral-400"],
       },
@@ -51,14 +50,14 @@ const cvaButton = cva(
   },
 );
 
-const cvaLabel = cva(["text-lg font-medium"], {
+const cvaLabel = cva(["text-xl font-medium"], {
   variants: {
     variant: {
-      primary: ["text-blue-950"],
+      primary: ["text-blue-900"],
       secondary: ["text-neutral-700 in-disabled:text-neutral-400"],
     },
   },
 });
 
-const cvaEmoji = cva(["text-xl in-disabled:opacity-50"]);
+const cvaEmoji = cva(["text-2xl in-disabled:opacity-50"]);
 </script>

@@ -3,6 +3,8 @@ export enum Category {
   TV_SHOW,
   VIDEO_GAME,
   BOOK,
+  CHARACTER,
+  FAMOUS_PERSON,
 }
 
 export type CategoryData = {

@@ -1,39 +1,56 @@
 <template>
   <div
-    class="grid w-full gap-3"
+    class="grid w-full max-w-4xl gap-2 md:gap-3"
     :style="{
       gridTemplateRows: `repeat(${ROWS}, minmax(0, 1fr))`,
       gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))`,
     }"
   >
     <!-- Search -->
-    <div class="col-start-4 col-span-3 row-start-1 self-end bg-white rounded-full h-2/3">
+    <div
+      class="col-start-3 col-span-4 row-start-1 self-end bg-white rounded-full h-2/3 inset-ring-2 inset-ring-neutral-200"
+    >
       <input
         type="text"
         v-model="search"
-        class="h-full w-full rounded-full py-1 px-4 font-medium"
-        placeholder="Search"
+        class="h-full w-full rounded-full py-1 px-6 font-medium text-xl placeholder:text-neutral-400"
+        placeholder="Search..."
+        maxlength="16"
+        autofocus
       />
     </div>
 
     <!-- Keys -->
-    <ui-emoji-keyboard-button
-      v-for="(emoji, i) in emojis"
+    <div
+      v-for="(_, i) in KEYS"
       :key="i"
-      :emoji="emoji"
-      variant="key"
       :style="{
         gridRow: Math.ceil((i + 1) / KEYS_PER_ROW) + (KEYS_ROW_START - 1),
       }"
-      @click="emit('click:key', emoji)"
-    />
+      class="aspect-square flex items-center justify-center"
+    >
+      <ui-emoji-keyboard-button
+        v-if="emojis[i]"
+        :emoji="emojis[i]"
+        variant="key"
+        @click="emit('click:key', emojis[i])"
+      />
+
+      <div
+        v-else
+        class="size-full scale-95 bg-white inset-ring-2 inset-ring-neutral-200 opacity-40 rounded-full"
+      ></div>
+    </div>
 
     <!-- Actions -->
     <ui-emoji-keyboard-button
       variant="action"
       :style="{ gridRow: ACTION_ROW_START, gridColumn: ACTION_COLUMN_START }"
+      @click="emit('click:submit')"
     >
-      <i-material-symbols-arrow-upward-rounded class="text-2xl text-blue-950" />
+      <template #icon>
+        <i-material-symbols-check-rounded />
+      </template>
     </ui-emoji-keyboard-button>
 
     <ui-emoji-keyboard-button
@@ -41,7 +58,9 @@
       :style="{ gridRow: ACTION_ROW_START + 1, gridColumn: ACTION_COLUMN_START }"
       @click="emit('click:backspace')"
     >
-      <i-material-symbols-backspace-outline-rounded class="text-2xl text-blue-950" />
+      <template #icon>
+        <i-material-symbols-backspace-outline-rounded />
+      </template>
     </ui-emoji-keyboard-button>
   </div>
 </template>
@@ -55,12 +74,12 @@ import { EMOJIS } from "../constants/emojis";
 import { Emoji } from "../types/emoji";
 
 const ROWS = 3;
-const COLS = 9;
+const COLS = 8;
 
 const KEYS_ROW_START = 2;
 const KEYS_ROW_END = 3;
 const KEYS_COL_START = 1;
-const KEYS_COL_END = 8;
+const KEYS_COL_END = 7;
 const KEYS_ROWS = KEYS_ROW_END - KEYS_ROW_START + 1;
 const KEYS_COLS = KEYS_COL_END - KEYS_COL_START + 1;
 
@@ -68,11 +87,12 @@ const KEYS = KEYS_ROWS * KEYS_COLS;
 const KEYS_PER_ROW = KEYS / KEYS_ROWS;
 
 const ACTION_ROW_START = 2;
-const ACTION_COLUMN_START = 9;
+const ACTION_COLUMN_START = 8;
 
 const emit = defineEmits<{
   (event: "click:key", emoji: Emoji): void;
   (event: "click:backspace"): void;
+  (event: "click:submit"): void;
 }>();
 
 const search = ref<string>("");

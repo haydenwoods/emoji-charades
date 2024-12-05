@@ -4,7 +4,7 @@
       <div class="flex items-center gap-x-3">
         <h2 class="text-xl text-neutral-800 font-medium">Your topic is a</h2>
         <span
-          class="rounded-full px-3 py-1.5 inline-flex items-center gap-x-2"
+          class="rounded-full px-2.5 py-1 inline-flex items-center gap-x-1.5"
           :class="
             {
               blue: 'bg-blue-300 text-blue-950',
@@ -40,15 +40,15 @@
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 
-import { Page, useAppStore } from "../stores/app";
-import { useCreateStore } from "../stores/create";
+import { Page, useAppStore } from "../../stores/app";
+import { useCreateStore } from "../../stores/create";
 
-import { CATEGORY_DATA } from "../../shared/constants/categories";
+import { CATEGORY_DATA } from "../../../shared/constants/categories";
 
-import { getRandomTopic } from "../../shared/utils/topics";
+import { getRandomTopic } from "../../../shared/utils/topics";
 
-import { Topic } from "../../shared/types/topic";
-import { CategoryData } from "../../shared/types/category";
+import { Topic } from "../../../shared/types/topic";
+import { CategoryData } from "../../../shared/types/category";
 
 const appStore = useAppStore();
 const createStore = useCreateStore();

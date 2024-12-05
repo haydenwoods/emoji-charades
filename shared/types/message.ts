@@ -1,9 +1,12 @@
-export type WebViewMountedRequest = {
-  type: "WEBVIEW_MOUNTED_REQUEST";
+import { Topic } from "./topic.js";
+
+// Events
+export type MountedEvent = {
+  type: "MOUNTED_EVENT";
 };
 
-export type WebViewMountedResponse = {
-  type: "WEBVIEW_MOUNTED_RESPONSE";
+export type UserDataEvent = {
+  type: "USER_DATA_EVENT";
   data: {
     user?: {
       id: string;
@@ -12,4 +15,17 @@ export type WebViewMountedResponse = {
   };
 };
 
-export type Message = WebViewMountedRequest | WebViewMountedResponse;
+// Request and Response
+export type CreateRequest = {
+  type: "CREATE_REQUEST";
+  data: {
+    topic: Topic;
+    sentence: string;
+  };
+};
+export type CreateResponse = {
+  type: "CREATE_RESPONSE";
+  data: {};
+};
+
+export type Message = MountedEvent | UserDataEvent | CreateRequest | CreateResponse;

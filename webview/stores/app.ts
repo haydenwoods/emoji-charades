@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 
-import { WebViewMountedResponse } from "@shared/types/message";
+import { UserDataEvent } from "@shared/types/message";
 
 export enum Page {
   CREATE_CHOOSE_TOPIC,
@@ -9,7 +9,7 @@ export enum Page {
 }
 
 export const useAppStore = defineStore("app", () => {
-  const user = ref<WebViewMountedResponse["data"]["user"]>();
+  const user = ref<UserDataEvent["data"]["user"]>();
   const page = ref<Page>(Page.CREATE_CHOOSE_TOPIC);
 
   return {

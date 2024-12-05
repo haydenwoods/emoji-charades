@@ -1,10 +1,12 @@
 <template>
-  <button :class="button({ variant })">
-    <slot>
-      <span v-if="emoji" class="text-4xl">
-        {{ emoji.value }}
-      </span>
-    </slot>
+  <button :class="cvaButton({ variant })">
+    <span v-if="$slots.icon" :class="cvaIcon({ variant })">
+      <slot name="icon"></slot>
+    </span>
+
+    <span v-else-if="emoji" class="text-4xl md:text-5xl">
+      {{ emoji.value }}
+    </span>
   </button>
 </template>
 
@@ -26,22 +28,38 @@ withDefaults(
   },
 );
 
-const button = cva(
+const cvaButton = cva(
   [
     "flex items-center justify-center",
-    "shadow-md shadow-blue-100/10",
+    "size-full",
     "rounded-full",
-    "aspect-square",
     "transition-all",
-    "hover:scale-104 active:scale-96",
+    "hover:scale-105 active:scale-95",
   ],
   {
     variants: {
       variant: {
-        key: ["bg-white"],
-        action: ["bg-blue-300"],
+        key: [
+          "bg-white",
+          "inset-ring-2 inset-ring-neutral-200",
+          "inset-shadow-sm inset-shadow-neutral-200/20",
+        ],
+        action: [
+          "bg-blue-300",
+          "inset-shadow-sm inset-shadow-white/10",
+          "inset-ring-2 inset-ring-blue-400",
+        ],
       },
     },
   },
 );
+
+const cvaIcon = cva(["text-3xl md:text-4xl"], {
+  variants: {
+    variant: {
+      key: ["text-neutral-800"],
+      action: ["text-blue-800"],
+    },
+  },
+});
 </script>

@@ -21,4 +21,14 @@ export const CATEGORY_DATA: Record<Category, CategoryData> = {
     emoji: "📖",
     color: "blue",
   },
+  [Category.CHARACTER]: {
+    name: "Character",
+    emoji: "👤",
+    color: "blue",
+  },
+  [Category.FAMOUS_PERSON]: {
+    name: "Famous Person",
+    emoji: "🌟",
+    color: "blue",
+  },
 };

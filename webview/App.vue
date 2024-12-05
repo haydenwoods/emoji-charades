@@ -1,7 +1,7 @@
 <template>
-  <div class="size-full p-3 sm:p-6">
-    <create-choose-topic-page v-if="page === Page.CREATE_CHOOSE_TOPIC" />
-    <create-type-page v-else-if="page === Page.CREATE_TYPE" />
+  <div class="size-full p-4 md:p-6">
+    <choose-topic-page v-if="page === Page.CREATE_CHOOSE_TOPIC" />
+    <type-page v-else-if="page === Page.CREATE_TYPE" />
   </div>
 </template>
 
@@ -18,9 +18,7 @@ const { page } = storeToRefs(appStore);
 
 onMounted(() => {
   sendMessage({
-    type: "WEBVIEW_MOUNTED_REQUEST",
+    type: "MOUNTED_EVENT",
   });
-
-  document.documentElement.focus();
 });
 </script>

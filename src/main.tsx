@@ -4,9 +4,16 @@ import { Menu } from "@/pages/Menu.js";
 
 import { WEBVIEW_ID } from "@/constants/webview.js";
 
-import { sendMessage } from "@/utils/message.js";
+import { Message } from "@shared/types/message.js";
+import { MessageHandler } from "./types/message.js";
 
-import { Message, WebViewMountedResponse } from "@shared/types/message.js";
+import { onMountedEvent } from "./messages/onMountedEvent.js";
+import { onCreateRequest } from "./messages/onCreateRequest.js";
+
+const MESSAGE_TYPE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
+  MOUNTED_EVENT: onMountedEvent,
+  CREATE_REQUEST: onCreateRequest,
+};
 
 Devvit.configure({
   redditAPI: true,
@@ -32,28 +39,6 @@ Devvit.addMenuItem({
   },
 });
 
-const onWebViewMountedRequest = async (context: Devvit.Context): Promise<void> => {
-  if (!context.userId) return;
-
-  const data: WebViewMountedResponse["data"] = {};
-
-  if (context.userId) {
-    const user = await context.reddit.getUserById(context.userId);
-
-    if (user) {
-      data.user = {
-        id: user?.id,
-        username: user?.username,
-      };
-    }
-  }
-
-  sendMessage(context, {
-    type: "WEBVIEW_MOUNTED_RESPONSE",
-    data,
-  });
-};
-
 Devvit.addCustomPostType({
   name: "Emoji Game",
   height: "tall",
@@ -71,18 +56,14 @@ Devvit.addCustomPostType({
             const message = event as Message;
             console.log(`Received message (${message.type})`, message);
 
-            switch (message.type) {
-              case "WEBVIEW_MOUNTED_REQUEST":
-                return onWebViewMountedRequest(context);
-            }
+            const messageHandler = MESSAGE_TYPE_TO_HANDLER[message.type];
+            await messageHandler?.(message, context);
           }}
         />
 
-        { !showWebview &&
-          <Menu context={context} app={{ showWebview, setShowWebview }} />
-        }
+        {!showWebview && <Menu context={context} app={{ showWebview, setShowWebview }} />}
       </zstack>
-    )
+    );
   },
 });
 

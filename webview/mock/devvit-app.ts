@@ -14,9 +14,9 @@ export const mockMessages = () => {
     const message = event.data as Message;
 
     switch (message.type) {
-      case "WEBVIEW_MOUNTED_REQUEST":
+      case "MOUNTED_EVENT":
         return sendMessage({
-          type: "WEBVIEW_MOUNTED_RESPONSE",
+          type: "USER_DATA_EVENT",
           data: {
             user: {
               id: "t2_12345",
