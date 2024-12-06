@@ -10,11 +10,13 @@ export enum Page {
 }
 
 export const useAppStore = defineStore("app", () => {
-  const user = ref<InitialDataEvent["data"]["user"]>();
+  const loading = ref<boolean>(true);
   const page = ref<Page>(Page.CREATE_CHOOSE_TOPIC);
+  const user = ref<InitialDataEvent["data"]["user"]>();
 
   return {
-    user,
+    loading,
     page,
+    user,
   };
 });

@@ -19,6 +19,7 @@ export const onInitialDataEvent = (message: InitialDataEvent) => {
     appStore.page = Page.GUESS;
   }
 
+  appStore.loading = false;
   // Let the root app know we are now loaded
   sendMessage({
     type: "LOADED_EVENT",

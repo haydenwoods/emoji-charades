@@ -30,7 +30,7 @@
         @click="onNewTopicClicked"
       />
 
-      <ui-button label="Let's start!" emoji="▶️" variant="primary" @click="onStartClicked" />
+      <ui-button label="Let's start!" emoji="🚀" variant="primary" @click="onStartClicked" />
     </div>
   </div>
 </template>

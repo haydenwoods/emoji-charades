@@ -1,22 +1,13 @@
 <template>
   <div class="size-full flex flex-col items-center justify-center">
-    <div class="flex flex-col gap-y-1 items-center">
-      <h1 class="text-xl text-center">
-        Your topic is <span class="font-semibold">"{{ topic.name }}"</span>
-      </h1>
-      <h2 class="text-neutral-500 text-sm text-center max-w-md">
-        Click on the emojis below to start typing out your sentence. If you can't see one that fits,
-        try searching for it instead.
-      </h2>
-    </div>
+    <h1 class="text-xl text-center">
+      Your topic is <span class="font-semibold">"{{ topic.name }}"</span>
+    </h1>
 
-    <div class="flex items-center gap-4 flex-wrap justify-center my-auto">
-      <span v-for="(emoji, i) in emojis" :key="i" class="text-6xl">
-        {{ emoji.value }}
-      </span>
-    </div>
+    <ui-emojis :emojis="emojis" />
 
     <ui-emoji-keyboard
+      :submit-disabled="!canSubmit"
       @click:key="onClickKey"
       @click:backspace="onClickBackspace"
       @click:submit="onClickSubmit"
@@ -25,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useCreateStore } from "../../stores/create";
@@ -37,10 +28,14 @@ import { Emoji } from "../../types/emoji";
 const createStore = useCreateStore();
 const { topic } = storeToRefs(createStore);
 
-const emojis = ref<Emoji[]>([]);
+const emojis = ref<string[]>([]);
+
+const canSubmit = computed(() => {
+  return emojis.value.length > 0;
+});
 
 const onClickKey = (emoji: Emoji) => {
-  emojis.value.push(emoji);
+  emojis.value.push(emoji.value);
 };
 
 const onClickBackspace = () => {
@@ -48,7 +43,9 @@ const onClickBackspace = () => {
 };
 
 const onClickSubmit = () => {
-  const sentence: string = emojis.value.map(({ value }) => value).join("");
+  if (!canSubmit.value) return;
+
+  const sentence: string = emojis.value.join("");
   sendMessage({
     type: "CREATE_REQUEST",
     data: {

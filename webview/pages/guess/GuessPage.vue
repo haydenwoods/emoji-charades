@@ -1,13 +1,15 @@
 <template>
   <div class="size-full flex flex-col items-center justify-center">
-    <div class="flex items-center gap-4 flex-wrap justify-center my-auto">
-      <span v-for="(emoji, i) in emojis" :key="i" class="text-6xl">
-        {{ emoji }}
-      </span>
-    </div>
+    <ui-emojis :emojis="emojis" />
 
     <div class="flex items-center gap-x-4 max-w-xl">
-      <ui-input placeholder="Guess..." autofocus v-model="guess">
+      <ui-input
+        id="input"
+        placeholder="Guess..."
+        autofocus
+        v-model="guess"
+        @keydown.enter="onKeydownEnter"
+      >
         <template #after>
           <button
             type="button"
@@ -17,6 +19,7 @@
           </button>
         </template>
       </ui-input>
+
       <ui-button label="Hint" emoji="💡" variant="secondary" />
     </div>
   </div>
@@ -26,8 +29,12 @@
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { emojiPattern } from "regex-combined-emojis";
+import { stringSimilarity } from "string-similarity-js";
+import { animate } from "motion";
 
 import { useGuessStore } from "../../stores/guess";
+
+import { sendMessage } from "../../utils/messages";
 
 const guessStore = useGuessStore();
 const { postData } = storeToRefs(guessStore);
@@ -41,4 +48,33 @@ const emojis = computed<string[]>(() => {
   const emojis = Array.from(matches).flat();
   return emojis;
 });
+
+const submitGuess = () => {
+  if (!postData.value) return;
+
+  const trimmedGuess = guess.value.trim();
+  if (trimmedGuess.length <= 0) return;
+
+  const similarity = stringSimilarity(trimmedGuess, postData.value.topicName);
+
+  if (similarity > 0.9) {
+    // Correct
+  } else {
+    animate("#input", {
+      x: [0, 6, -6, 6, -6, 6, -6, 0],
+    });
+  }
+
+  sendMessage({
+    type: "GUESS_REQUEST",
+    data: {
+      guess: trimmedGuess,
+    },
+  });
+};
+
+const onKeydownEnter = (event: Event) => {
+  event.preventDefault();
+  submitGuess();
+};
 </script>

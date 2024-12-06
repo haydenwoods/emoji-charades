@@ -6,7 +6,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   // Search
-  "search.exclude": {
+  "files.exclude": {
     "**/webroot/**": true
   },
   // TailwindCSS

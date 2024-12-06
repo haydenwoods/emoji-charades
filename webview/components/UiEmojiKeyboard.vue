@@ -46,6 +46,7 @@
     <ui-emoji-keyboard-button
       variant="action"
       :style="{ gridRow: ACTION_ROW_START, gridColumn: ACTION_COLUMN_START }"
+      :disabled="submitDisabled"
       @click="emit('click:submit')"
     >
       <template #icon>
@@ -88,6 +89,10 @@ const KEYS_PER_ROW = KEYS / KEYS_ROWS;
 
 const ACTION_ROW_START = 2;
 const ACTION_COLUMN_START = 8;
+
+defineProps<{
+  submitDisabled?: boolean;
+}>();
 
 const emit = defineEmits<{
   (event: "click:key", emoji: Emoji): void;

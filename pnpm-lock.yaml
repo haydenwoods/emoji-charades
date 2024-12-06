@@ -38,6 +38,9 @@ importers:
       regex-combined-emojis:
         specifier: ^1.6.0
         version: 1.6.0
+      string-similarity-js:
+        specifier: ^2.1.4
+        version: 2.1.4
       tailwind-merge:
         specifier: ^2.5.5
         version: 2.5.5
@@ -1855,6 +1858,9 @@ packages:
 
   spdx-license-ids@3.0.20:
     resolution: {integrity: sha512-jg25NiDV/1fLtSgEgyvVyDunvaNHbuwF9lfNV17gSmPFAlYzdfNBlLtLzXTevwkPj7DhGbmN9VnmJIgLnhvaBw==}
+
+  string-similarity-js@2.1.4:
+    resolution: {integrity: sha512-uApODZNjCHGYROzDSAdCmAHf60L/pMDHnP/yk6TAbvGg7JSPZlSto/ceCI7hZEqzc53/juU2aOJFkM2yUVTMTA==}
 
   string.prototype.padend@3.1.6:
     resolution: {integrity: sha512-XZpspuSB7vJWhvJc9DLSlrXl1mcA2BdoY5jjnS135ydXqLoqhs96JjDtCkjJEQHvfqZIp9hBuBMgI589peyx9Q==}
@@ -3944,6 +3950,8 @@ snapshots:
       spdx-license-ids: 3.0.20
 
   spdx-license-ids@3.0.20: {}
+
+  string-similarity-js@2.1.4: {}
 
   string.prototype.padend@3.1.6:
     dependencies:

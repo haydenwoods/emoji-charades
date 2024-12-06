@@ -1,5 +1,5 @@
 <template>
-  <div class="size-full p-6 md:p-8">
+  <div v-if="!loading" class="size-full p-6 md:p-8">
     <choose-topic-page v-if="page === Page.CREATE_CHOOSE_TOPIC" />
     <type-page v-else-if="page === Page.CREATE_TYPE" />
     <guess-page v-else-if="page === Page.GUESS" />
@@ -15,7 +15,7 @@ import { useAppStore, Page } from "./stores/app.js";
 import { sendMessage } from "./utils/messages/index.js";
 
 const appStore = useAppStore();
-const { page } = storeToRefs(appStore);
+const { loading, page } = storeToRefs(appStore);
 
 onMounted(() => {
   sendMessage({

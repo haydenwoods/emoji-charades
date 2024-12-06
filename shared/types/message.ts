@@ -33,9 +33,24 @@ export type CreateResponse = {
   type: "CREATE_RESPONSE";
 };
 
+export type GuessRequest = {
+  type: "GUESS_REQUEST";
+  data: {
+    guess: string;
+  };
+};
+export type GuessResponse = {
+  type: "GUESS_RESPONSE";
+  data: {
+    correct: boolean;
+  };
+};
+
 export type Message =
   | MountedEvent
   | LoadedEvent
   | InitialDataEvent
   | CreateRequest
-  | CreateResponse;
+  | CreateResponse
+  | GuessRequest
+  | GuessResponse;

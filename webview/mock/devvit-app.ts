@@ -21,18 +21,18 @@ export const mockMessages = () => {
           id: "t2_12345",
           username: "Username",
         };
-        const topic = TOPICS[0];
+        const topic = TOPICS.find(({ name }) => name === "Farming Simulator") ?? TOPICS[0];
 
         sendMessage({
           type: "INITIAL_DATA_EVENT",
           data: {
             user,
-            postData: {
-              topicName: topic.name,
-              topicCategory: topic.category.toString(),
-              sentence: "🌾🚜🎮",
-              createdBy: user.id,
-            },
+            // postData: {
+            //   topicName: topic.name,
+            //   topicCategory: topic.category.toString(),
+            //   sentence: "🌾🚜🎮",
+            //   createdBy: user.id,
+            // },
           },
         });
         break;

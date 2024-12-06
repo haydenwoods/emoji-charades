@@ -34,7 +34,7 @@ const cvaButton = cva(
     "size-full",
     "rounded-full",
     "transition-all",
-    "hover:scale-105 active:scale-95",
+    "hover:not-disabled:scale-105 active:not-disabled:scale-95",
   ],
   {
     variants: {
@@ -45,9 +45,9 @@ const cvaButton = cva(
           "inset-shadow-sm inset-shadow-neutral-200/20",
         ],
         action: [
-          "bg-blue-300",
+          "bg-blue-300 disabled:bg-blue-100",
           "inset-shadow-sm inset-shadow-white/10",
-          "inset-ring-2 inset-ring-blue-400",
+          "inset-ring-2 inset-ring-blue-400 disabled:inset-ring-blue-200",
         ],
       },
     },
@@ -58,7 +58,7 @@ const cvaIcon = cva(["text-3xl md:text-4xl"], {
   variants: {
     variant: {
       key: ["text-neutral-800"],
-      action: ["text-blue-800"],
+      action: ["text-blue-800 in-disabled:text-blue-300"],
     },
   },
 });
