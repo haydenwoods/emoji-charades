@@ -1,29 +1,22 @@
 <template>
-  <div class="size-full flex flex-col items-center justify-center">
-    <h1 class="text-xl text-center">
-      Your topic is <span class="font-semibold">"{{ topic.name }}"</span>
-    </h1>
-
-    <ui-emojis :emojis="emojis" />
-
-    <ui-emoji-keyboard
-      :submit-disabled="!canSubmit"
-      @click:key="onClickKey"
-      @click:backspace="onClickBackspace"
-      @click:submit="onClickSubmit"
-    />
-  </div>
+  <ui-emojis :emojis="emojis" />
+  <ui-emoji-keyboard
+    :submit-disabled="!canSubmit"
+    @click:key="onClickKey"
+    @click:backspace="onClickBackspace"
+    @click:submit="onClickSubmit"
+  />
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 
-import { useCreateStore } from "../../stores/create";
+import { useCreateStore } from "../../../stores/create";
 
-import { sendMessage } from "../../utils/messages";
+import { sendMessage } from "../../../utils/messages";
 
-import { Emoji } from "../../types/emoji";
+import { Emoji } from "../../../types/emoji";
 
 const createStore = useCreateStore();
 const { topic } = storeToRefs(createStore);

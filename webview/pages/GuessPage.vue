@@ -32,9 +32,9 @@ import { emojiPattern } from "regex-combined-emojis";
 import { stringSimilarity } from "string-similarity-js";
 import { animate } from "motion";
 
-import { useGuessStore } from "../../stores/guess";
+import { useGuessStore } from "../stores/guess";
 
-import { sendMessage } from "../../utils/messages";
+import { sendMessage } from "../utils/messages";
 
 const guessStore = useGuessStore();
 const { postData } = storeToRefs(guessStore);
@@ -52,12 +52,16 @@ const emojis = computed<string[]>(() => {
 const submitGuess = () => {
   if (!postData.value) return;
 
+  const { topic } = postData.value;
+
   const trimmedGuess = guess.value.trim();
   if (trimmedGuess.length <= 0) return;
 
-  const similarity = stringSimilarity(trimmedGuess, postData.value.topicName);
+  const topicNames = [topic.name, ...(topic.alternateNames ?? [])];
+  const topicNameSimilarities = topicNames.map((name) => stringSimilarity(trimmedGuess, name));
+  const highestSimilarity = Math.max(...topicNameSimilarities);
 
-  if (similarity > 0.9) {
+  if (highestSimilarity > 0.9) {
     // Correct
   } else {
     animate("#input", {

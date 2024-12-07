@@ -18,15 +18,18 @@ export const TOPICS: Topic[] = [
   },
   {
     name: "Parks and Recreation",
+    alternateNames: ["Parks and Rec", "P and R", "P&R"],
     category: Category.TV_SHOW,
   },
   // Video Games
   {
     name: "Farming Simulator",
+    alternateNames: ["Farming Sim"],
     category: Category.VIDEO_GAME,
   },
   {
     name: "Grand Theft Auto",
+    alternateNames: ["GTA"],
     category: Category.VIDEO_GAME,
   },
   // Books

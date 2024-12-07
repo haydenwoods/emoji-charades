@@ -39,21 +39,18 @@
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 
-import { Page, useAppStore } from "../../stores/app";
-import { useCreateStore } from "../../stores/create";
+import { useCreateStore, CreateStage } from "../../../stores/create";
 
-import { CATEGORY_DATA } from "../../../shared/constants/categories";
+import { CATEGORY_DATA } from "../../../../shared/constants/categories";
 
-import { getRandomTopic } from "../../../shared/utils/topics";
+import { getRandomTopic } from "../../../../shared/utils/topics";
 
-import { Topic } from "../../../shared/types/topic";
-import { CategoryData } from "../../../shared/types/category";
+import { Topic } from "../../../../shared/types/topic";
+import { CategoryData } from "../../../../shared/types/category";
 
-const appStore = useAppStore();
 const createStore = useCreateStore();
 
-const { page } = storeToRefs(appStore);
-const { topic } = storeToRefs(createStore);
+const { stage, topic } = storeToRefs(createStore);
 
 const excludeTopics = ref<Topic[]>([]);
 const hasTopicsRemaining = ref(true);
@@ -77,6 +74,6 @@ const onNewTopicClicked = () => {
 };
 
 const onStartClicked = () => {
-  page.value = Page.CREATE_TYPE;
+  stage.value = CreateStage.PHRASE;
 };
 </script>

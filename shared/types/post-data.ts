@@ -1,6 +1,7 @@
+import { Topic } from "./topic.js";
+
 export type PostData = {
-  topicName: string;
-  topicCategory: string;
+  topic: Topic;
   sentence: string;
   createdBy: string;
 };

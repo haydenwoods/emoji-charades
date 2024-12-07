@@ -4,14 +4,13 @@ import { defineStore } from "pinia";
 import { InitialDataEvent } from "@shared/types/message";
 
 export enum Page {
-  CREATE_CHOOSE_TOPIC,
-  CREATE_TYPE,
+  CREATE,
   GUESS,
 }
 
 export const useAppStore = defineStore("app", () => {
   const loading = ref<boolean>(true);
-  const page = ref<Page>(Page.CREATE_CHOOSE_TOPIC);
+  const page = ref<Page>(Page.CREATE);
   const user = ref<InitialDataEvent["data"]["user"]>();
 
   return {

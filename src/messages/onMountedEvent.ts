@@ -4,6 +4,7 @@ import { sendMessage } from "@/utils/message.js";
 
 import { MessageHandler } from "@/types/message.js";
 import { PostData } from "@shared/types/post-data.js";
+import { getObject } from "@/utils/db.js";
 
 export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, app }) => {
   const { postId, userId } = context;
@@ -23,8 +24,8 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
 
   // Send the post data if there is valid post in the context
   if (postId) {
-    const postData = (await context.redis.hGetAll(`post:${postId}`)) as PostData;
-    if (Object.keys(postData).length > 0) {
+    const postData = await getObject<PostData>(context.redis, `post:${postId}`);
+    if (postData) {
       data.postData = postData;
       app.setShowWebview(true);
     }

@@ -6,6 +6,7 @@ import { CreateRequest } from "@shared/types/message.js";
 import { PostData } from "@shared/types/post-data.js";
 import { MessageHandler } from "@/types/message.js";
 import { Loading } from "@/components/Loading.js";
+import { setObject } from "@/utils/db.js";
 
 export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, context }) => {
   const { userId } = context;
@@ -21,12 +22,11 @@ export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, 
     preview: <Loading />,
   });
 
-  await context.redis.hSet(`post:${post.id}`, {
-    topicName: topic.name,
-    topicCategory: topic.category.toString(),
+  await setObject<PostData>(context.redis, `post:${post.id}`, {
+    topic,
     sentence,
     createdBy: userId,
-  } satisfies PostData);
+  });
 
   sendMessage(context, {
     type: "CREATE_RESPONSE",

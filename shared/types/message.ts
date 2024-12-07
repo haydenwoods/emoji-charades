@@ -21,6 +21,10 @@ export type InitialDataEvent = {
   };
 };
 
+export type BackToMenuEvent = {
+  type: "BACK_TO_MENU_EVENT";
+};
+
 // Request and Response
 export type CreateRequest = {
   type: "CREATE_REQUEST";
@@ -50,6 +54,7 @@ export type Message =
   | MountedEvent
   | LoadedEvent
   | InitialDataEvent
+  | BackToMenuEvent
   | CreateRequest
   | CreateResponse
   | GuessRequest

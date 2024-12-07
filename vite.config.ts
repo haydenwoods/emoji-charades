@@ -12,7 +12,7 @@ export default defineConfig({
     Vue(),
     TailwindCSS(),
     Components({
-      dirs: ["components", "pages"],
+      dirs: ["**/components"],
       resolvers: [IconsResolver()],
     }),
     Icons({
