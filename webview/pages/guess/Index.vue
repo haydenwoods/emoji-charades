@@ -1,8 +1,8 @@
 <template>
-  <div class="size-full flex flex-col items-center justify-center">
-    <h1 id="title" class="text-lg font-medium">What does this emoji phrase represent?</h1>
+  <div class="size-full flex flex-col items-center justify-between">
+    <h1 id="title" class="text-lg font-medium">What do these emojis represent?</h1>
 
-    <ui-emojis v-if="dbPost?.emojis" :emojis="dbPost.emojis" />
+    <ui-emojis v-if="dbPost?.clue" :emojis="dbPost.clue" />
 
     <div class="flex items-center gap-x-4 max-w-xl">
       <ui-input
@@ -29,7 +29,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
-import { animate } from "motion";
 
 import { useGuessStore } from "../../stores/guess";
 

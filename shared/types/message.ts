@@ -28,7 +28,7 @@ export type CreateRequest = {
   type: "CREATE_REQUEST";
   data: {
     topic: Topic;
-    emojis: string[];
+    clue: string[];
   };
 };
 export type CreateResponse = {

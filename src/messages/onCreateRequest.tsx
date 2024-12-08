@@ -17,7 +17,7 @@ export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, 
 
   const subreddit = await context.reddit.getCurrentSubreddit();
   const post = await context.reddit.submitPost({
-    title: "What is this Emoji Phrase?",
+    title: "What do these emojis represent?",
     subredditName: subreddit.name,
     preview: <Loading />,
   });
@@ -34,6 +34,6 @@ export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, 
     type: "CREATE_RESPONSE",
   });
 
-  context.ui.showToast({ text: "Created a new Emoji Phrase!" });
+  context.ui.showToast({ text: "Created a new Emoji Game post!" });
   context.ui.navigateTo(post);
 };

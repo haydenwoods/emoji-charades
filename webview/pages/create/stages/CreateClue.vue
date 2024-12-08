@@ -1,15 +1,18 @@
 <template>
-  <ui-emojis :emojis="emojis" />
-  <ui-emoji-keyboard
-    :submit-disabled="!canSubmit"
-    @click:key="onClickKey"
-    @click:backspace="onClickBackspace"
-    @click:submit="onClickSubmit"
-  />
+  <div class="size-full flex flex-col items-center">
+    <ui-emojis :emojis="clue" sortable class="my-auto" />
+
+    <ui-emoji-keyboard
+      :submit-disabled="!canSubmit"
+      @click:key="onClickKey"
+      @click:backspace="onClickBackspace"
+      @click:submit="onClickSubmit"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, toRaw, unref } from "vue";
+import { computed, ref, toRaw } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useCreateStore } from "../../../stores/create";
@@ -21,18 +24,18 @@ import { Emoji } from "../../../types/emoji";
 const createStore = useCreateStore();
 const { topic } = storeToRefs(createStore);
 
-const emojis = ref<string[]>([]);
+const clue = ref<string[]>([]);
 
 const canSubmit = computed(() => {
-  return emojis.value.length > 0;
+  return clue.value.length > 0;
 });
 
 const onClickKey = (emoji: Emoji) => {
-  emojis.value.push(emoji.value);
+  clue.value.push(emoji.value);
 };
 
 const onClickBackspace = () => {
-  emojis.value.pop();
+  clue.value.pop();
 };
 
 const onClickSubmit = () => {
@@ -42,7 +45,7 @@ const onClickSubmit = () => {
     type: "CREATE_REQUEST",
     data: {
       topic: toRaw(topic.value),
-      emojis: toRaw(emojis.value),
+      clue: toRaw(clue.value),
     },
   });
 };

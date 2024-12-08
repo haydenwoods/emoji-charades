@@ -5,12 +5,12 @@ import { Topic } from "../../shared/types/topic";
 import { getRandomTopic } from "../../shared/utils/topics";
 
 export enum CreateStage {
-  TOPIC,
-  PHRASE,
+  SELECT_TOPIC,
+  CREATE_CLUE,
 }
 
 export const useCreateStore = defineStore("create", () => {
-  const stage = ref<CreateStage>(CreateStage.TOPIC);
+  const stage = ref<CreateStage>(CreateStage.SELECT_TOPIC);
 
   const topic = ref<Topic>(getRandomTopic().topic);
 

@@ -46,6 +46,7 @@ const cvaButton = cva(
     "transition-all",
     "hover:not-disabled:scale-102 active:not-disabled:scale-98",
     "not-disabled:cursor-pointer",
+    "disabled:opacity-70",
   ],
   {
     variants: {
@@ -56,7 +57,7 @@ const cvaButton = cva(
           "inset-shadow-sm inset-shadow-blue-400/20",
           "ring-2 ring-blue-400",
         ],
-        secondary: ["bg-neutral-50", "ring-2 ring-neutral-300 disabled:ring-neutral-200"],
+        secondary: ["bg-white", "ring-2 ring-neutral-200 "],
         plain: [],
       },
       size: {

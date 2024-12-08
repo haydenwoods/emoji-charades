@@ -4,6 +4,6 @@ import { Timestamped, UserCreated } from "./index.js";
 export type DBPost = {
   id: string;
   topic: Topic;
-  emojis: string[];
+  clue: string[];
 } & UserCreated &
   Timestamped;

@@ -1,6 +1,6 @@
 <template>
-  <div class="size-full flex flex-col gap-y-4 items-center justify-center">
-    <div class="flex flex-col items-center gap-y-5 my-auto">
+  <div class="size-full flex flex-col items-center justify-between">
+    <div class="flex flex-col items-center gap-y-4 my-auto">
       <div class="flex items-center gap-x-2.5">
         <h2 class="text-xl text-neutral-800 font-medium">Your topic is a</h2>
         <span
@@ -34,7 +34,7 @@
         @click="onNewTopicClicked"
       />
 
-      <ui-button label="Let's start!" emoji="🚀" variant="primary" @click="onStartClicked" />
+      <ui-button label="Let's start!" emoji="▶️" variant="primary" @click="onStartClicked" />
     </div>
   </div>
 </template>
@@ -94,6 +94,6 @@ const onNewTopicClicked = () => {
 };
 
 const onStartClicked = () => {
-  createStore.navigateTo(CreateStage.PHRASE);
+  createStore.navigateTo(CreateStage.CREATE_CLUE);
 };
 </script>
