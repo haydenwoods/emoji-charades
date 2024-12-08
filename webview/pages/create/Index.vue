@@ -3,10 +3,15 @@
     <header class="w-full flex">
       <!-- Left -->
       <div class="flex-1">
-        <button type="button" class="flex items-center gap-x-2" @clicked="onBackToMenuClicked">
-          <i-material-symbols-arrow-back-rounded class="text-xl" />
-          <span class="font-medium">Back to Menu</span>
-        </button>
+        <ui-button variant="plain" size="sm" :padded="false" @click="onBackToMenuClicked">
+          <template #icon>
+            <i-material-symbols-arrow-back-rounded class="text-xl" />
+          </template>
+
+          <template #default>
+            <span class="font-medium"> Back to Menu </span>
+          </template>
+        </ui-button>
       </div>
 
       <!-- Middle -->
@@ -21,24 +26,30 @@
     </header>
 
     <!-- Stages -->
-    <create-topic v-if="stage === CreateStage.TOPIC" />
-    <create-phrase v-else-if="stage === CreateStage.PHRASE" />
+    <create-stage-topic v-if="stage === CreateStage.TOPIC" />
+    <create-stage-phrase v-else-if="stage === CreateStage.PHRASE" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useCreateStore, CreateStage } from "../../stores/create";
+import { Page, useAppStore } from "../../stores/app";
 
-import { sendMessage } from "../../utils/messages";
+import CreateStageTopic from "./stages/CreateStageTopic.vue";
+import CreateStagePhrase from "./stages/CreateStagePhrase.vue";
 
+const appStore = useAppStore();
 const createStore = useCreateStore();
 const { stage, topic } = storeToRefs(createStore);
 
 const onBackToMenuClicked = () => {
-  sendMessage({
-    type: "BACK_TO_MENU_EVENT",
-  });
+  appStore.navigateTo(Page.MENU);
 };
+
+onMounted(() => {
+  createStore.navigateTo(CreateStage.TOPIC);
+});
 </script>

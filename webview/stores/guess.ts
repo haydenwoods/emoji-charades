@@ -1,10 +1,10 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 
-import { PostData } from "../../shared/types/post-data";
+import { DBPost } from "../../shared/types/db/post";
 
 export const useGuessStore = defineStore("guess", () => {
-  const postData = ref<PostData>();
+  const postData = ref<DBPost>();
 
   return {
     postData,

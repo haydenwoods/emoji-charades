@@ -3,7 +3,7 @@ import { InitialDataEvent, MountedEvent } from "@shared/types/message.js";
 import { sendMessage } from "@/utils/message.js";
 
 import { MessageHandler } from "@/types/message.js";
-import { PostData } from "@shared/types/post-data.js";
+import { DBPost } from "@shared/types/db/post.js";
 import { getObject } from "@/utils/db.js";
 
 export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, app }) => {
@@ -24,7 +24,7 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
 
   // Send the post data if there is valid post in the context
   if (postId) {
-    const postData = await getObject<PostData>(context.redis, `post:${postId}`);
+    const postData = await getObject<DBPost>(context.redis, `post:${postId}`);
     if (postData) {
       data.postData = postData;
       app.setShowWebview(true);

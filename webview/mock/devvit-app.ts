@@ -27,11 +27,12 @@ export const mockMessages = () => {
           type: "INITIAL_DATA_EVENT",
           data: {
             user,
-            postData: {
-              topic,
-              sentence: "🛝➕🏃📺",
-              createdBy: user.id,
-            },
+            // postData: {
+            //   topic,
+            //   sentence: "🛝➕🏃📺",
+            //   createdBy: user.id,
+            //   createdAt: new Date().toISOString(),
+            // },
           },
         });
         break;

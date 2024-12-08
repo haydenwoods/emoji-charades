@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { readonly, ref } from "vue";
 import { defineStore } from "pinia";
 
 import { Topic } from "../../shared/types/topic";
@@ -14,8 +14,13 @@ export const useCreateStore = defineStore("create", () => {
 
   const topic = ref<Topic>(getRandomTopic().topic);
 
+  const navigateTo = (newStage: CreateStage) => {
+    stage.value = newStage;
+  };
+
   return {
-    stage,
+    stage: readonly(stage),
     topic,
+    navigateTo,
   };
 });

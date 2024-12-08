@@ -32,9 +32,9 @@ import { emojiPattern } from "regex-combined-emojis";
 import { stringSimilarity } from "string-similarity-js";
 import { animate } from "motion";
 
-import { useGuessStore } from "../stores/guess";
+import { useGuessStore } from "../../stores/guess";
 
-import { sendMessage } from "../utils/messages";
+import { sendMessage } from "../../utils/messages";
 
 const guessStore = useGuessStore();
 const { postData } = storeToRefs(guessStore);

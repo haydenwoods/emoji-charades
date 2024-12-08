@@ -1,4 +1,4 @@
-import { PostData } from "./post-data.js";
+import { DBPost } from "./db/post.js";
 import { Topic } from "./topic.js";
 
 // Events
@@ -17,7 +17,7 @@ export type InitialDataEvent = {
       id: string;
       username: string;
     };
-    postData?: PostData;
+    postData?: DBPost;
   };
 };
 

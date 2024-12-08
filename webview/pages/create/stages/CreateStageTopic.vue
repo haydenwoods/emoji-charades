@@ -49,8 +49,7 @@ import { Topic } from "../../../../shared/types/topic";
 import { CategoryData } from "../../../../shared/types/category";
 
 const createStore = useCreateStore();
-
-const { stage, topic } = storeToRefs(createStore);
+const { topic } = storeToRefs(createStore);
 
 const excludeTopics = ref<Topic[]>([]);
 const hasTopicsRemaining = ref(true);
@@ -74,6 +73,6 @@ const onNewTopicClicked = () => {
 };
 
 const onStartClicked = () => {
-  stage.value = CreateStage.PHRASE;
+  createStore.navigateTo(CreateStage.PHRASE);
 };
 </script>
