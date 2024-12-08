@@ -1,13 +1,13 @@
 <template>
   <div class="size-full flex flex-col items-center justify-center">
-    <ui-emojis :emojis="emojis" />
+    <ui-emojis :emojis="dbPost?.emojis" />
 
     <div class="flex items-center gap-x-4 max-w-xl">
       <ui-input
         id="input"
         placeholder="Guess..."
         autofocus
-        v-model="guess"
+        v-model="input"
         @keydown.enter="onKeydownEnter"
       >
         <template #after>
@@ -26,43 +26,36 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import { emojiPattern } from "regex-combined-emojis";
 import { stringSimilarity } from "string-similarity-js";
 import { animate } from "motion";
 
+import { Page, useAppStore } from "../../stores/app";
 import { useGuessStore } from "../../stores/guess";
 
 import { sendMessage } from "../../utils/messages";
 
+const appStore = useAppStore();
 const guessStore = useGuessStore();
-const { postData } = storeToRefs(guessStore);
+const { dbPost } = storeToRefs(guessStore);
 
-const guess = ref<string>("");
-
-const emojis = computed<string[]>(() => {
-  if (!postData.value?.sentence) return [];
-  const regex = new RegExp(emojiPattern, "g");
-  const matches = postData.value.sentence.matchAll(regex);
-  const emojis = Array.from(matches).flat();
-  return emojis;
-});
+const input = ref<string>("");
 
 const submitGuess = () => {
-  if (!postData.value) return;
+  if (!dbPost.value) return;
 
-  const { topic } = postData.value;
+  const { topic } = dbPost.value;
 
-  const trimmedGuess = guess.value.trim();
-  if (trimmedGuess.length <= 0) return;
+  const trimmedInput = input.value.trim();
+  if (trimmedInput.length <= 0) return;
 
   const topicNames = [topic.name, ...(topic.alternateNames ?? [])];
-  const topicNameSimilarities = topicNames.map((name) => stringSimilarity(trimmedGuess, name));
+  const topicNameSimilarities = topicNames.map((name) => stringSimilarity(trimmedInput, name));
   const highestSimilarity = Math.max(...topicNameSimilarities);
 
   if (highestSimilarity > 0.9) {
-    // Correct
+    appStore.navigateTo(Page.SUMMARY);
   } else {
     animate("#input", {
       x: [0, 6, -6, 6, -6, 6, -6, 0],
@@ -72,7 +65,7 @@ const submitGuess = () => {
   sendMessage({
     type: "GUESS_REQUEST",
     data: {
-      guess: trimmedGuess,
+      input: trimmedInput,
     },
   });
 };

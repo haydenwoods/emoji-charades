@@ -25,7 +25,7 @@ type Size = "sm" | "md";
 
 withDefaults(
   defineProps<{
-    label: string;
+    label?: string;
     emoji?: string;
 
     variant?: Variant;

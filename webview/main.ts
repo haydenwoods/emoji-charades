@@ -1,11 +1,9 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
-import { mockMessages } from "@/mock/devvit-app.js";
+import { mockMessages } from "@/mock/messages";
 
 import App from "@/App.vue";
-
-import "@/utils/messages/listeners/index.js";
 
 import "@/css/fonts.css";
 import "@/css/index.css";

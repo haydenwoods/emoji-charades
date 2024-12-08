@@ -4,9 +4,9 @@ import { defineStore } from "pinia";
 import { DBPost } from "../../shared/types/db/post";
 
 export const useGuessStore = defineStore("guess", () => {
-  const postData = ref<DBPost>();
+  const dbPost = ref<DBPost>();
 
   return {
-    postData,
+    dbPost,
   };
 });

@@ -1,7 +1,5 @@
 import { Devvit, useState } from "@devvit/public-api";
 
-import { Menu } from "@/pages/Menu.js";
-
 import { WEBVIEW_ID } from "@/constants/webview.js";
 
 import { Loading } from "./components/Loading.js";
@@ -12,11 +10,13 @@ import { MessageHandler } from "./types/message.js";
 import { onMountedEvent } from "./messages/onMountedEvent.js";
 import { onLoadedEvent } from "./messages/onLoadedEvent.js";
 import { onCreateRequest } from "./messages/onCreateRequest.js";
+import { onGuessRequest } from "./messages/onGuessRequest.js";
 
-const MESSAGE_TYPE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
+const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
   MOUNTED_EVENT: onMountedEvent,
   LOADED_EVENT: onLoadedEvent,
   CREATE_REQUEST: onCreateRequest,
+  GUESS_REQUEST: onGuessRequest,
 };
 
 Devvit.configure({
@@ -45,38 +45,31 @@ Devvit.addCustomPostType({
   height: "tall",
   render: (context) => {
     const [loading, setLoading] = useState(true);
-    const [showWebview, setShowWebview] = useState(false);
+
+    const webviewSize = loading ? "0%" : "100%";
 
     return (
       <zstack width="100%" height="100%">
         <webview
           id={WEBVIEW_ID}
           url="index.html"
-          height={showWebview && !loading ? "100%" : "0%"}
-          width={showWebview && !loading ? "100%" : "0%"}
+          height={webviewSize}
+          width={webviewSize}
           onMessage={async (event) => {
             const message = event as Message;
             console.log(`Received message (${message.type})`, message);
 
-            const messageHandler = MESSAGE_TYPE_TO_HANDLER[message.type];
-            if (messageHandler) {
-              await messageHandler({
-                message,
-                context,
-                app: {
-                  loading,
-                  setLoading,
-                  showWebview,
-                  setShowWebview,
-                },
-              });
-            }
+            const messageHandler = MESSAGE_TO_HANDLER[message.type];
+            await messageHandler?.({
+              message,
+              context,
+              app: {
+                loading,
+                setLoading,
+              },
+            });
           }}
         />
-
-        {!showWebview && !loading && (
-          <Menu context={context} app={{ showWebview, setShowWebview }} />
-        )}
 
         {loading && <Loading />}
       </zstack>

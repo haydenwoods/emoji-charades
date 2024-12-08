@@ -38,12 +38,11 @@ const onClickBackspace = () => {
 const onClickSubmit = () => {
   if (!canSubmit.value) return;
 
-  const sentence: string = emojis.value.join("");
   sendMessage({
     type: "CREATE_REQUEST",
     data: {
       topic: { ...topic.value },
-      sentence,
+      emojis: emojis.value,
     },
   });
 };

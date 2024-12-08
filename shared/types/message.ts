@@ -1,4 +1,5 @@
 import { DBPost } from "./db/post.js";
+import { DBUser } from "./db/user.js";
 import { Topic } from "./topic.js";
 
 // Events
@@ -17,7 +18,8 @@ export type InitialDataEvent = {
       id: string;
       username: string;
     };
-    postData?: DBPost;
+    dbUser?: DBUser;
+    dbPost?: DBPost;
   };
 };
 
@@ -30,7 +32,7 @@ export type CreateRequest = {
   type: "CREATE_REQUEST";
   data: {
     topic: Topic;
-    sentence: string;
+    emojis: string[];
   };
 };
 export type CreateResponse = {
@@ -40,7 +42,7 @@ export type CreateResponse = {
 export type GuessRequest = {
   type: "GUESS_REQUEST";
   data: {
-    guess: string;
+    input: string;
   };
 };
 export type GuessResponse = {

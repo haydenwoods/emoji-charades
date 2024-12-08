@@ -8,7 +8,5 @@ export type MessageHandler<T extends Message = Message, R = void> = (args: {
   app: {
     loading: boolean;
     setLoading: StateSetter<boolean>;
-    showWebview: boolean;
-    setShowWebview: StateSetter<boolean>;
   };
 }) => R | Promise<R>;

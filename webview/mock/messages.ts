@@ -17,6 +17,7 @@ export const mockMessages = () => {
 
     switch (message.type) {
       case "MOUNTED_EVENT":
+        const now = new Date().toISOString();
         const user: InitialDataEvent["data"]["user"] = {
           id: "t2_12345",
           username: "Username",
@@ -27,12 +28,18 @@ export const mockMessages = () => {
           type: "INITIAL_DATA_EVENT",
           data: {
             user,
-            // postData: {
-            //   topic,
-            //   sentence: "🛝➕🏃📺",
-            //   createdBy: user.id,
-            //   createdAt: new Date().toISOString(),
-            // },
+            dbUser: {
+              id: user.id,
+              playedPosts: [],
+              createdAt: now,
+            },
+            dbPost: {
+              id: "t3_12345",
+              topic,
+              emojis: ["🛝", "➕", "🏃", "📺"],
+              createdBy: user.id,
+              createdAt: now,
+            },
           },
         });
         break;

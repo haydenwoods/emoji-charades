@@ -7,16 +7,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    CreatePhrase: typeof import('./pages/create/components/CreatePhrase.vue')['default']
-    CreateTopic: typeof import('./pages/create/components/CreateTopic.vue')['default']
-    GuessPage: typeof import('./pages/GuessPage.vue')['default']
     IMaterialSymbolsArrowBackRounded: typeof import('~icons/material-symbols/arrow-back-rounded')['default']
-    IMaterialSymbolsArrowBackward: typeof import('~icons/material-symbols/arrow-backward')['default']
-    IMaterialSymbolsArrowBackwardRounded: typeof import('~icons/material-symbols/arrow-backward-rounded')['default']
     IMaterialSymbolsArrowUpwardRounded: typeof import('~icons/material-symbols/arrow-upward-rounded')['default']
     IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
     IMaterialSymbolsCheckRounded: typeof import('~icons/material-symbols/check-rounded')['default']
-    Index: typeof import('./pages/create/Index.vue')['default']
     UiButton: typeof import('./components/UiButton.vue')['default']
     UiEmojiKeyboard: typeof import('./components/UiEmojiKeyboard.vue')['default']
     UiEmojiKeyboardButton: typeof import('./components/UiEmojiKeyboardButton.vue')['default']
