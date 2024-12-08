@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, toRaw, unref } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useCreateStore } from "../../../stores/create";
@@ -41,8 +41,8 @@ const onClickSubmit = () => {
   sendMessage({
     type: "CREATE_REQUEST",
     data: {
-      topic: { ...topic.value },
-      emojis: emojis.value,
+      topic: toRaw(topic.value),
+      emojis: toRaw(emojis.value),
     },
   });
 };

@@ -9,6 +9,7 @@ type PlayedPost = {
   id: string;
   guesses: Guess[];
   xpGained?: number;
+  completedAt?: string;
 } & Timestamped;
 
 export type DBUser = {

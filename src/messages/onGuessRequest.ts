@@ -16,7 +16,6 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
 
   // Find or create the DBUser
   let dbUser = await getObject<DBUser>(context.redis, dbUserKey);
-  console.log("Updating DBUser. Before:", dbUser);
   if (!dbUser) {
     dbUser = {
       id: userId,
@@ -45,18 +44,32 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
 
   // Update the DBUser
   await setObject<DBUser>(context.redis, dbUserKey, dbUser);
-  console.log("Updated DBUser. After:", dbUser);
+
+  const guessCount = playedPost.guesses.length;
+
+  let commentText = "";
+  if (guessCount === 1) {
+    commentText = "I got it correct on my first guess!";
+  } else {
+    const guessInputList = playedPost.guesses.reduce<string>((acc, { input }, index) => {
+      const isFirst = index === 0;
+      const isLast = index === playedPost.guesses.length - 1;
+      if (isLast) {
+        return acc + ` and *"${input}"*`;
+      } else {
+        return acc + `${isFirst ? "" : ", "}*"${input}"*`;
+      }
+    }, "");
+    commentText = `I got it correct after **${guessCount} guesses!** My guesses were ${guessInputList}.`;
+  }
 
   // Add a comment to the post
   await context.reddit.submitComment({
     id: postId,
-    text: "I got it correct! I took 2 guesses and used 0 hints.",
+    text: commentText,
   });
 
   sendMessage(context, {
     type: "GUESS_RESPONSE",
-    data: {
-      correct: true,
-    },
   });
 };

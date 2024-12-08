@@ -86,9 +86,9 @@ const cvaButton = cva(
 const cvaLabel = cva(["text-center w-full font-medium whitespace-nowrap"], {
   variants: {
     variant: {
-      primary: ["text-blue-900"],
-      secondary: ["text-neutral-600 in-disabled:text-neutral-400"],
-      plain: ["text-neutral-600 in-disabled:text-neutral-400"],
+      primary: ["text-blue-950"],
+      secondary: ["text-neutral-800 in-disabled:text-neutral-400"],
+      plain: ["text-neutral-800 in-disabled:text-neutral-400"],
     },
     size: {
       sm: "text-lg",
@@ -109,9 +109,9 @@ const cvaEmoji = cva(["in-disabled:opacity-50"], {
 const cvaIcon = cva([], {
   variants: {
     variant: {
-      primary: ["text-blue-900"],
-      secondary: ["text-neutral-600 in-disabled:text-neutral-400"],
-      plain: ["text-neutral-600 in-disabled:text-neutral-400"],
+      primary: ["text-blue-950"],
+      secondary: ["text-neutral-800 in-disabled:text-neutral-400"],
+      plain: ["text-neutral-800 in-disabled:text-neutral-400"],
     },
     size: {
       sm: "text-xl",

@@ -1,21 +1,25 @@
 <template>
   <div class="size-full flex flex-col gap-y-4 items-center justify-center">
     <div class="flex flex-col items-center gap-y-5 my-auto">
-      <div class="flex items-center gap-x-3">
+      <div class="flex items-center gap-x-2.5">
         <h2 class="text-xl text-neutral-800 font-medium">Your topic is a</h2>
         <span
-          class="rounded-full px-2.5 py-1 inline-flex items-center gap-x-1.5"
+          class="rounded-full px-2.5 py-1 inline-flex items-center gap-x-2 border-2"
           :class="
             {
-              blue: 'bg-blue-300 text-blue-950',
-              orange: 'bg-orange-300 text-orange-950',
-              red: 'bg-red-300 text-red-950',
-              emerald: 'bg-emerald-300 text-emerald-950',
+              blue: 'bg-blue-200 text-blue-950 border-blue-300',
+              orange: 'bg-orange-200 text-orange-950 border-orange-300',
+              red: 'bg-red-200 text-red-950 border-red-300',
+              emerald: 'bg-green-200 text-green-950 border-green-300',
+              purple: 'bg-purple-200 text-purple-950 border-purple-300',
+              indigo: 'bg-indigo-200 text-indigo-950 border-indigo-300',
+              yellow: 'bg-yellow-200 text-yellow-950 border-yellow-300',
+              amber: 'bg-amber-200 text-amber-950 border-amber-300',
             }[topicCategoryData.color]
           "
         >
           <span class="text-xl">{{ topicCategoryData.emoji }}</span>
-          <span class="text-lg font-medium">{{ topicCategoryData.name }}</span>
+          <span class="text-xl font-medium">{{ topicCategoryData.name }}</span>
         </span>
       </div>
       <h1 class="text-5xl text-neutral-950 font-semibold text-center">"{{ topic.name }}"</h1>
@@ -23,10 +27,10 @@
 
     <div class="flex items-end gap-x-4">
       <ui-button
-        label="I don't know it"
+        :label="newTopicLabel"
         emoji="🤷‍♂️"
         variant="secondary"
-        :disabled="!hasTopicsRemaining"
+        :disabled="newTopicDisabled"
         @click="onNewTopicClicked"
       />
 
@@ -48,14 +52,30 @@ import { getRandomTopic } from "../../../../shared/utils/topics";
 import { Topic } from "../../../../shared/types/topic";
 import { CategoryData } from "../../../../shared/types/category";
 
+const NEW_TOPIC_COUNT_MAX: number = 5;
+
 const createStore = useCreateStore();
 const { topic } = storeToRefs(createStore);
 
 const excludeTopics = ref<Topic[]>([]);
 const hasTopicsRemaining = ref(true);
 
+const newTopicCount = ref<number>(0);
+
 const topicCategoryData = computed<CategoryData>(() => {
   return CATEGORY_DATA[topic.value.category];
+});
+
+const newTopicLabel = computed<string>(() => {
+  if (newTopicCount.value === 0) {
+    return "I don't know it";
+  } else {
+    return `${newTopicCount.value}/${NEW_TOPIC_COUNT_MAX} used`;
+  }
+});
+
+const newTopicDisabled = computed<boolean>(() => {
+  return !hasTopicsRemaining.value || newTopicCount.value >= NEW_TOPIC_COUNT_MAX;
 });
 
 // TODO: Impose a limit on how many re-rolls you get
@@ -67,6 +87,7 @@ const onNewTopicClicked = () => {
   if (!topic) return;
   topic.value = randomTopic;
   // Check if there is no other topics remaining, set hasTopicsRemaining accordingly
+  newTopicCount.value++;
   if (remaining === 0) {
     hasTopicsRemaining.value = false;
   }

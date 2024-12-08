@@ -24,11 +24,11 @@ export const CATEGORY_DATA: Record<Category, CategoryData> = {
   [Category.CHARACTER]: {
     name: "Character",
     emoji: "👤",
-    color: "blue",
+    color: "indigo",
   },
   [Category.FAMOUS_PERSON]: {
     name: "Famous Person",
     emoji: "🌟",
-    color: "blue",
+    color: "amber",
   },
 };

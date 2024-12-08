@@ -3,6 +3,7 @@
     <menu-page v-if="page === Page.MENU" />
     <create-page v-else-if="page === Page.CREATE" />
     <guess-page v-else-if="page === Page.GUESS" />
+    <summary-page v-else-if="page === Page.SUMMARY" />
   </div>
 </template>
 
@@ -23,6 +24,7 @@ import { MessageHandler } from "./types/message";
 import MenuPage from "./pages/menu/Index.vue";
 import CreatePage from "./pages/create/Index.vue";
 import GuessPage from "./pages/guess/Index.vue";
+import SummaryPage from "./pages/summary/Index.vue";
 
 const appStore = useAppStore();
 const { loading, page } = storeToRefs(appStore);
