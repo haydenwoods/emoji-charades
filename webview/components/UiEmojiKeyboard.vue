@@ -7,18 +7,13 @@
     }"
   >
     <!-- Search -->
-    <div
-      class="col-start-3 col-span-4 row-start-1 self-end bg-white rounded-full h-2/3 inset-ring-2 inset-ring-neutral-200"
-    >
-      <input
-        type="text"
-        v-model="search"
-        class="h-full w-full rounded-full py-1 px-6 font-medium text-xl placeholder:text-neutral-400"
-        placeholder="Search..."
-        maxlength="16"
-        autofocus
-      />
-    </div>
+    <ui-input
+      class="col-span-4 row-start-1 col-start-3 h-min self-end"
+      placeholder="Search emojis..."
+      maxlength="16"
+      autofocus
+      v-model="search"
+    />
 
     <!-- Keys -->
     <div

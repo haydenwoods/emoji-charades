@@ -1,5 +1,10 @@
 <template>
   <div class="size-full flex flex-col items-center">
+    <h1 class="text-xl text-neutral-800 font-medium">
+      Your topic is <span class="font-semibold">"{{ topic.name }}"</span>
+    </h1>
+    <h2 class="text-neutral-500">Create a clue for this, using only emojis!</h2>
+
     <ui-emojis :emojis="clue" sortable class="my-auto" />
 
     <ui-emoji-keyboard

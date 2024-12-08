@@ -5,12 +5,7 @@
     class="flex items-center gap-1.5 flex-wrap justify-center select-none"
     ghost-class="bg-neutral-200"
     drag-class="opacity-0"
-    tag="transition-group"
-    :component-data="{
-      tag: 'div',
-      type: 'transition-group',
-      name: !dragging ? 'flip-list' : null,
-    }"
+    tag="div"
     :disabled="!sortable"
     :animation="200"
     @start="dragging = true"
@@ -28,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, useTemplateRef, ref } from "vue";
+import { nextTick, onMounted, ref } from "vue";
 import { animate, stagger } from "motion";
 import Draggable from "vuedraggable";
 
@@ -41,21 +36,18 @@ const emojis = defineModel<string[]>("emojis");
 const dragging = ref<boolean>(false);
 
 onMounted(() => {
-  // animate(
-  //   ".emoji",
-  //   {
-  //     opacity: [0, 1],
-  //     scale: [0, 1],
-  //   },
-  //   {
-  //     delay: stagger(0.1, { startDelay: 0.25 }),
-  //   },
-  // );
+  nextTick(() => {
+    if (document.getElementsByClassName("emoji").length <= 0) return;
+    animate(
+      ".emoji",
+      {
+        opacity: [0, 1],
+        scale: [0, 1],
+      },
+      {
+        delay: stagger(0.1, { startDelay: 0.25 }),
+      },
+    );
+  });
 });
 </script>
-
-<style>
-.flip-list-move {
-  transition: transform 0.5s;
-}
-</style>

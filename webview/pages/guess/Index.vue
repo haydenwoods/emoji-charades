@@ -1,6 +1,6 @@
 <template>
   <div class="size-full flex flex-col items-center justify-between">
-    <h1 id="title" class="text-lg font-medium">What do these emojis represent?</h1>
+    <h1 id="title" class="text-xl font-medium">What does this emoji clue represent?</h1>
 
     <ui-emojis v-if="dbPost?.clue" :emojis="dbPost.clue" />
 

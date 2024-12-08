@@ -33,13 +33,13 @@ export const mockMessages = () => {
               playedPosts: [],
               createdAt: now,
             },
-            // dbPost: {
-            //   id: "t3_12345",
-            //   topic,
-            //   clue: ["🛝", "➕", "🏃", "📺"],
-            //   createdBy: user.id,
-            //   createdAt: now,
-            // },
+            dbPost: {
+              id: "t3_12345",
+              topic,
+              clue: ["🛝", "➕", "🏃", "📺"],
+              createdBy: user.id,
+              createdAt: now,
+            },
           },
         });
         break;

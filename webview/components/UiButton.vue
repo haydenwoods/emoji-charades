@@ -9,7 +9,7 @@
     </span>
 
     <!-- Middle -->
-    <span :class="cvaLabel({ variant, size })">
+    <span v-if="label || $slots.default" :class="cvaLabel({ variant, size })">
       <slot>
         {{ label }}
       </slot>
@@ -21,7 +21,7 @@
 import { cva } from "class-variance-authority";
 
 type Variant = "primary" | "secondary";
-type Size = "sm" | "md";
+type Size = "xs" | "sm" | "md";
 
 withDefaults(
   defineProps<{
@@ -41,7 +41,7 @@ withDefaults(
 
 const cvaButton = cva(
   [
-    "flex items-center gap-x-2.5",
+    "flex items-center ",
     "rounded-full",
     "transition-all",
     "hover:not-disabled:scale-102 active:not-disabled:scale-98",
@@ -57,12 +57,13 @@ const cvaButton = cva(
           "inset-shadow-sm inset-shadow-blue-400/20",
           "ring-2 ring-blue-400",
         ],
-        secondary: ["bg-white", "ring-2 ring-neutral-200 "],
+        secondary: ["bg-white", "ring-2 ring-neutral-300 "],
         plain: [],
       },
       size: {
-        sm: "",
-        md: "",
+        xs: "gap-x-1",
+        sm: "gap-x-2",
+        md: "gap-x-2.5",
       },
       padded: {
         true: "",
@@ -70,6 +71,11 @@ const cvaButton = cva(
       },
     },
     compoundVariants: [
+      {
+        size: "xs",
+        padded: true,
+        class: "py-0.5 px-2",
+      },
       {
         size: "sm",
         padded: true,
@@ -88,10 +94,11 @@ const cvaLabel = cva(["text-center w-full font-medium whitespace-nowrap"], {
   variants: {
     variant: {
       primary: ["text-blue-950"],
-      secondary: ["text-neutral-800 in-disabled:text-neutral-400"],
+      secondary: ["text-neutral-600 in-disabled:text-neutral-400"],
       plain: ["text-neutral-800 in-disabled:text-neutral-400"],
     },
     size: {
+      xs: "text-base",
       sm: "text-lg",
       md: "text-xl",
     },
@@ -101,6 +108,7 @@ const cvaLabel = cva(["text-center w-full font-medium whitespace-nowrap"], {
 const cvaEmoji = cva(["in-disabled:opacity-50"], {
   variants: {
     size: {
+      xs: "text-lg",
       sm: "text-xl",
       md: "text-2xl",
     },
@@ -115,6 +123,7 @@ const cvaIcon = cva([], {
       plain: ["text-neutral-800 in-disabled:text-neutral-400"],
     },
     size: {
+      xs: "text-lg",
       sm: "text-xl",
       md: "text-2xl",
     },

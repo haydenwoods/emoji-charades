@@ -35,6 +35,7 @@ const cvaButton = cva(
     "rounded-full",
     "transition-all",
     "hover:not-disabled:scale-105 active:not-disabled:scale-95",
+    "not-disabled:cursor-pointer",
   ],
   {
     variants: {
@@ -57,8 +58,8 @@ const cvaButton = cva(
 const cvaIcon = cva(["text-3xl md:text-4xl"], {
   variants: {
     variant: {
-      key: ["text-neutral-800"],
-      action: ["text-blue-800 in-disabled:text-blue-300"],
+      key: ["text-neutral-900"],
+      action: ["text-blue-900 in-disabled:text-blue-300"],
     },
   },
 });
