@@ -7,7 +7,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    IMaterialSymbolsArrowBackRounded: typeof import('~icons/material-symbols/arrow-back-rounded')['default']
     IMaterialSymbolsArrowUpwardRounded: typeof import('~icons/material-symbols/arrow-upward-rounded')['default']
     IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
     IMaterialSymbolsCheckRounded: typeof import('~icons/material-symbols/check-rounded')['default']

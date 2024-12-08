@@ -12,7 +12,7 @@ export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, 
   const { userId } = context;
   if (!userId) return;
 
-  const { topic, emojis } = message.data;
+  const { topic, clue } = message.data;
   // TODO: Validate sentence, etc
 
   const subreddit = await context.reddit.getCurrentSubreddit();
@@ -25,7 +25,7 @@ export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, 
   await setObject<DBPost>(context.redis, `post:${post.id}`, {
     id: post.id,
     topic,
-    emojis,
+    clue,
     createdBy: userId,
     createdAt: new Date().toISOString(),
   });
