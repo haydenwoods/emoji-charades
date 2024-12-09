@@ -8,12 +8,35 @@
   >
     <!-- Search -->
     <ui-input
-      class="col-span-4 row-start-1 col-start-3 h-min self-end"
+      class="col-span-4 row-start-1 col-start-1 self-end"
       placeholder="Search emojis..."
       maxlength="16"
       autofocus
       v-model="search"
     />
+
+    <!-- Backspace -->
+    <ui-button
+      variant="secondary"
+      class="self-end row-start-1 col-start-6"
+      @click="emit('click:backspace')"
+    >
+      <template #icon>
+        <i-material-symbols-backspace-outline-rounded />
+      </template>
+    </ui-button>
+
+    <!-- Submit -->
+    <ui-button
+      label="Submit"
+      variant="primary"
+      class="self-end row-start-1 col-start-7 col-span-2"
+      @click="emit('click:submit')"
+    >
+      <template #icon>
+        <i-material-symbols-check-rounded />
+      </template>
+    </ui-button>
 
     <!-- Keys -->
     <div
@@ -38,7 +61,7 @@
     </div>
 
     <!-- Actions -->
-    <ui-emoji-keyboard-button
+    <!-- <ui-emoji-keyboard-button
       variant="action"
       :style="{ gridRow: ACTION_ROW_START, gridColumn: ACTION_COLUMN_START }"
       :disabled="submitDisabled"
@@ -57,7 +80,7 @@
       <template #icon>
         <i-material-symbols-backspace-outline-rounded />
       </template>
-    </ui-emoji-keyboard-button>
+    </ui-emoji-keyboard-button> -->
   </div>
 </template>
 
@@ -69,21 +92,18 @@ import { EMOJIS } from "../constants/emojis";
 
 import { Emoji } from "../types/emoji";
 
-const ROWS = 3;
+const ROWS = 2;
 const COLS = 8;
 
 const KEYS_ROW_START = 2;
-const KEYS_ROW_END = 3;
+const KEYS_ROW_END = 2;
 const KEYS_COL_START = 1;
-const KEYS_COL_END = 7;
+const KEYS_COL_END = 8;
 const KEYS_ROWS = KEYS_ROW_END - KEYS_ROW_START + 1;
 const KEYS_COLS = KEYS_COL_END - KEYS_COL_START + 1;
 
 const KEYS = KEYS_ROWS * KEYS_COLS;
 const KEYS_PER_ROW = KEYS / KEYS_ROWS;
-
-const ACTION_ROW_START = 2;
-const ACTION_COLUMN_START = 8;
 
 defineProps<{
   submitDisabled?: boolean;

@@ -2,3 +2,8 @@
   font-family: "Quicksand";
   src: url("../assets/fonts/Quicksand-VariableFont_wght.ttf");
 }
+
+@font-face {
+  font-family: "Noto Emoji";
+  src: url("../assets/fonts/NotoColorEmoji-Regular.ttf");
+}

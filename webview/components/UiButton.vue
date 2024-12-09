@@ -41,7 +41,7 @@ withDefaults(
 
 const cvaButton = cva(
   [
-    "flex items-center ",
+    "flex items-center justify-center",
     "rounded-full",
     "transition-all",
     "hover:not-disabled:scale-102 active:not-disabled:scale-98",
@@ -62,8 +62,8 @@ const cvaButton = cva(
       },
       size: {
         xs: "gap-x-1",
-        sm: "gap-x-2",
-        md: "gap-x-2.5",
+        sm: "gap-x-1.5",
+        md: "gap-x-2",
       },
       padded: {
         true: "",
@@ -90,7 +90,7 @@ const cvaButton = cva(
   },
 );
 
-const cvaLabel = cva(["text-center w-full font-medium whitespace-nowrap"], {
+const cvaLabel = cva(["font-medium whitespace-nowrap"], {
   variants: {
     variant: {
       primary: ["text-blue-950"],
@@ -119,7 +119,7 @@ const cvaIcon = cva([], {
   variants: {
     variant: {
       primary: ["text-blue-950"],
-      secondary: ["text-neutral-800 in-disabled:text-neutral-400"],
+      secondary: ["text-neutral-600 in-disabled:text-neutral-400"],
       plain: ["text-neutral-800 in-disabled:text-neutral-400"],
     },
     size: {

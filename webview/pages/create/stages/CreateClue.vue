@@ -20,13 +20,16 @@
 import { computed, ref, toRaw } from "vue";
 import { storeToRefs } from "pinia";
 
+import { useAppStore } from "../../../stores/app";
 import { useCreateStore } from "../../../stores/create";
 
 import { sendMessage } from "../../../utils/messages";
 
 import { Emoji } from "../../../types/emoji";
 
+const appStore = useAppStore();
 const createStore = useCreateStore();
+
 const { topic } = storeToRefs(createStore);
 
 const clue = ref<string[]>([]);
@@ -45,6 +48,11 @@ const onClickBackspace = () => {
 
 const onClickSubmit = () => {
   if (!canSubmit.value) return;
+
+  appStore.startLoadingOverlay({
+    id: "CREATE_REQUEST",
+    label: "Creating",
+  });
 
   sendMessage({
     type: "CREATE_REQUEST",

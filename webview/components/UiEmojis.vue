@@ -2,18 +2,22 @@
   <draggable
     v-model="emojis"
     group="emojis"
-    class="flex items-center gap-1.5 flex-wrap justify-center select-none"
-    ghost-class="bg-neutral-200"
-    drag-class="opacity-0"
-    tag="div"
+    class="flex items-center gap-0.5 flex-wrap justify-center"
+    drag-class="!opacity-0"
+    tag="transition-group"
+    :component-data="{
+      type: 'transition-group',
+      tag: 'div',
+      name: !dragging ? 'emojis' : '',
+    }"
     :disabled="!edit"
-    :animation="200"
+    :animation="400"
     @start="dragging = true"
     @end="dragging = false"
   >
     <template #item="{ element }">
       <span
-        class="emoji text-6xl p-2 rounded-full transition-colors"
+        class="emoji text-6xl font-emoji p-2 rounded-full transition-opacity aspect-square flex items-center justify-center select-none"
         :class="[edit ? 'cursor-move hover:bg-neutral-200' : '']"
       >
         {{ element }}
@@ -35,10 +39,6 @@ const emojis = defineModel<string[]>("emojis");
 
 const dragging = ref<boolean>(false);
 
-const remove = (index: number): void => {
-  emojis.value?.splice(index, 1);
-};
-
 onMounted(() => {
   nextTick(() => {
     if (document.getElementsByClassName("emoji").length <= 0) return;
@@ -55,3 +55,15 @@ onMounted(() => {
   });
 });
 </script>
+
+<style>
+.emojis-enter-from,
+.emojis-leave-to {
+  opacity: 0;
+}
+
+.emojis-enter-to,
+.emojis-leave-from {
+  opacity: 1;
+}
+</style>
