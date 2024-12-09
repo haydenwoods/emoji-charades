@@ -42,7 +42,7 @@ export const mockMessages = () => {
             // dbPost: {
             //   id: "t3_12345",
             //   topic,
-            //   clue: ["🛝", "➕", "🏃", "📺"],
+            //   clue: ["📺", "🛝", "➕", "🏃"],
             //   createdBy: user.id,
             //   createdAt: now,
             // },

@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 
 import { InitialDataEvent } from "@shared/types/message";
 import { DBUser } from "@shared/types/db/user";
-import { animate } from "motion";
 
 export enum Page {
   MENU,
@@ -19,7 +18,9 @@ type LoadingOverlayData = {
 
 export const useAppStore = defineStore("app", () => {
   const loading = ref<boolean>(true);
+  const showLoadingOverlay = ref<boolean>(false);
   const loadingOverlayData = ref<LoadingOverlayData>();
+
   const page = ref<Page>(Page.MENU);
 
   const user = ref<InitialDataEvent["data"]["user"]>();
@@ -31,30 +32,23 @@ export const useAppStore = defineStore("app", () => {
 
   const startLoadingOverlay = (data: LoadingOverlayData) => {
     loadingOverlayData.value = data;
-
-    animate([
-      ["#loading-overlay", { opacity: [0, 1] }, { duration: 0.1 }],
-      [
-        "#loading-overlay-modal",
-        { opacity: [0, 1], scale: [0.5, 1] },
-        { type: "spring", duration: 0.4 },
-      ],
-    ]);
+    showLoadingOverlay.value = true;
   };
 
   const stopLoadingOverlay = (id?: LoadingOverlayData["id"]) => {
     if (id && id !== loadingOverlayData.value?.id) return;
-    animate("#loading-overlay", { opacity: [1, 0] }, { duration: 0.2 }).then(() => {
-      loadingOverlayData.value = undefined;
-    });
+    showLoadingOverlay.value = false;
   };
 
   return {
     loading,
+    showLoadingOverlay,
     loadingOverlayData: readonly(loadingOverlayData),
     startLoadingOverlay,
     stopLoadingOverlay,
+
     page: readonly(page),
+
     user,
     dbUser,
     navigateTo,

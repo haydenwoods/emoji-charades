@@ -31,4 +31,9 @@ export const CATEGORY_DATA: Record<Category, CategoryData> = {
     emoji: "🌟",
     color: "amber",
   },
+  [Category.IDIOM]: {
+    name: "Idiom",
+    emoji: "🗣️",
+    color: "indigo",
+  },
 };

@@ -5,6 +5,7 @@ export enum Category {
   BOOK,
   CHARACTER,
   FAMOUS_PERSON,
+  IDIOM,
 }
 
 export type CategoryData = {

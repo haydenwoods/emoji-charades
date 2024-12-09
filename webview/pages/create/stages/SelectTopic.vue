@@ -70,7 +70,7 @@ const newTopicLabel = computed<string>(() => {
   if (newTopicCount.value === 0) {
     return "I don't know it";
   } else {
-    return `${newTopicCount.value}/${NEW_TOPIC_COUNT_MAX} used`;
+    return `${newTopicCount.value}/${NEW_TOPIC_COUNT_MAX} rolls`;
   }
 });
 

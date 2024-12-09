@@ -54,7 +54,7 @@ const cvaButton = cva(
         primary: [
           "bg-amber-300",
           "inset-shadow-sm inset-shadow-amber-400/20",
-          "ring-2 ring-amber-400",
+          "border-2 border-amber-400",
         ],
         secondary: ["bg-white", "ring-2 ring-neutral-300 "],
         plain: [],
@@ -62,7 +62,7 @@ const cvaButton = cva(
       size: {
         xs: "gap-x-1",
         sm: "gap-x-1.5",
-        md: "gap-x-2",
+        md: "gap-x-1.5",
       },
       padded: {
         true: "",

@@ -1,51 +1,53 @@
 <template>
-  <div class="size-full flex flex-col items-center justify-between">
-    <h1 id="title" class="text-xl font-medium text-center">What does this emoji clue represent?</h1>
+  <div class="relative size-full flex flex-col items-center justify-between">
+    <h1 id="title" class="text-xl font-medium text-center">What do these emojis represent?</h1>
 
     <ui-emojis v-if="dbPost?.clue" :emojis="dbPost.clue" />
 
-    <div class="relative flex items-center gap-x-4 max-w-xl">
+    <div id="tools" class="flex items-center gap-x-2 max-w-xl">
       <ui-input
         id="input"
         placeholder="Guess..."
         autofocus
         v-model="input"
         @keydown.enter="onKeydownEnter"
-      >
-        <template #after>
-          <button
-            id="submit-button"
-            type="button"
-            class="not-disabled:cursor-pointer text-xl text-neutral-800 p-1 flex items-center justify-center disabled:text-neutral-400 transition-colors"
-            :disabled="submitDisabled"
-            @click="submit"
-          >
-            <i-material-symbols-arrow-upward-rounded />
-          </button>
-        </template>
-      </ui-input>
-
-      <div
-        id="incorrect-notification"
-        class="flex items-center gap-1.5 bg-red-100 border-2 border-red-700 rounded-full py-2.5 px-3.5 absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 -z-10"
-      >
-        <i-material-symbols-cancel-rounded class="text-red-700" />
-        <span class="font-medium leading-none text-red-800"> Incorrect </span>
-      </div>
-
-      <div
-        id="correct-notification"
-        class="flex items-center gap-1.5 bg-green-100 border-2 border-green-700 rounded-full py-2.5 px-3.5 absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 -z-10"
-      >
-        <i-material-symbols-check-circle-rounded class="text-green-700" />
-        <span class="font-medium leading-none text-green-800"> Correct </span>
-      </div>
+      />
+      <ui-button id="submit" label="Submit" emoji="🔥" @click="submit" />
     </div>
+
+    <ui-overlay theme="success" label="Correct" :open="showCorrectOverlay">
+      <template #icon>
+        <i-material-symbols-cancel-rounded />
+      </template>
+    </ui-overlay>
+
+    <ui-overlay theme="error" label="Incorrect" :open="showIncorrectOverlay">
+      <template #icon>
+        <i-material-symbols-cancel-rounded />
+      </template>
+    </ui-overlay>
+
+    <!-- Notifications -->
+    <!-- <div
+      id="incorrect-notification"
+      class="flex items-center gap-1.5 bg-red-100 border-2 border-red-700 rounded-full py-2.5 px-3.5 absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 -z-10"
+    >
+    <i-material-symbols-cancel-rounded class="text-red-700" />
+      <span class="font-medium leading-none text-red-800"> Incorrect </span>
+    </div>
+
+    <div
+      id="correct-notification"
+      class="flex items-center gap-1.5 bg-green-100 border-2 border-green-700 rounded-full py-2.5 px-3.5 absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 -z-10"
+    >
+      <i-material-symbols-check-circle-rounded class="text-green-700" />
+      <span class="font-medium leading-none text-green-800"> Correct </span>
+    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { animate } from "motion";
 
@@ -60,36 +62,25 @@ const guessStore = useGuessStore();
 const { dbPost } = storeToRefs(guessStore);
 
 const input = ref<string>("");
-
-const submitDisabled = computed(() => {
-  return input.value.trim().length <= 0;
-});
+const showCorrectOverlay = ref<boolean>(false);
+const showIncorrectOverlay = ref<boolean>(false);
 
 const submit = () => {
   const response = guessStore.submit(input.value);
 
   if (response?.correct) {
-    animate([
-      [
-        "#correct-notification",
-        { y: [0, -52], opacity: [0, 1] },
-        { type: "spring", bounce: 0.2, visualDuration: 0.3 },
-      ],
-      ["#correct-notification", { opacity: [0, 1] }, { delay: 1 }],
-    ]).then(() => {
-      appStore.navigateTo(Page.SUMMARY);
-    });
-  } else if (response?.correct === false) {
-    animateShake("#input");
+    showCorrectOverlay.value = true;
 
-    animate([
-      [
-        "#incorrect-notification",
-        { y: [0, -52], opacity: [0, 1] },
-        { type: "spring", bounce: 0.2, visualDuration: 0.3 },
-      ],
-      ["#incorrect-notification", { opacity: [1, 0] }, { delay: 0.2 }],
-    ]);
+    setTimeout(() => {
+      appStore.navigateTo(Page.SUMMARY);
+    }, 2000);
+  } else if (response?.correct === false) {
+    animateShake("#tools");
+
+    showIncorrectOverlay.value = true;
+    setTimeout(() => {
+      showIncorrectOverlay.value = false;
+    }, 1000);
   }
 
   input.value = "";
@@ -102,7 +93,7 @@ const onKeydownEnter = (event: KeyboardEvent) => {
 };
 
 onMounted(() => {
-  animatePopIn("#input");
+  animatePopIn("#tools");
   animatePopIn("#title");
 });
 </script>

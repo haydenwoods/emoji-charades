@@ -8,7 +8,7 @@
   >
     <!-- Search -->
     <ui-input
-      class="col-span-4 row-start-1 col-start-1 self-end"
+      class="h-[52px] col-span-4 row-start-1 col-start-1 self-end"
       placeholder="Search emojis..."
       maxlength="16"
       autofocus
@@ -32,7 +32,7 @@
     <!-- Backspace -->
     <ui-button
       variant="secondary"
-      class="self-end row-start-1 col-start-6"
+      class="self-end h-[52px] row-start-1 col-start-6"
       @click="emit('click:backspace')"
     >
       <template #icon>
@@ -44,7 +44,7 @@
     <ui-button
       label="Submit"
       variant="primary"
-      class="self-end row-start-1 col-start-7 col-span-2"
+      class="self-end h-[52px] row-start-1 col-start-7 col-span-2"
       :disabled="submitDisabled"
       @click="emit('click:submit')"
     >

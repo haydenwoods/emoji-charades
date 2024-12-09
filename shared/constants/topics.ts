@@ -51,4 +51,9 @@ export const TOPICS: Topic[] = [
     name: "Tom Hanks",
     category: Category.FAMOUS_PERSON,
   },
+  // Idiom
+  {
+    name: "Cost an arm and a leg",
+    category: Category.IDIOM,
+  },
 ];

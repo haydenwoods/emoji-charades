@@ -42,13 +42,13 @@ const cvaButton = cva(
       variant: {
         key: [
           "bg-white",
-          "inset-ring-2 inset-ring-neutral-300",
+          "border-2 border-neutral-300",
           "inset-shadow-sm inset-shadow-neutral-200/20",
         ],
         action: [
-          "bg-blue-300 disabled:bg-blue-100",
+          "bg-blue-300",
           "inset-shadow-sm inset-shadow-white/10",
-          "inset-ring-2 inset-ring-blue-400 disabled:inset-ring-blue-200",
+          "border-2 border-blue-400",
         ],
       },
     },

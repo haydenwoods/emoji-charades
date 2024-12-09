@@ -25,5 +25,6 @@ declare module 'vue' {
     UiEmojiKeyboardButton: typeof import('./components/UiEmojiKeyboardButton.vue')['default']
     UiEmojis: typeof import('./components/UiEmojis.vue')['default']
     UiInput: typeof import('./components/UiInput.vue')['default']
+    UiOverlay: typeof import('./components/UiOverlay.vue')['default']
   }
 }
