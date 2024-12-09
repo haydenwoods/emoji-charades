@@ -12,6 +12,7 @@ declare module 'vue' {
     IMaterialSymbolsBackspaceRounded: typeof import('~icons/material-symbols/backspace-rounded')['default']
     IMaterialSymbolsCancelOutlineRounded: typeof import('~icons/material-symbols/cancel-outline-rounded')['default']
     IMaterialSymbolsCancelRounded: typeof import('~icons/material-symbols/cancel-rounded')['default']
+    IMaterialSymbolsCheckCircleOutlineRounded: typeof import('~icons/material-symbols/check-circle-outline-rounded')['default']
     IMaterialSymbolsCheckCircleRounded: typeof import('~icons/material-symbols/check-circle-rounded')['default']
     IMaterialSymbolsCheckRounded: typeof import('~icons/material-symbols/check-rounded')['default']
     IMaterialSymbolsCloseRounded: typeof import('~icons/material-symbols/close-rounded')['default']

@@ -11,45 +11,41 @@
         autofocus
         v-model="input"
         @keydown.enter="onKeydownEnter"
-      />
+      >
+        <template #after>
+          <button
+            id="submit-button"
+            type="button"
+            class="not-disabled:cursor-pointer p-1 flex items-center justify-center transition-colors"
+            :class="input.length > 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'"
+            @click="input = ''"
+          >
+            <i-material-symbols-cancel-outline-rounded
+              class="text-xl text-neutral-600 in-disabled:text-neutral-400"
+            />
+          </button>
+        </template>
+      </ui-input>
       <ui-button id="submit" label="Submit" emoji="🔥" @click="submit" />
     </div>
 
     <ui-overlay theme="success" label="Correct" :open="showCorrectOverlay">
       <template #icon>
-        <i-material-symbols-cancel-rounded />
+        <i-material-symbols-check-circle-outline-rounded />
       </template>
     </ui-overlay>
 
     <ui-overlay theme="error" label="Incorrect" :open="showIncorrectOverlay">
       <template #icon>
-        <i-material-symbols-cancel-rounded />
+        <i-material-symbols-cancel-outline-rounded />
       </template>
     </ui-overlay>
-
-    <!-- Notifications -->
-    <!-- <div
-      id="incorrect-notification"
-      class="flex items-center gap-1.5 bg-red-100 border-2 border-red-700 rounded-full py-2.5 px-3.5 absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 -z-10"
-    >
-    <i-material-symbols-cancel-rounded class="text-red-700" />
-      <span class="font-medium leading-none text-red-800"> Incorrect </span>
-    </div>
-
-    <div
-      id="correct-notification"
-      class="flex items-center gap-1.5 bg-green-100 border-2 border-green-700 rounded-full py-2.5 px-3.5 absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 -z-10"
-    >
-      <i-material-symbols-check-circle-rounded class="text-green-700" />
-      <span class="font-medium leading-none text-green-800"> Correct </span>
-    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
-import { animate } from "motion";
 
 import { Page, useAppStore } from "../../stores/app";
 import { useGuessStore } from "../../stores/guess";

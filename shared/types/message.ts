@@ -43,6 +43,9 @@ export type GuessRequest = {
 };
 export type GuessResponse = {
   type: "GUESS_RESPONSE";
+  data: {
+    correct: boolean;
+  };
 };
 
 export type Message =

@@ -15,13 +15,22 @@ export const onInitialDataEvent: MessageHandler<InitialDataEvent> = ({ message }
   appStore.user = user;
   appStore.dbUser = dbUser;
 
-  // If there is post data, this post must be one that should be on the GUESS page
   if (dbPost) {
     guessStore.dbPost = dbPost;
-    appStore.navigateTo(Page.GUESS);
+
+    // Find if the user has already completed the post or not
+    const playedPost = dbUser?.playedPosts.find(({ id }) => id === dbPost.id);
+    const isPostCompleted = Boolean(playedPost?.completedAt);
+
+    if (isPostCompleted) {
+      appStore.navigateTo(Page.SUMMARY);
+    } else {
+      appStore.navigateTo(Page.GUESS);
+    }
   }
 
   appStore.loading = false;
+
   sendMessage({
     type: "LOADED_EVENT",
   });
