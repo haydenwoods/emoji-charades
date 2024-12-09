@@ -33,7 +33,6 @@ Devvit.addMenuItem({
       subredditName: subreddit.name,
       preview: <Loading />,
     });
-    context.ui.showToast({ text: "Created Emoji Game post!" });
     context.ui.navigateTo(post);
   },
 });

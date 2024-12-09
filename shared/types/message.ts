@@ -18,6 +18,7 @@ export type InitialDataEvent = {
       id: string;
       username: string;
     };
+    userXP?: number;
     dbUser?: DBUser;
     dbPost?: DBPost;
   };

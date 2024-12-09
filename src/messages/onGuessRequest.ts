@@ -7,6 +7,12 @@ import { DBUser } from "@shared/types/db/user.js";
 import { isGuessSimilar } from "@shared/utils/topics.js";
 import { DBPost } from "@shared/types/db/post.js";
 import { getPostCompletedCommentText } from "@/utils/comment.js";
+import { addUserXP } from "@/utils/user-xp.js";
+import {
+  CORRECT_GUESS_XP,
+  POST_CREATOR_CORRECT_GUESS_XP,
+  SINGLE_GUESS_XP,
+} from "@/constants/user-xp.js";
 
 export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, context }) => {
   const { userId, postId } = context;
@@ -56,13 +62,19 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
     playedPost.completedAt = now;
 
     // Add XP to the user
-    // Add XP to the user that created the post
+    let xpGained = CORRECT_GUESS_XP;
+    if (playedPost.guesses.length <= 1) xpGained += SINGLE_GUESS_XP;
+    await addUserXP(context.redis, userId, xpGained);
 
-    // Add a comment to the post
-    await context.reddit.submitComment({
-      id: postId,
-      text: getPostCompletedCommentText(playedPost),
-    });
+    await Promise.all([
+      // Add XP to the user that created the post
+      await addUserXP(context.redis, dbPost.createdBy, POST_CREATOR_CORRECT_GUESS_XP),
+      // Add a comment to the post
+      context.reddit.submitComment({
+        id: postId,
+        text: getPostCompletedCommentText(playedPost),
+      }),
+    ]);
   }
 
   // Update the DBUser

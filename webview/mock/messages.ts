@@ -34,6 +34,7 @@ export const mockMessages = () => {
           type: "INITIAL_DATA_EVENT",
           data: {
             user,
+            userXP: 248,
             dbUser: {
               id: user.id,
               playedPosts: [

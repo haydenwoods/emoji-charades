@@ -1,6 +1,7 @@
 import { InitialDataEvent, MountedEvent } from "@shared/types/message.js";
 
 import { sendMessage } from "@/utils/message.js";
+import { getUserXP } from "@/utils/user-xp.js";
 
 import { MessageHandler } from "@/types/message.js";
 import { DBPost } from "@shared/types/db/post.js";
@@ -19,9 +20,9 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
     data.user = await context.reddit.getUserById(userId);
   };
 
-  const getDBPost = async () => {
-    if (!postId) return;
-    data.dbPost = await getObject<DBPost>(context.redis, `post:${postId}`);
+  const _getUserXP = async () => {
+    if (!userId) return;
+    data.userXP = await getUserXP(context.redis, userId);
   };
 
   const getDBUser = async () => {
@@ -29,7 +30,12 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
     data.dbUser = await getObject<DBUser>(context.redis, `user:${userId}`);
   };
 
-  await Promise.all([getUser(), getDBPost(), getDBUser()]);
+  const getDBPost = async () => {
+    if (!postId) return;
+    data.dbPost = await getObject<DBPost>(context.redis, `post:${postId}`);
+  };
+
+  await Promise.all([getUser(), _getUserXP(), getDBUser(), getDBPost()]);
 
   sendMessage(context, {
     type: "INITIAL_DATA_EVENT",

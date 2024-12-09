@@ -7,20 +7,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    IMaterialSymbolsArrowUpwardRounded: typeof import('~icons/material-symbols/arrow-upward-rounded')['default']
     IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
-    IMaterialSymbolsBackspaceRounded: typeof import('~icons/material-symbols/backspace-rounded')['default']
     IMaterialSymbolsCancelOutlineRounded: typeof import('~icons/material-symbols/cancel-outline-rounded')['default']
-    IMaterialSymbolsCancelRounded: typeof import('~icons/material-symbols/cancel-rounded')['default']
     IMaterialSymbolsCheckCircleOutlineRounded: typeof import('~icons/material-symbols/check-circle-outline-rounded')['default']
-    IMaterialSymbolsCheckCircleRounded: typeof import('~icons/material-symbols/check-circle-rounded')['default']
     IMaterialSymbolsCheckRounded: typeof import('~icons/material-symbols/check-rounded')['default']
-    IMaterialSymbolsCloseRounded: typeof import('~icons/material-symbols/close-rounded')['default']
     IMaterialSymbolsProgressActivity: typeof import('~icons/material-symbols/progress-activity')['default']
-    IMaterialSymbolsProgressActivityRounded: typeof import('~icons/material-symbols/progress-activity-rounded')['default']
-    IMaterialSymbolsProgressIndicatorRounded: typeof import('~icons/material-symbols/progress-indicator-rounded')['default']
-    IMaterialSymbolsUndoRounded: typeof import('~icons/material-symbols/undo-rounded')['default']
-    IMaterialSymbolsXRounded: typeof import('~icons/material-symbols/x-rounded')['default']
     UiButton: typeof import('./components/UiButton.vue')['default']
     UiEmojiKeyboard: typeof import('./components/UiEmojiKeyboard.vue')['default']
     UiEmojiKeyboardButton: typeof import('./components/UiEmojiKeyboardButton.vue')['default']
