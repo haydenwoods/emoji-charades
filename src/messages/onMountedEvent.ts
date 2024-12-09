@@ -7,7 +7,9 @@ import { DBPost } from "@shared/types/db/post.js";
 import { getObject } from "@/utils/db.js";
 import { DBUser } from "@shared/types/db/user.js";
 
-export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context }) => {
+export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, app }) => {
+  app.setWebviewMounted(true);
+
   const { postId, userId } = context;
 
   let data: InitialDataEvent["data"] = {};

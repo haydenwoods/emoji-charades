@@ -6,7 +6,7 @@
     ghost-class="bg-neutral-200"
     drag-class="opacity-0"
     tag="div"
-    :disabled="!sortable"
+    :disabled="!edit"
     :animation="200"
     @start="dragging = true"
     @end="dragging = false"
@@ -14,7 +14,7 @@
     <template #item="{ element }">
       <span
         class="emoji text-6xl p-2 rounded-full transition-colors"
-        :class="[sortable ? 'cursor-move hover:bg-neutral-200' : '']"
+        :class="[edit ? 'cursor-move hover:bg-neutral-200' : '']"
       >
         {{ element }}
       </span>
@@ -28,12 +28,16 @@ import { animate, stagger } from "motion";
 import Draggable from "vuedraggable";
 
 defineProps<{
-  sortable?: boolean;
+  edit?: boolean;
 }>();
 
 const emojis = defineModel<string[]>("emojis");
 
 const dragging = ref<boolean>(false);
+
+const remove = (index: number): void => {
+  emojis.value?.splice(index, 1);
+};
 
 onMounted(() => {
   nextTick(() => {

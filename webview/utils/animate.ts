@@ -5,7 +5,8 @@ type ShakeOptions = {
   startDirection: 1 | -1;
   distance: number;
   repetitions: number;
-  durationPerRepetition: number;
+  repetitionDuration: number;
+  attenuation: number;
 };
 
 type Element = Parameters<typeof animate>[1];
@@ -15,24 +16,34 @@ const DEFAULT_OPTIONS: ShakeOptions = {
   startDirection: 1,
   distance: 4,
   repetitions: 4,
-  durationPerRepetition: 0.2,
+  repetitionDuration: 0.2,
+  attenuation: 0.25,
 };
 
 export const animateShake = (
   element: Element,
   options: Partial<ShakeOptions> = DEFAULT_OPTIONS,
 ) => {
-  const { direction, startDirection, distance, repetitions, durationPerRepetition } = {
+  const { direction, startDirection, distance, repetitions, repetitionDuration, attenuation } = {
     ...DEFAULT_OPTIONS,
     ...options,
   };
 
   const shakeValues = new Array(repetitions)
-    .fill([distance * startDirection, distance * -startDirection])
+    .fill("")
+    .map((_, index) => {
+      const attenuationPercentage = Math.pow(1 - attenuation, index);
+      const attenuatedDistance = distance * attenuationPercentage;
+      const repetition = [
+        attenuatedDistance * startDirection,
+        attenuatedDistance * -startDirection,
+      ];
+      return repetition;
+    })
     .flat();
   const values = [0, ...shakeValues, 0];
 
-  const duration = durationPerRepetition * repetitions;
+  const duration = repetitionDuration * repetitions;
 
   animate(
     element,

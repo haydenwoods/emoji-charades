@@ -11,8 +11,14 @@ const sendMessage = (message: Message) => {
   });
 };
 
+const timeout = (ms: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};
+
 export const mockMessages = () => {
-  window.addEventListener("message", (event) => {
+  window.addEventListener("message", async (event) => {
     const message = event.data as Message;
 
     switch (message.type) {
@@ -33,20 +39,22 @@ export const mockMessages = () => {
               playedPosts: [],
               createdAt: now,
             },
-            dbPost: {
-              id: "t3_12345",
-              topic,
-              clue: ["🛝", "➕", "🏃", "📺"],
-              createdBy: user.id,
-              createdAt: now,
-            },
+            // dbPost: {
+            //   id: "t3_12345",
+            //   topic,
+            //   clue: ["🛝", "➕", "🏃", "📺"],
+            //   createdBy: user.id,
+            //   createdAt: now,
+            // },
           },
         });
         break;
       case "CREATE_REQUEST":
-        return sendMessage({
+        await timeout(2000);
+        sendMessage({
           type: "CREATE_RESPONSE",
         });
+        break;
     }
   });
 };

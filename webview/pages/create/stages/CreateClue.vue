@@ -5,7 +5,7 @@
     </h1>
     <h2 class="text-neutral-500">Create a clue for this, using only emojis!</h2>
 
-    <ui-emojis :emojis="clue" sortable class="my-auto" />
+    <ui-emojis v-model:emojis="clue" edit class="my-auto" />
 
     <ui-emoji-keyboard
       :submit-disabled="!canSubmit"

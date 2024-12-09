@@ -9,7 +9,12 @@ declare module 'vue' {
   export interface GlobalComponents {
     IMaterialSymbolsArrowUpwardRounded: typeof import('~icons/material-symbols/arrow-upward-rounded')['default']
     IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
+    IMaterialSymbolsBackspaceRounded: typeof import('~icons/material-symbols/backspace-rounded')['default']
+    IMaterialSymbolsCancelRounded: typeof import('~icons/material-symbols/cancel-rounded')['default']
+    IMaterialSymbolsCheckCircleRounded: typeof import('~icons/material-symbols/check-circle-rounded')['default']
     IMaterialSymbolsCheckRounded: typeof import('~icons/material-symbols/check-rounded')['default']
+    IMaterialSymbolsCloseRounded: typeof import('~icons/material-symbols/close-rounded')['default']
+    IMaterialSymbolsXRounded: typeof import('~icons/material-symbols/x-rounded')['default']
     UiButton: typeof import('./components/UiButton.vue')['default']
     UiEmojiKeyboard: typeof import('./components/UiEmojiKeyboard.vue')['default']
     UiEmojiKeyboardButton: typeof import('./components/UiEmojiKeyboardButton.vue')['default']

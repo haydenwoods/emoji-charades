@@ -6,7 +6,7 @@ export type MessageHandler<T extends Message = Message, R = void> = (args: {
   message: T;
   context: Devvit.Context;
   app: {
-    loading: boolean;
-    setLoading: StateSetter<boolean>;
+    webviewMounted: boolean;
+    setWebviewMounted: StateSetter<boolean>;
   };
 }) => R | Promise<R>;

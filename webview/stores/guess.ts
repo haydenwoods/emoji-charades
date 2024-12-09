@@ -29,9 +29,6 @@ export const useGuessStore = defineStore("guess", () => {
 
     // If correct, navigate to the summary page
     const correct = topicNamesHighestSimilarity >= CORRECT_SIMILARITY_PERCENTAGE;
-    if (correct) {
-      appStore.navigateTo(Page.SUMMARY);
-    }
 
     sendMessage({
       type: "GUESS_REQUEST",

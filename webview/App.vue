@@ -1,6 +1,7 @@
 <template>
-  <div v-if="!loading" class="size-full p-6 md:p-8">
-    <menu-page v-if="page === Page.MENU" />
+  <div class="size-full p-6 md:p-8">
+    <loading-page v-if="loading" />
+    <menu-page v-else-if="page === Page.MENU" />
     <create-page v-else-if="page === Page.CREATE" />
     <guess-page v-else-if="page === Page.GUESS" />
     <summary-page v-else-if="page === Page.SUMMARY" />
@@ -21,6 +22,7 @@ import { onInitialDataEvent } from "./messages/onInitialDataEvent";
 import { Message } from "../shared/types/message";
 import { MessageHandler } from "./types/message";
 
+import LoadingPage from "./pages/Loading.vue";
 import MenuPage from "./pages/menu/Index.vue";
 import CreatePage from "./pages/create/Index.vue";
 import GuessPage from "./pages/guess/Index.vue";
