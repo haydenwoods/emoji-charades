@@ -17,7 +17,7 @@
   >
     <template #item="{ element }">
       <span
-        class="emoji text-6xl font-emoji p-2 rounded-full transition-opacity aspect-square flex items-center justify-center select-none"
+        class="emoji text-6xl p-2 rounded-full transition-opacity aspect-square flex items-center justify-center select-none"
         :class="[edit ? 'cursor-move hover:bg-neutral-200' : '']"
       >
         {{ element }}

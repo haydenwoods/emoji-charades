@@ -104,7 +104,7 @@ const cvaLabel = cva(["font-medium whitespace-nowrap"], {
   },
 });
 
-const cvaEmoji = cva(["in-disabled:opacity-50 font-emoji"], {
+const cvaEmoji = cva(["in-disabled:opacity-50 "], {
   variants: {
     size: {
       xs: "text-lg",

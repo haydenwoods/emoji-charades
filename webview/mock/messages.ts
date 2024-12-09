@@ -38,12 +38,12 @@ export const mockMessages = () => {
             dbUser: {
               id: user.id,
               playedPosts: [
-                {
-                  id: "t3_12345",
-                  guesses: [],
-                  createdAt: now,
-                  completedAt: now,
-                },
+                // {
+                //   id: "t3_12345",
+                //   guesses: [],
+                //   createdAt: now,
+                //   completedAt: now,
+                // },
               ],
               createdAt: now,
             },

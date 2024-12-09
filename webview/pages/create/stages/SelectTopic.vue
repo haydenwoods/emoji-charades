@@ -18,7 +18,7 @@
             }[topicCategoryData.color]
           "
         >
-          <span class="text-xl font-emoji">{{ topicCategoryData.emoji }}</span>
+          <span class="text-xl">{{ topicCategoryData.emoji }}</span>
           <span class="text-xl font-medium">{{ topicCategoryData.name }}</span>
         </span>
       </div>
