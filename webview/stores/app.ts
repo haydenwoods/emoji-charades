@@ -36,7 +36,7 @@ export const useAppStore = defineStore("app", () => {
       ["#loading-overlay", { opacity: [0, 1] }, { duration: 0.1 }],
       [
         "#loading-overlay-modal",
-        { opacity: [0, 1], scale: [0.6, 1] },
+        { opacity: [0, 1], scale: [0.5, 1] },
         { type: "spring", duration: 0.4 },
       ],
     ]);
@@ -44,7 +44,7 @@ export const useAppStore = defineStore("app", () => {
 
   const stopLoadingOverlay = (id?: LoadingOverlayData["id"]) => {
     if (id && id !== loadingOverlayData.value?.id) return;
-    animate([["#loading-overlay", { opacity: [1, 0] }, { duration: 0.2 }]]).then(() => {
+    animate("#loading-overlay", { opacity: [1, 0] }, { duration: 0.2 }).then(() => {
       loadingOverlayData.value = undefined;
     });
   };

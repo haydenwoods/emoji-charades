@@ -10,6 +10,7 @@ declare module 'vue' {
     IMaterialSymbolsArrowUpwardRounded: typeof import('~icons/material-symbols/arrow-upward-rounded')['default']
     IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
     IMaterialSymbolsBackspaceRounded: typeof import('~icons/material-symbols/backspace-rounded')['default']
+    IMaterialSymbolsCancelOutlineRounded: typeof import('~icons/material-symbols/cancel-outline-rounded')['default']
     IMaterialSymbolsCancelRounded: typeof import('~icons/material-symbols/cancel-rounded')['default']
     IMaterialSymbolsCheckCircleRounded: typeof import('~icons/material-symbols/check-circle-rounded')['default']
     IMaterialSymbolsCheckRounded: typeof import('~icons/material-symbols/check-rounded')['default']

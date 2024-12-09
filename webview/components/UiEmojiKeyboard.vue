@@ -13,7 +13,21 @@
       maxlength="16"
       autofocus
       v-model="search"
-    />
+    >
+      <template #after>
+        <button
+          v-if="search.length > 0"
+          id="submit-button"
+          type="button"
+          class="not-disabled:cursor-pointer p-1 flex items-center justify-center transition-colors"
+          @click="search = ''"
+        >
+          <i-material-symbols-cancel-outline-rounded
+            class="text-xl text-neutral-600 in-disabled:text-neutral-400"
+          />
+        </button>
+      </template>
+    </ui-input>
 
     <!-- Backspace -->
     <ui-button
@@ -31,10 +45,11 @@
       label="Submit"
       variant="primary"
       class="self-end row-start-1 col-start-7 col-span-2"
+      :disabled="submitDisabled"
       @click="emit('click:submit')"
     >
       <template #icon>
-        <i-material-symbols-check-rounded />
+        <i-material-symbols-check-rounded class="text-amber-900" />
       </template>
     </ui-button>
 

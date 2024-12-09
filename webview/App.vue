@@ -15,10 +15,10 @@
     >
       <div
         id="loading-overlay-modal"
-        class="bg-neutral-100 rounded-full flex items-center gap-y-2 shadow-md px-5 py-4 gap-2"
+        class="bg-amber-300 rounded-full flex items-center gap-y-2 shadow-md px-5 py-4 gap-2"
       >
-        <i-material-symbols-progress-activity class="text-3xl animate-spin text-neutral-800" />
-        <span class="text-2xl font-medium text-neutral-800">{{ loadingOverlayData?.label }}</span>
+        <i-material-symbols-progress-activity class="text-3xl animate-spin text-amber-900" />
+        <span class="text-2xl font-medium text-amber-900">{{ loadingOverlayData?.label }}</span>
       </div>
     </div>
   </div>

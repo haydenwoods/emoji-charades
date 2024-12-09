@@ -52,10 +52,9 @@ const cvaButton = cva(
     variants: {
       variant: {
         primary: [
-          "bg-blue-300",
-          "not-disabled:shadow-md",
-          "inset-shadow-sm inset-shadow-blue-400/20",
-          "ring-2 ring-blue-400",
+          "bg-amber-300",
+          "inset-shadow-sm inset-shadow-amber-400/20",
+          "ring-2 ring-amber-400",
         ],
         secondary: ["bg-white", "ring-2 ring-neutral-300 "],
         plain: [],
@@ -93,7 +92,7 @@ const cvaButton = cva(
 const cvaLabel = cva(["font-medium whitespace-nowrap"], {
   variants: {
     variant: {
-      primary: ["text-blue-950"],
+      primary: ["text-amber-900"],
       secondary: ["text-neutral-600 in-disabled:text-neutral-400"],
       plain: ["text-neutral-800 in-disabled:text-neutral-400"],
     },
@@ -105,7 +104,7 @@ const cvaLabel = cva(["font-medium whitespace-nowrap"], {
   },
 });
 
-const cvaEmoji = cva(["in-disabled:opacity-50"], {
+const cvaEmoji = cva(["in-disabled:opacity-50 font-emoji"], {
   variants: {
     size: {
       xs: "text-lg",
@@ -118,7 +117,7 @@ const cvaEmoji = cva(["in-disabled:opacity-50"], {
 const cvaIcon = cva([], {
   variants: {
     variant: {
-      primary: ["text-blue-950"],
+      primary: ["text-amber-950"],
       secondary: ["text-neutral-600 in-disabled:text-neutral-400"],
       plain: ["text-neutral-800 in-disabled:text-neutral-400"],
     },

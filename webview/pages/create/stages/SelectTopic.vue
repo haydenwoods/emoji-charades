@@ -7,18 +7,18 @@
           class="rounded-full px-2.5 py-1 inline-flex items-center gap-x-2 border-2"
           :class="
             {
-              blue: 'bg-blue-200 text-blue-950 border-blue-300',
-              orange: 'bg-orange-200 text-orange-950 border-orange-300',
-              red: 'bg-red-200 text-red-950 border-red-300',
-              emerald: 'bg-green-200 text-green-950 border-green-300',
-              purple: 'bg-purple-200 text-purple-950 border-purple-300',
-              indigo: 'bg-indigo-200 text-indigo-950 border-indigo-300',
-              yellow: 'bg-yellow-200 text-yellow-950 border-yellow-300',
-              amber: 'bg-amber-200 text-amber-950 border-amber-300',
+              blue: 'bg-blue-200 text-blue-900 border-blue-300',
+              orange: 'bg-orange-200 text-orange-900 border-orange-300',
+              red: 'bg-red-200 text-red-900 border-red-300',
+              emerald: 'bg-green-200 text-green-900 border-green-300',
+              purple: 'bg-purple-200 text-purple-900 border-purple-300',
+              indigo: 'bg-indigo-200 text-indigo-900 border-indigo-300',
+              yellow: 'bg-yellow-200 text-yellow-900 border-yellow-300',
+              amber: 'bg-amber-200 text-amber-900 border-amber-300',
             }[topicCategoryData.color]
           "
         >
-          <span class="text-xl">{{ topicCategoryData.emoji }}</span>
+          <span class="text-xl font-emoji">{{ topicCategoryData.emoji }}</span>
           <span class="text-xl font-medium">{{ topicCategoryData.name }}</span>
         </span>
       </div>
