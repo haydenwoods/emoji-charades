@@ -7,6 +7,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    IMaterialSymbolsArrowBack: typeof import('~icons/material-symbols/arrow-back')['default']
+    IMaterialSymbolsArrowBackRounded: typeof import('~icons/material-symbols/arrow-back-rounded')['default']
     IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
     IMaterialSymbolsCancelOutlineRounded: typeof import('~icons/material-symbols/cancel-outline-rounded')['default']
     IMaterialSymbolsCheckCircleOutlineRounded: typeof import('~icons/material-symbols/check-circle-outline-rounded')['default']
@@ -17,6 +19,8 @@ declare module 'vue' {
     INotoBackArrow: typeof import('~icons/noto/back-arrow')['default']
     INotoEightOclock: typeof import('~icons/noto/eight-oclock')['default']
     INotoElevenOclock: typeof import('~icons/noto/eleven-oclock')['default']
+    INotoExclamationMark: typeof import('~icons/noto/exclamation-mark')['default']
+    INotoExclamationQuestionMark: typeof import('~icons/noto/exclamation-question-mark')['default']
     INotoFiveOclock: typeof import('~icons/noto/five-oclock')['default']
     INotoFourOclock: typeof import('~icons/noto/four-oclock')['default']
     INotoGear: typeof import('~icons/noto/gear')['default']
@@ -28,6 +32,7 @@ declare module 'vue' {
     INotoPlay: typeof import('~icons/noto/play')['default']
     INotoPlayButton: typeof import('~icons/noto/play-button')['default']
     INotoPlus: typeof import('~icons/noto/plus')['default']
+    INotoQuestionMark: typeof import('~icons/noto/question-mark')['default']
     INotoRightArrowCurvingLeft: typeof import('~icons/noto/right-arrow-curving-left')['default']
     INotoSevenOclock: typeof import('~icons/noto/seven-oclock')['default']
     INotoSixOclock: typeof import('~icons/noto/six-oclock')['default']

@@ -17,8 +17,14 @@
   >
     <template #item="{ element }">
       <span
-        class="emoji text-6xl p-2 rounded-full transition-opacity aspect-square flex items-center justify-center select-none"
-        :class="[edit ? 'cursor-move hover:bg-neutral-200' : '']"
+        class="emoji rounded-full transition-opacity aspect-square flex items-center justify-center select-none"
+        :class="[
+          edit ? 'cursor-move hover:bg-neutral-200' : '',
+          {
+            sm: 'text-5xl p-1.5',
+            md: 'text-6xl p-2',
+          }[size],
+        ]"
       >
         {{ element }}
       </span>
@@ -31,9 +37,17 @@ import { nextTick, onMounted, ref } from "vue";
 import { animate, stagger } from "motion";
 import Draggable from "vuedraggable";
 
-defineProps<{
-  edit?: boolean;
-}>();
+type Size = "sm" | "md";
+
+withDefaults(
+  defineProps<{
+    size?: Size;
+    edit?: boolean;
+  }>(),
+  {
+    size: "md",
+  },
+);
 
 const emojis = defineModel<string[]>("emojis");
 

@@ -3,10 +3,11 @@
     <loading-page v-if="loading" />
 
     <transition v-else name="page" mode="out-in">
-      <menu-page v-if="page === Page.MENU" key="menu-page" />
-      <create-page v-else-if="page === Page.CREATE" key="create-page" />
-      <guess-page v-else-if="page === Page.GUESS" key="guess-page" />
-      <summary-page v-else-if="page === Page.SUMMARY" key="summary-page" />
+      <menu-page v-if="page === Page.MENU" />
+      <create-page v-else-if="page === Page.CREATE" />
+      <guess-page v-else-if="page === Page.GUESS" />
+      <summary-page v-else-if="page === Page.SUMMARY" />
+      <about-page v-else-if="page == Page.ABOUT" />
     </transition>
 
     <!-- Loading overlay -->
@@ -38,6 +39,7 @@ import MenuPage from "./pages/menu/Index.vue";
 import CreatePage from "./pages/create/Index.vue";
 import GuessPage from "./pages/guess/Index.vue";
 import SummaryPage from "./pages/summary/Index.vue";
+import AboutPage from "./pages/About.vue";
 
 const appStore = useAppStore();
 const { loading, showLoadingOverlay, loadingOverlayData, page } = storeToRefs(appStore);

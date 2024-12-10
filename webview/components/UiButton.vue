@@ -58,7 +58,7 @@ const cvaButton = cva(
       },
       size: {
         xs: "gap-x-1",
-        sm: "gap-x-2",
+        sm: "gap-x-1.5",
         md: "gap-x-2.5",
       },
       padded: {

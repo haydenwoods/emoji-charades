@@ -9,6 +9,7 @@ export enum Page {
   CREATE,
   GUESS,
   SUMMARY,
+  ABOUT,
 }
 
 type LoadingOverlayData = {

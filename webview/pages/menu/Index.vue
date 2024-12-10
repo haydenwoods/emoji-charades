@@ -19,7 +19,7 @@
         id="create-button"
         type="button"
         class="size-full bg-neutral-200 border-2 border-neutral-300 p-4 aspect-square rounded-xl flex flex-col gap-y-2 items-center justify-center text-neutral-900 not-disabled:cursor-pointer hover:scale-103 transition-transform active:scale-97"
-        @click="onCreateClicked"
+        @click="appStore.navigateTo(Page.CREATE)"
       >
         <i-noto-plus class="text-5xl" />
         <span class="text-xl font-medium">Create</span>
@@ -32,6 +32,16 @@
       >
         <i-noto-trophy class="text-2xl" />
         <span class="text-xl font-medium">Leaderboard</span>
+      </button>
+
+      <button
+        id="leaderboard-button"
+        type="button"
+        class="size-full bg-neutral-200 border-2 border-neutral-300 p-2 rounded-xl flex gap-x-2 items-center justify-center text-neutral-900 not-disabled:cursor-pointer hover:scale-103 transition-transform col-span-2 active:scale-97"
+        @click="appStore.navigateTo(Page.ABOUT)"
+      >
+        <i-noto-question-mark class="text-2xl" />
+        <span class="text-xl font-medium">What is this?</span>
       </button>
     </div>
   </div>

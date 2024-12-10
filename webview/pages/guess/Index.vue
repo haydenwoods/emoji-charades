@@ -1,6 +1,9 @@
 <template>
   <div class="relative size-full flex flex-col items-center justify-between">
-    <h1 id="title" class="text-xl font-medium text-center">What do these emojis represent?</h1>
+    <div id="header" class="flex flex-col gap-y-0.5 items-center">
+      <h1 class="text-xl font-medium text-center">What do these emojis represent?</h1>
+      <h2 class="text-neutral-500 text-center">Clue created by u/Spleentacular</h2>
+    </div>
 
     <ui-emojis v-if="dbPost?.clue" :emojis="dbPost.clue" />
 
@@ -26,6 +29,7 @@
           </button>
         </template>
       </ui-input>
+
       <ui-button id="submit" label="Submit" @click="submit">
         <template #icon>
           <i-noto-outbox-tray />
@@ -93,7 +97,7 @@ const onKeydownEnter = (event: KeyboardEvent) => {
 };
 
 onMounted(() => {
+  animatePopIn("#header");
   animatePopIn("#tools");
-  animatePopIn("#title");
 });
 </script>
