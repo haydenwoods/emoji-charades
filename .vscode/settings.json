@@ -7,7 +7,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   // Search
   "files.exclude": {
-    "**/webroot/**": true
+    // "**/webroot/**": true
   },
   // TailwindCSS
   // From: https://cva.style/docs/getting-started/installation#intellisense
