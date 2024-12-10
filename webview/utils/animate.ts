@@ -57,8 +57,15 @@ export const animateShake = (
 };
 
 export const animatePopIn = (element: Element) => {
-  animate(element, {
-    scale: [0.6, 1],
-    opacity: [0, 1],
-  });
+  animate(
+    element,
+    {
+      scale: [0.5, 1],
+      opacity: [0, 1],
+    },
+    {
+      type: "spring",
+      duration: 0.5,
+    },
+  );
 };

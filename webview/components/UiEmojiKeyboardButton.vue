@@ -34,7 +34,7 @@ const cvaButton = cva(
     "size-full",
     "rounded-full",
     "transition-all",
-    "hover:not-disabled:scale-105 active:not-disabled:scale-95",
+    "hover:not-disabled:scale-103 active:not-disabled:scale-97",
     "not-disabled:cursor-pointer",
   ],
   {

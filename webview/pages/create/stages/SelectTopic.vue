@@ -77,7 +77,7 @@ const newTopicLabel = computed<string>(() => {
   if (newTopicCount.value === 0) {
     return "I don't know it";
   } else {
-    return `${newTopicCount.value}/${NEW_TOPIC_COUNT_MAX} rolls`;
+    return `${newTopicCount.value}/${NEW_TOPIC_COUNT_MAX} re-rolls`;
   }
 });
 
@@ -85,7 +85,6 @@ const newTopicDisabled = computed<boolean>(() => {
   return !hasTopicsRemaining.value || newTopicCount.value >= NEW_TOPIC_COUNT_MAX;
 });
 
-// TODO: Impose a limit on how many re-rolls you get
 const onNewTopicClicked = () => {
   // Add the current topic to the excludes (so it doesn't come up again)
   excludeTopics.value.push(topic.value);

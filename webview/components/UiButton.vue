@@ -41,7 +41,7 @@ const cvaButton = cva(
     "flex items-center justify-center",
     "rounded-full",
     "transition-all",
-    "hover:not-disabled:scale-102 active:not-disabled:scale-98",
+    "hover:not-disabled:scale-103 active:not-disabled:scale-97",
     "not-disabled:cursor-pointer",
     "disabled:opacity-70",
   ],

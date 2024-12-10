@@ -2,10 +2,12 @@
   <div class="size-full p-6 md:p-8">
     <loading-page v-if="loading" />
 
-    <menu-page v-else-if="page === Page.MENU" />
-    <create-page v-else-if="page === Page.CREATE" />
-    <guess-page v-else-if="page === Page.GUESS" />
-    <summary-page v-else-if="page === Page.SUMMARY" />
+    <transition v-else name="page" mode="out-in">
+      <menu-page v-if="page === Page.MENU" key="menu-page" />
+      <create-page v-else-if="page === Page.CREATE" key="create-page" />
+      <guess-page v-else-if="page === Page.GUESS" key="guess-page" />
+      <summary-page v-else-if="page === Page.SUMMARY" key="summary-page" />
+    </transition>
 
     <!-- Loading overlay -->
     <ui-overlay :open="showLoadingOverlay" :label="loadingOverlayData?.label">
@@ -61,3 +63,20 @@ onMounted(() => {
   });
 });
 </script>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+.page-enter-to,
+.page-leave-from {
+  opacity: 1;
+}
+</style>
