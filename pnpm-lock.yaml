@@ -57,6 +57,12 @@ importers:
       '@iconify-json/material-symbols':
         specifier: ^1.2.8
         version: 1.2.8
+      '@iconify-json/noto':
+        specifier: ^1.2.1
+        version: 1.2.1
+      '@iconify/vue':
+        specifier: ^4.2.0
+        version: 4.2.0(vue@3.5.13(typescript@5.6.3))
       '@types/node':
         specifier: ^22.10.0
         version: 22.10.1
@@ -341,11 +347,19 @@ packages:
   '@iconify-json/material-symbols@1.2.8':
     resolution: {integrity: sha512-X89QwN5eRMVHEfm5HWMYCZxkUqUPQM2TNv7D8rIPUn2jTzDmgjgiTMomn3DOXWyh1/geHPnTt1bTSFcUXlpGbw==}
 
+  '@iconify-json/noto@1.2.1':
+    resolution: {integrity: sha512-ZJBvfNBNb64iPf7uhOF20PuArUhYNSe9nheaqLOXfaPEFXd/DsNrDL2CuBCLOVuDxcyRqbhdhhhRBwLikTdrhQ==}
+
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
   '@iconify/utils@2.1.33':
     resolution: {integrity: sha512-jP9h6v/g0BIZx0p7XGJJVtkVnydtbgTgt9mVNcGDYwaa7UhdHdI9dvoq+gKj9sijMSJKxUPEG2JyjsgXjxL7Kw==}
+
+  '@iconify/vue@4.2.0':
+    resolution: {integrity: sha512-CMynoz9BDWugDO2B7LU/s8L99dHCiqDGCjCki6bhVx5etZhw9x0BTV7wWRdj82jtl1yQTc+QQRcHQmSvUY6R+g==}
+    peerDependencies:
+      vue: '>=3'
 
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
@@ -2369,6 +2383,10 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/noto@1.2.1':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify/types@2.0.0': {}
 
   '@iconify/utils@2.1.33':
@@ -2382,6 +2400,11 @@ snapshots:
       mlly: 1.7.3
     transitivePeerDependencies:
       - supports-color
+
+  '@iconify/vue@4.2.0(vue@3.5.13(typescript@5.6.3))':
+    dependencies:
+      '@iconify/types': 2.0.0
+      vue: 3.5.13(typescript@5.6.3)
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:

@@ -8,7 +8,6 @@
     <ui-emojis v-model:emojis="clue" edit class="my-auto" />
 
     <ui-emoji-keyboard
-      :submit-disabled="!canSubmit"
       @click:key="onClickKey"
       @click:backspace="onClickBackspace"
       @click:submit="onClickSubmit"
@@ -17,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, toRaw } from "vue";
+import { ref, toRaw } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useAppStore } from "../../../stores/app";
@@ -34,10 +33,6 @@ const { topic } = storeToRefs(createStore);
 
 const clue = ref<string[]>([]);
 
-const canSubmit = computed(() => {
-  return clue.value.length > 0;
-});
-
 const onClickKey = (emoji: Emoji) => {
   clue.value.push(emoji.value);
 };
@@ -47,7 +42,7 @@ const onClickBackspace = () => {
 };
 
 const onClickSubmit = () => {
-  if (!canSubmit.value) return;
+  if (clue.value.length <= 0) return;
 
   appStore.startLoadingOverlay({
     id: "CREATE_REQUEST",

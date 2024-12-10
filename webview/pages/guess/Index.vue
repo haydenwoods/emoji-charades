@@ -26,7 +26,11 @@
           </button>
         </template>
       </ui-input>
-      <ui-button id="submit" label="Submit" emoji="🔥" @click="submit" />
+      <ui-button id="submit" label="Submit" @click="submit">
+        <template #icon>
+          <i-noto-outbox-tray />
+        </template>
+      </ui-button>
     </div>
 
     <ui-overlay theme="success" label="Correct" :open="showCorrectOverlay">

@@ -27,14 +27,21 @@
 
     <div class="flex items-end gap-x-4">
       <ui-button
-        :label="newTopicLabel"
-        emoji="🤷‍♂️"
         variant="secondary"
+        :label="newTopicLabel"
         :disabled="newTopicDisabled"
         @click="onNewTopicClicked"
-      />
+      >
+        <template #icon>
+          <i-noto-person-shrugging />
+        </template>
+      </ui-button>
 
-      <ui-button label="Let's start!" emoji="▶️" variant="primary" @click="onStartClicked" />
+      <ui-button label="Let's start!" variant="primary" @click="onStartClicked">
+        <template #icon>
+          <i-noto-play-button />
+        </template>
+      </ui-button>
     </div>
   </div>
 </template>

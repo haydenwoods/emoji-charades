@@ -10,7 +10,7 @@
     <!-- Loading overlay -->
     <ui-overlay :open="showLoadingOverlay" :label="loadingOverlayData?.label">
       <template #icon>
-        <i-material-symbols-progress-activity class="animate-spin" />
+        <ui-loader />
       </template>
     </ui-overlay>
   </div>

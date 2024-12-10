@@ -36,7 +36,7 @@
       @click="emit('click:backspace')"
     >
       <template #icon>
-        <i-material-symbols-backspace-outline-rounded />
+        <i-noto-right-arrow-curving-left />
       </template>
     </ui-button>
 
@@ -45,11 +45,10 @@
       label="Submit"
       variant="primary"
       class="self-end h-[52px] row-start-1 col-start-7 col-span-2"
-      :disabled="submitDisabled"
       @click="emit('click:submit')"
     >
       <template #icon>
-        <i-material-symbols-check-rounded class="text-amber-900" />
+        <i-noto-outbox-tray />
       </template>
     </ui-button>
 
@@ -74,28 +73,6 @@
         class="size-full scale-95 bg-white inset-ring-2 inset-ring-neutral-200 opacity-40 rounded-full"
       ></div>
     </div>
-
-    <!-- Actions -->
-    <!-- <ui-emoji-keyboard-button
-      variant="action"
-      :style="{ gridRow: ACTION_ROW_START, gridColumn: ACTION_COLUMN_START }"
-      :disabled="submitDisabled"
-      @click="emit('click:submit')"
-    >
-      <template #icon>
-        <i-material-symbols-check-rounded />
-      </template>
-    </ui-emoji-keyboard-button>
-
-    <ui-emoji-keyboard-button
-      variant="action"
-      :style="{ gridRow: ACTION_ROW_START + 1, gridColumn: ACTION_COLUMN_START }"
-      @click="emit('click:backspace')"
-    >
-      <template #icon>
-        <i-material-symbols-backspace-outline-rounded />
-      </template>
-    </ui-emoji-keyboard-button> -->
   </div>
 </template>
 
@@ -119,10 +96,6 @@ const KEYS_COLS = KEYS_COL_END - KEYS_COL_START + 1;
 
 const KEYS = KEYS_ROWS * KEYS_COLS;
 const KEYS_PER_ROW = KEYS / KEYS_ROWS;
-
-defineProps<{
-  submitDisabled?: boolean;
-}>();
 
 const emit = defineEmits<{
   (event: "click:key", emoji: Emoji): void;

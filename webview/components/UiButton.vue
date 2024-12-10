@@ -1,10 +1,7 @@
 <template>
   <button type="button" :class="cvaButton({ variant, size, padded })">
     <!-- Left -->
-    <span v-if="emoji" :class="cvaEmoji({ size })">
-      {{ emoji }}
-    </span>
-    <span v-else-if="$slots.icon" :class="cvaIcon({ variant, size })">
+    <span v-if="$slots.icon" :class="cvaIcon({ variant, size })">
       <slot name="icon"></slot>
     </span>
 
@@ -61,8 +58,8 @@ const cvaButton = cva(
       },
       size: {
         xs: "gap-x-1",
-        sm: "gap-x-1.5",
-        md: "gap-x-1.5",
+        sm: "gap-x-2",
+        md: "gap-x-2.5",
       },
       padded: {
         true: "",
@@ -93,8 +90,8 @@ const cvaLabel = cva(["font-medium whitespace-nowrap"], {
   variants: {
     variant: {
       primary: ["text-amber-900"],
-      secondary: ["text-neutral-600 in-disabled:text-neutral-400"],
-      plain: ["text-neutral-800 in-disabled:text-neutral-400"],
+      secondary: ["text-neutral-600"],
+      plain: ["text-neutral-800"],
     },
     size: {
       xs: "text-base",
@@ -104,22 +101,12 @@ const cvaLabel = cva(["font-medium whitespace-nowrap"], {
   },
 });
 
-const cvaEmoji = cva(["in-disabled:opacity-50 "], {
-  variants: {
-    size: {
-      xs: "text-lg",
-      sm: "text-xl",
-      md: "text-2xl",
-    },
-  },
-});
-
 const cvaIcon = cva([], {
   variants: {
     variant: {
       primary: ["text-amber-950"],
-      secondary: ["text-neutral-600 in-disabled:text-neutral-400"],
-      plain: ["text-neutral-800 in-disabled:text-neutral-400"],
+      secondary: ["text-neutral-600"],
+      plain: ["text-neutral-800"],
     },
     size: {
       xs: "text-lg",
