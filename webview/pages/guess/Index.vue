@@ -56,29 +56,41 @@ import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 
 import { Page, useAppStore } from "../../stores/app";
-import { useGuessStore } from "../../stores/guess";
 
+import { isGuessSimilar } from "../../../shared/utils/topics";
 import { animatePopIn, animateShake } from "../../utils/animate";
+import { sendMessage } from "../../utils/messages";
 
 const appStore = useAppStore();
-const guessStore = useGuessStore();
-
-const { dbPost } = storeToRefs(guessStore);
+const { dbPost } = storeToRefs(appStore);
 
 const input = ref<string>("");
 const showCorrectOverlay = ref<boolean>(false);
 const showIncorrectOverlay = ref<boolean>(false);
 
 const submit = () => {
-  const response = guessStore.submit(input.value);
+  const trimmedInput = input.value.trim();
+  if (trimmedInput.length <= 0) return;
 
-  if (response?.correct) {
+  if (!dbPost.value) return;
+  const { topic } = dbPost.value;
+
+  const correct = isGuessSimilar(trimmedInput, topic);
+
+  sendMessage({
+    type: "GUESS_REQUEST",
+    data: {
+      input: trimmedInput,
+    },
+  });
+
+  if (correct) {
     showCorrectOverlay.value = true;
 
     setTimeout(() => {
       appStore.navigateTo(Page.SUMMARY);
     }, 2000);
-  } else if (response?.correct === false) {
+  } else {
     animateShake("#tools");
 
     showIncorrectOverlay.value = true;

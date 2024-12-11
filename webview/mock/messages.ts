@@ -63,6 +63,22 @@ export const mockMessages = () => {
           type: "CREATE_RESPONSE",
         });
         break;
+      case "LEADERBOARD_REQUEST":
+        await timeout(1500);
+        sendMessage({
+          type: "LEADERBOARD_RESPONSE",
+          data: {
+            leaderboard: [
+              { username: "Spleentacular", xp: 6392, rank: 1 },
+              { username: "Box", xp: 4820, rank: 2 },
+              { username: "SomebodyElse", xp: 4530, rank: 3 },
+              { username: "WhatTheHell", xp: 3498, rank: 4 },
+              { username: "Spleentacular2", xp: 3222, rank: 5 },
+              { username: "AHHHHH", xp: 2982, rank: 6 },
+            ],
+          },
+        });
+        return;
     }
   });
 };

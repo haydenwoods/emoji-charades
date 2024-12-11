@@ -1,12 +1,16 @@
 <template>
   <div class="size-full flex flex-col items-center">
-    <div class="flex flex-col items-center gap-y-1">
-      <div class="flex items-center gap-x-1.5">
-        <h2 class="text-neutral-800 font-medium">Your topic is a</h2>
-        <ui-topic-category-tag :category="topic.category" />
-      </div>
-      <h1 class="text-2xl text-neutral-950 font-semibold text-center">"{{ topic.name }}"</h1>
-    </div>
+    <ui-page-header @click:back="appStore.navigateTo(Page.MENU)">
+      <template #title>
+        <div class="flex flex-col items-center gap-y-1">
+          <div class="flex items-center gap-x-1.5">
+            <h2 class="text-neutral-800 font-medium">Your topic is a</h2>
+            <ui-topic-category-tag :category="topic.category" />
+          </div>
+          <h1 class="text-2xl text-neutral-950 font-semibold text-center">"{{ topic.name }}"</h1>
+        </div>
+      </template>
+    </ui-page-header>
 
     <ui-emojis v-model:emojis="clue" edit class="my-auto" />
 
@@ -22,7 +26,7 @@
 import { ref, toRaw } from "vue";
 import { storeToRefs } from "pinia";
 
-import { useAppStore } from "../../stores/app";
+import { Page, useAppStore } from "../../stores/app";
 import { useCreateStore } from "../../stores/create";
 
 import { sendMessage } from "../../utils/messages";

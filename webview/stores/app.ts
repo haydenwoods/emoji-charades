@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 
 import { InitialDataEvent } from "@shared/types/message";
 import { DBUser } from "@shared/types/db/user";
+import { DBPost } from "@shared/types/db/post";
 
 export enum Page {
   MENU,
@@ -11,10 +12,11 @@ export enum Page {
   GUESS,
   SUMMARY,
   ABOUT,
+  LEADERBOARD,
 }
 
 type LoadingOverlayData = {
-  id: "CREATE_REQUEST" | "GUESS_REQUEST";
+  id: "CREATE_REQUEST" | "GUESS_REQUEST" | "LEADERBOARD_REQUEST";
   label: string;
 };
 
@@ -27,6 +29,8 @@ export const useAppStore = defineStore("app", () => {
 
   const user = ref<InitialDataEvent["data"]["user"]>();
   const dbUser = ref<DBUser>();
+
+  const dbPost = ref<DBPost>();
 
   const navigateTo = (newPage: Page) => {
     page.value = newPage;
@@ -53,6 +57,9 @@ export const useAppStore = defineStore("app", () => {
 
     user,
     dbUser,
+
+    dbPost,
+
     navigateTo,
   };
 });

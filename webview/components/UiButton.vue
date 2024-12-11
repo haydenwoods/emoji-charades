@@ -50,10 +50,10 @@ const cvaButton = cva(
       variant: {
         primary: [
           "bg-amber-300",
-          "inset-shadow-sm inset-shadow-amber-400/20",
+          "inset-shadow-sm inset-shadow-amber-400/40",
           "border-2 border-amber-400",
         ],
-        secondary: ["bg-white", "ring-2 ring-neutral-300 "],
+        secondary: ["bg-white", "border-2 border-neutral-300 "],
         plain: [],
       },
       size: {
@@ -109,7 +109,7 @@ const cvaIcon = cva([], {
       plain: ["text-neutral-800"],
     },
     size: {
-      xs: "text-lg",
+      xs: "text-base",
       sm: "text-xl",
       md: "text-2xl",
     },

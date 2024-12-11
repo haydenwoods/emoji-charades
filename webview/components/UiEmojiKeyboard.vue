@@ -46,11 +46,7 @@
       variant="primary"
       class="self-end h-[52px] row-start-1 col-start-7 col-span-2"
       @click="emit('click:submit')"
-    >
-      <template #icon>
-        <i-noto-outbox-tray />
-      </template>
-    </ui-button>
+    />
 
     <!-- Keys -->
     <div

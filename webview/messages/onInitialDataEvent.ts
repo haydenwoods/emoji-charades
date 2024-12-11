@@ -1,4 +1,3 @@
-import { useGuessStore } from "@/stores/guess";
 import { Page, useAppStore } from "@/stores/app";
 
 import { sendMessage } from "@/utils/messages";
@@ -10,13 +9,12 @@ export const onInitialDataEvent: MessageHandler<InitialDataEvent> = ({ message }
   const { user, dbUser, dbPost } = message.data;
 
   const appStore = useAppStore();
-  const guessStore = useGuessStore();
 
   appStore.user = user;
   appStore.dbUser = dbUser;
 
   if (dbPost) {
-    guessStore.dbPost = dbPost;
+    appStore.dbPost = dbPost;
 
     // Find if the user has already completed the post or not
     const playedPost = dbUser?.playedPosts.find(({ id }) => id === dbPost.id);

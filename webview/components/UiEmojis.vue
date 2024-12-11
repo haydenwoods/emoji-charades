@@ -21,6 +21,7 @@
         :class="[
           edit ? 'cursor-move hover:bg-neutral-200' : '',
           {
+            xs: 'text-4xl p-1',
             sm: 'text-5xl p-1.5',
             md: 'text-6xl p-2',
           }[size],
@@ -37,7 +38,7 @@ import { nextTick, onMounted, ref } from "vue";
 import { animate, stagger } from "motion";
 import Draggable from "vuedraggable";
 
-type Size = "sm" | "md";
+type Size = "xs" | "sm" | "md";
 
 withDefaults(
   defineProps<{

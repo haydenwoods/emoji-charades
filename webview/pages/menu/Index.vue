@@ -8,18 +8,17 @@
         </h2>
       </div>
 
-      <div id="buttons" class="grid grid-cols-2 max-w-2xs w-full gap-2">
+      <div id="buttons" class="grid grid-cols-2 max-w-2xs w-full gap-3">
         <button
           id="play-button"
           type="button"
-          class="size-full bg-amber-300 border-2 border-amber-400 p-4 aspect-square rounded-xl flex flex-col gap-y-2 items-center justify-center text-amber-950 not-disabled:cursor-pointer hover:scale-103 transition-transform active:scale-97"
+          class="size-full bg-amber-300 border-2 border-amber-400 inset-shadow-sm inset-shadow-amber-400/40 p-4 aspect-square rounded-xl flex flex-col gap-y-2 items-center justify-center text-amber-950 not-disabled:cursor-pointer hover:scale-103 transition-transform active:scale-97"
         >
           <i-noto-play-button class="text-5xl" />
           <span class="text-xl font-medium text-amber-900">Play</span>
         </button>
 
         <button
-          id="create-button"
           type="button"
           class="size-full bg-neutral-200 border-2 border-neutral-300 p-4 aspect-square rounded-xl flex flex-col gap-y-2 items-center justify-center text-neutral-900 not-disabled:cursor-pointer hover:scale-103 transition-transform active:scale-97"
           @click="appStore.navigateTo(Page.CREATE_SELECT_TOPIC)"
@@ -29,16 +28,15 @@
         </button>
 
         <button
-          id="leaderboard-button"
           type="button"
           class="size-full bg-neutral-200 border-2 border-neutral-300 p-2 rounded-xl flex gap-x-2 items-center justify-center text-neutral-900 not-disabled:cursor-pointer hover:scale-103 transition-transform col-span-2 active:scale-97"
+          @click="appStore.navigateTo(Page.LEADERBOARD)"
         >
           <i-noto-trophy class="text-2xl" />
           <span class="text-xl font-medium text-neutral-900">Leaderboard</span>
         </button>
 
         <button
-          id="leaderboard-button"
           type="button"
           class="size-full bg-neutral-200 border-2 border-neutral-300 p-2 rounded-xl flex gap-x-2 items-center justify-center text-neutral-900 not-disabled:cursor-pointer hover:scale-103 transition-transform col-span-2 active:scale-97"
           @click="appStore.navigateTo(Page.ABOUT)"
