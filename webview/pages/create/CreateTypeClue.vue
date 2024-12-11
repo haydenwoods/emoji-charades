@@ -1,9 +1,12 @@
 <template>
   <div class="size-full flex flex-col items-center">
-    <h1 class="text-xl text-neutral-800 font-medium">
-      Your topic is <span class="font-semibold">"{{ topic.name }}"</span>
-    </h1>
-    <h2 class="text-neutral-500">Create a clue for this, using only emojis!</h2>
+    <div class="flex flex-col items-center gap-y-1">
+      <div class="flex items-center gap-x-1.5">
+        <h2 class="text-neutral-800 font-medium">Your topic is a</h2>
+        <ui-topic-category-tag :category="topic.category" />
+      </div>
+      <h1 class="text-2xl text-neutral-950 font-semibold text-center">"{{ topic.name }}"</h1>
+    </div>
 
     <ui-emojis v-model:emojis="clue" edit class="my-auto" />
 
@@ -19,12 +22,12 @@
 import { ref, toRaw } from "vue";
 import { storeToRefs } from "pinia";
 
-import { useAppStore } from "../../../stores/app";
-import { useCreateStore } from "../../../stores/create";
+import { useAppStore } from "../../stores/app";
+import { useCreateStore } from "../../stores/create";
 
-import { sendMessage } from "../../../utils/messages";
+import { sendMessage } from "../../utils/messages";
 
-import { Emoji } from "../../../types/emoji";
+import { Emoji } from "../../types/emoji";
 
 const appStore = useAppStore();
 const createStore = useCreateStore();

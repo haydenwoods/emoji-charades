@@ -6,7 +6,8 @@ import { mockMessages } from "@/mock/messages";
 import App from "@/App.vue";
 
 import "@/css/fonts.css";
-import "@/css/index.css";
+import "@/css/tailwind.css";
+import "@/css/transitions.css";
 
 const pinia = createPinia();
 

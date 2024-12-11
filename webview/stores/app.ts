@@ -6,7 +6,8 @@ import { DBUser } from "@shared/types/db/user";
 
 export enum Page {
   MENU,
-  CREATE,
+  CREATE_SELECT_TOPIC,
+  CREATE_TYPE_CLUE,
   GUESS,
   SUMMARY,
   ABOUT,

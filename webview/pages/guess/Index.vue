@@ -1,7 +1,7 @@
 <template>
   <div class="relative size-full flex flex-col items-center justify-between">
     <div id="header" class="flex flex-col gap-y-0.5 items-center">
-      <h1 class="text-xl font-medium text-center">What do these emojis represent?</h1>
+      <h1 class="text-2xl font-medium text-center">What do these emojis represent?</h1>
       <h2 class="text-neutral-500 text-center">Clue created by u/Spleentacular</h2>
     </div>
 

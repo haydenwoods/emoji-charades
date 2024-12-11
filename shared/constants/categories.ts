@@ -1,39 +1,24 @@
-import { Category, CategoryData } from "../types/category.js";
+import { Category } from "../types/category.js";
 
-export const CATEGORY_DATA: Record<Category, CategoryData> = {
-  [Category.MOVIE]: {
-    name: "Movie",
-    emoji: "🎬",
-    color: "emerald",
-  },
-  [Category.TV_SHOW]: {
-    name: "TV Show",
-    emoji: "📺",
-    color: "orange",
-  },
-  [Category.VIDEO_GAME]: {
-    name: "Video Game",
-    emoji: "🎮",
-    color: "red",
-  },
-  [Category.BOOK]: {
-    name: "Book",
-    emoji: "📖",
-    color: "blue",
-  },
-  [Category.CHARACTER]: {
-    name: "Character",
-    emoji: "👤",
-    color: "indigo",
-  },
-  [Category.FAMOUS_PERSON]: {
-    name: "Famous Person",
-    emoji: "🌟",
-    color: "amber",
-  },
-  [Category.IDIOM]: {
-    name: "Idiom",
-    emoji: "🗣️",
-    color: "indigo",
-  },
+export const CATEGORY_TO_NAME: Record<Category, string> = {
+  [Category.MOVIE]: "Movie",
+  [Category.TV_SHOW]: "TV Show",
+  [Category.VIDEO_GAME]: "Video Game",
+  [Category.BOOK]: "Book",
+  [Category.CHARACTER]: "Character",
+  [Category.FAMOUS_PERSON]: "Famous Person",
+  [Category.IDIOM]: "Idiom",
+};
+
+export const CATEGORY_TO_COLOR: Record<
+  Category,
+  "blue" | "orange" | "red" | "emerald" | "purple" | "yellow" | "indigo" | "amber"
+> = {
+  [Category.MOVIE]: "emerald",
+  [Category.TV_SHOW]: "orange",
+  [Category.VIDEO_GAME]: "red",
+  [Category.BOOK]: "blue",
+  [Category.CHARACTER]: "indigo",
+  [Category.FAMOUS_PERSON]: "yellow",
+  [Category.IDIOM]: "indigo",
 };

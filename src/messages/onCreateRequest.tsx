@@ -34,6 +34,5 @@ export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, 
     type: "CREATE_RESPONSE",
   });
 
-  context.ui.showToast({ text: "Created a new Emoji Game post!" });
   context.ui.navigateTo(post);
 };

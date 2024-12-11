@@ -2,12 +2,8 @@
   <div class="size-full p-6 md:p-8">
     <loading-page v-if="loading" />
 
-    <transition v-else name="page" mode="out-in">
-      <menu-page v-if="page === Page.MENU" />
-      <create-page v-else-if="page === Page.CREATE" />
-      <guess-page v-else-if="page === Page.GUESS" />
-      <summary-page v-else-if="page === Page.SUMMARY" />
-      <about-page v-else-if="page == Page.ABOUT" />
+    <transition v-else name="fade" mode="out-in">
+      <component :key="page" :is="PAGE_TO_COMPONENT[page]" />
     </transition>
 
     <!-- Loading overlay -->
@@ -20,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { type Component, onMounted } from "vue";
 import { useEventListener } from "@vueuse/core";
 import { storeToRefs } from "pinia";
 
@@ -36,13 +32,23 @@ import { MessageHandler } from "./types/message";
 
 import LoadingPage from "./pages/Loading.vue";
 import MenuPage from "./pages/menu/Index.vue";
-import CreatePage from "./pages/create/Index.vue";
+import CreateSelectTopicPage from "./pages/create/CreateSelectTopic.vue";
+import CreateTypeCluePage from "./pages/create/CreateTypeClue.vue";
 import GuessPage from "./pages/guess/Index.vue";
 import SummaryPage from "./pages/summary/Index.vue";
 import AboutPage from "./pages/About.vue";
 
 const appStore = useAppStore();
 const { loading, showLoadingOverlay, loadingOverlayData, page } = storeToRefs(appStore);
+
+const PAGE_TO_COMPONENT: Record<Page, Component> = {
+  [Page.MENU]: MenuPage,
+  [Page.CREATE_SELECT_TOPIC]: CreateSelectTopicPage,
+  [Page.CREATE_TYPE_CLUE]: CreateTypeCluePage,
+  [Page.GUESS]: GuessPage,
+  [Page.SUMMARY]: SummaryPage,
+  [Page.ABOUT]: AboutPage,
+};
 
 const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
   INITIAL_DATA_EVENT: onInitialDataEvent,
@@ -65,20 +71,3 @@ onMounted(() => {
   });
 });
 </script>
-
-<style>
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.2s ease-in-out;
-}
-
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-}
-
-.page-enter-to,
-.page-leave-from {
-  opacity: 1;
-}
-</style>

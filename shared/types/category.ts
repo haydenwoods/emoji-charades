@@ -7,9 +7,3 @@ export enum Category {
   FAMOUS_PERSON,
   IDIOM,
 }
-
-export type CategoryData = {
-  name: string;
-  emoji: string;
-  color: "blue" | "orange" | "red" | "emerald" | "purple" | "yellow" | "indigo" | "amber";
-};

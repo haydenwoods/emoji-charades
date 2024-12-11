@@ -36,7 +36,7 @@
       @click="emit('click:backspace')"
     >
       <template #icon>
-        <i-noto-right-arrow-curving-left />
+        <i-material-symbols-backspace-outline-rounded />
       </template>
     </ui-button>
 
