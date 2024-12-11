@@ -4,7 +4,7 @@
       <slot name="icon"></slot>
     </span>
 
-    <span v-else-if="emoji" class="text-4xl md:text-5xl">
+    <span v-else-if="emoji" class="font-emoji text-4xl md:text-5xl">
       {{ emoji.value }}
     </span>
   </button>

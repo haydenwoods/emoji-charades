@@ -12,22 +12,9 @@
       placeholder="Search emojis..."
       maxlength="16"
       autofocus
+      show-clear
       v-model="search"
-    >
-      <template #after>
-        <button
-          v-if="search.length > 0"
-          id="submit-button"
-          type="button"
-          class="not-disabled:cursor-pointer p-1 flex items-center justify-center transition-colors"
-          @click="search = ''"
-        >
-          <i-material-symbols-cancel-outline-rounded
-            class="text-xl text-neutral-600 in-disabled:text-neutral-400"
-          />
-        </button>
-      </template>
-    </ui-input>
+    />
 
     <!-- Backspace -->
     <ui-button
@@ -58,10 +45,10 @@
       class="aspect-square flex items-center justify-center"
     >
       <ui-emoji-keyboard-button
-        v-if="emojis[i]"
-        :emoji="emojis[i]"
+        v-if="keys[i]"
+        :emoji="keys[i]"
         variant="key"
-        @click="emit('click:key', emojis[i])"
+        @click="emit('click:key', keys[i])"
       />
 
       <div
@@ -109,10 +96,12 @@ const { results } = useFuse(search, EMOJIS, {
   resultLimit: KEYS,
   fuseOptions: {
     keys: ["searchTerms"],
+    minMatchCharLength: 2,
+    threshold: 0.2,
   },
 });
 
-const emojis = computed<Emoji[]>(() => {
+const keys = computed<Emoji[]>(() => {
   if (isSearching.value) {
     return results.value.map(({ item }) => item);
   } else {

@@ -1,84 +1,58 @@
 <template>
-  <draggable
-    v-model="emojis"
-    group="emojis"
-    class="flex items-center gap-0.5 flex-wrap justify-center"
-    drag-class="!opacity-0"
-    tag="transition-group"
-    :component-data="{
-      type: 'transition-group',
-      tag: 'div',
-      name: !dragging ? 'emojis' : '',
-    }"
-    :disabled="!edit"
-    :animation="400"
-    @start="dragging = true"
-    @end="dragging = false"
-  >
-    <template #item="{ element }">
+  <div class="flex items-center gap-0.5 flex-wrap justify-center">
+    <div
+      v-for="(emoji, i) in emojis"
+      :key="i"
+      :class="[
+        'emoji',
+        'font-emoji',
+        'aspect-square',
+        'flex items-center justify-center',
+        'select-none',
+      ]"
+    >
       <span
-        class="emoji rounded-full transition-opacity aspect-square flex items-center justify-center select-none"
-        :class="[
-          edit ? 'cursor-move hover:bg-neutral-200' : '',
+        :class="
           {
             xs: 'text-4xl p-1',
             sm: 'text-5xl p-1.5',
             md: 'text-6xl p-2',
-          }[size],
-        ]"
+          }[size]
+        "
       >
-        {{ element }}
+        {{ emoji }}
       </span>
-    </template>
-  </draggable>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from "vue";
-import { animate, stagger } from "motion";
-import Draggable from "vuedraggable";
+import { nextTick, onMounted } from "vue";
+
+import { animatePopIn } from "../utils/animate";
 
 type Size = "xs" | "sm" | "md";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     size?: Size;
-    edit?: boolean;
+    animate?: boolean;
   }>(),
   {
     size: "md",
+    animate: true,
   },
 );
 
 const emojis = defineModel<string[]>("emojis");
 
-const dragging = ref<boolean>(false);
-
 onMounted(() => {
-  nextTick(() => {
-    if (document.getElementsByClassName("emoji").length <= 0) return;
-    animate(
-      ".emoji",
-      {
-        opacity: [0, 1],
-        scale: [0, 1],
-      },
-      {
-        delay: stagger(0.1, { startDelay: 0.25 }),
-      },
-    );
-  });
+  if (props.animate) {
+    nextTick(() => {
+      try {
+        animatePopIn(".emoji", true);
+      } catch {}
+    });
+  }
 });
 </script>
-
-<style>
-.emojis-enter-from,
-.emojis-leave-to {
-  opacity: 0;
-}
-
-.emojis-enter-to,
-.emojis-leave-from {
-  opacity: 1;
-}
-</style>

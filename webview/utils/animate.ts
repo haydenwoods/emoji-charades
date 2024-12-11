@@ -1,4 +1,4 @@
-import { animate } from "motion";
+import { animate, stagger } from "motion";
 
 type ShakeOptions = {
   direction: "x" | "y";
@@ -56,7 +56,7 @@ export const animateShake = (
   );
 };
 
-export const animatePopIn = (element: Element) => {
+export const animatePopIn = (element: string | Element | Element[], staggered: boolean = false) => {
   animate(
     element,
     {
@@ -66,6 +66,7 @@ export const animatePopIn = (element: Element) => {
     {
       type: "spring",
       duration: 0.5,
+      delay: staggered ? stagger(0.1, { startDelay: 0.1 }) : undefined,
     },
   );
 };
