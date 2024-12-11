@@ -5,7 +5,7 @@
         <i-noto-trophy />
       </template>
     </ui-page-header>
-    <ui-leaderboard :items="leaderboard" />
+    <ui-leaderboard v-if="leaderboard" :items="leaderboard" />
   </div>
 </template>
 

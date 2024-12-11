@@ -8,7 +8,7 @@
         </h2>
       </div>
 
-      <div id="buttons" class="grid grid-cols-2 max-w-2xs w-full gap-3">
+      <div id="buttons" class="grid grid-cols-2 max-w-2xs w-full gap-4">
         <button
           id="play-button"
           type="button"
