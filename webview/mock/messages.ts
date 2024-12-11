@@ -84,11 +84,15 @@ export const mockMessages = () => {
           data: {
             leaderboard: [
               { username: "Spleentacular", xp: 6392, rank: 1 },
-              { username: "Box", xp: 4820, rank: 2 },
-              { username: "SomebodyElse", xp: 4530, rank: 3 },
-              { username: "WhatTheHell", xp: 3498, rank: 4 },
-              { username: "Spleentacular2", xp: 3222, rank: 5 },
-              { username: "AHHHHH", xp: 2982, rank: 6 },
+              { username: "Richard", xp: 4820, rank: 2 },
+              { username: "Jared", xp: 4530, rank: 3 },
+              { username: "Erlich", xp: 3498, rank: 4 },
+              { username: "Dinesh", xp: 3222, rank: 5 },
+              { username: "Gilfoyle", xp: 2982, rank: 6 },
+              { username: "Monica", xp: 2430, rank: 7 },
+              { username: "Russ", xp: 1454, rank: 8 },
+              { username: "Peter", xp: 820, rank: 9 },
+              { username: "Ron", xp: 566, rank: 10 },
             ],
           },
         });

@@ -1,6 +1,10 @@
 <template>
   <div class="size-full flex flex-col items-center gap-y-6">
-    <ui-page-header title="Leaderboard" @click:back="appStore.navigateTo(Page.MENU)" />
+    <ui-page-header title="Leaderboard" @click:back="appStore.navigateTo(Page.MENU)">
+      <template #title:icon>
+        <i-noto-trophy />
+      </template>
+    </ui-page-header>
     <ui-leaderboard :items="leaderboard" />
   </div>
 </template>

@@ -10,9 +10,14 @@
 
     <div class="flex-1">
       <slot name="title">
-        <h1 v-if="title" class="flex-1 text-center font-medium text-xl leading-6">
-          {{ title }}
-        </h1>
+        <div v-if="title" class="flex justify-center items-center gap-x-2">
+          <span class="text-lg">
+            <slot name="title:icon"></slot>
+          </span>
+          <h1 class="text-center font-medium text-xl leading-6">
+            {{ title }}
+          </h1>
+        </div>
       </slot>
     </div>
 

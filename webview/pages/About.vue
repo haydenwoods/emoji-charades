@@ -1,10 +1,19 @@
 <template>
   <div class="size-full flex flex-col items-center gap-y-6">
-    <ui-page-header title="What is this?" @click:back="appStore.navigateTo(Page.MENU)" />
+    <ui-page-header title="What is this?" @click:back="appStore.navigateTo(Page.MENU)">
+      <template #title:icon>
+        <i-noto-red-question-mark />
+      </template>
+    </ui-page-header>
 
     <div
       class="flex flex-col gap-y-6 items-center text-center text-neutral-900 my-auto max-w-xl text-2xl"
     >
+      <div class="flex flex-col gap-y-1">
+        <ui-emojis :emojis="['🎬', '🕖', '💼', '🍊']" size="sm" />
+        <span class="text-neutral-600 text-base">For example: "A Clockwork Orange"</span>
+      </div>
+
       <p>
         You will be shown a clue made from emojis. Your goal is to try and
         <span class="font-medium">work out what it means</span>. It could be anything from
