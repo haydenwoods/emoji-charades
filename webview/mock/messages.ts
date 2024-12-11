@@ -2,6 +2,9 @@ import { TOPICS } from "@shared/constants/topics";
 
 import { Message, InitialDataEvent } from "@shared/types/message";
 
+const HAS_POST = true;
+const IS_SOLVED = false;
+
 const sendMessage = (message: Message) => {
   window.postMessage({
     type: "devvit-message",
@@ -17,55 +20,66 @@ const timeout = (ms: number) => {
   });
 };
 
+const onMountedEvent = () => {
+  const now = new Date().toISOString();
+  const topic = TOPICS.find(({ name }) => name === "Parks and Recreation") ?? TOPICS[0];
+
+  const data: InitialDataEvent["data"] = {
+    userXP: 248,
+    userRank: 1789,
+  };
+
+  data.user = {
+    id: "t2_12345",
+    username: "Spleentacular",
+  };
+
+  if (HAS_POST) {
+    data.dbPost = {
+      id: "t3_12345",
+      topic,
+      clue: ["📺", "🛝", "➕", "🏃"],
+      createdBy: data.user.id,
+      createdAt: now,
+    };
+  }
+
+  data.dbUser = {
+    id: data.user.id,
+    playedPosts: [],
+    createdAt: now,
+  };
+
+  if (IS_SOLVED && data.dbPost) {
+    data.dbUser.playedPosts.push({
+      id: data.dbPost.id,
+      guesses: [],
+      createdAt: now,
+      completedAt: now,
+    });
+  }
+
+  sendMessage({
+    type: "INITIAL_DATA_EVENT",
+    data,
+  });
+};
+
 export const mockMessages = () => {
   window.addEventListener("message", async (event) => {
     const message = event.data as Message;
 
     switch (message.type) {
       case "MOUNTED_EVENT":
-        const now = new Date().toISOString();
-        const user: InitialDataEvent["data"]["user"] = {
-          id: "t2_12345",
-          username: "Username",
-        };
-        const topic = TOPICS.find(({ name }) => name === "Parks and Recreation") ?? TOPICS[0];
-
-        sendMessage({
-          type: "INITIAL_DATA_EVENT",
-          data: {
-            user,
-            userXP: 248,
-            dbUser: {
-              id: user.id,
-              playedPosts: [
-                // {
-                //   id: "t3_12345",
-                //   guesses: [],
-                //   createdAt: now,
-                //   completedAt: now,
-                // },
-              ],
-              createdAt: now,
-            },
-            // dbPost: {
-            //   id: "t3_12345",
-            //   topic,
-            //   clue: ["📺", "🛝", "➕", "🏃"],
-            //   createdBy: user.id,
-            //   createdAt: now,
-            // },
-          },
-        });
-        break;
+        return onMountedEvent();
       case "CREATE_REQUEST":
         await timeout(2000);
-        sendMessage({
+        return sendMessage({
           type: "CREATE_RESPONSE",
         });
-        break;
       case "LEADERBOARD_REQUEST":
         await timeout(1500);
-        sendMessage({
+        return sendMessage({
           type: "LEADERBOARD_RESPONSE",
           data: {
             leaderboard: [
@@ -78,7 +92,6 @@ export const mockMessages = () => {
             ],
           },
         });
-        return;
     }
   });
 };

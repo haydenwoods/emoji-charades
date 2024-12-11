@@ -13,6 +13,7 @@
           id="play-button"
           type="button"
           class="size-full bg-amber-300 border-2 border-amber-400 inset-shadow-sm inset-shadow-amber-400/40 p-4 aspect-square rounded-xl flex flex-col gap-y-2 items-center justify-center text-amber-950 not-disabled:cursor-pointer hover:scale-103 transition-transform active:scale-97"
+          @click="appStore.navigateTo(Page.PLAY)"
         >
           <i-noto-play-button class="text-5xl" />
           <span class="text-xl font-medium text-amber-900">Play</span>

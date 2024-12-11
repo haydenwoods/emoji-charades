@@ -7,6 +7,7 @@ import { DBPost } from "@shared/types/db/post";
 
 export enum Page {
   MENU,
+  PLAY,
   CREATE_SELECT_TOPIC,
   CREATE_TYPE_CLUE,
   GUESS,
