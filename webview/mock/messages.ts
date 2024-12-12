@@ -2,7 +2,7 @@ import { TOPICS } from "@shared/constants/topics";
 
 import { Message, InitialDataEvent } from "@shared/types/message";
 
-const HAS_POST = false;
+const HAS_POST = true;
 const IS_SOLVED = false;
 
 const sendMessage = (message: Message) => {

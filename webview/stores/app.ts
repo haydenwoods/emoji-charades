@@ -1,4 +1,4 @@
-import { readonly, ref } from "vue";
+import { computed, readonly, ref } from "vue";
 import { defineStore } from "pinia";
 
 import { InitialDataEvent } from "@shared/types/message";
@@ -32,6 +32,14 @@ export const useAppStore = defineStore("app", () => {
   const dbUser = ref<DBUser>();
 
   const dbPost = ref<DBPost>();
+
+  // const isPuzzle = computed(() => {
+  //   return Boolean(dbPost.value);
+  // });
+
+  // conts isPuzzleCompleted = computed(() => {
+  //   return
+  // });
 
   const navigateTo = (newPage: Page) => {
     page.value = newPage;

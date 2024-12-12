@@ -21,13 +21,16 @@
 
       <p>It could be anything from categories such as:</p>
 
-      <div class="flex flex-wrap gap-3">
-        <ui-topic-category-tag size="md" :category="Category.MOVIE" />
-        <ui-topic-category-tag size="md" :category="Category.TV_SHOW" />
-        <ui-topic-category-tag size="md" :category="Category.VIDEO_GAME" />
+      <div class="flex flex-wrap gap-2">
+        <ui-topic-category-tag
+          v-for="category in EXAMPLE_CATEGORIES"
+          :key="category"
+          size="md"
+          :category="category"
+        />
       </div>
 
-      <p>Earn points by guessing correctly or having one of your clues solved by another player.</p>
+      <p>Earn XP by guessing correctly or having one of your clues solved by another player.</p>
     </div>
   </div>
 </template>
@@ -35,6 +38,8 @@
 <script setup lang="ts">
 import { Category } from "../../shared/types/category";
 import { Page, useAppStore } from "../stores/app";
+
+const EXAMPLE_CATEGORIES: Category[] = [Category.MOVIE, Category.TV_SHOW, Category.IDIOM];
 
 const appStore = useAppStore();
 </script>

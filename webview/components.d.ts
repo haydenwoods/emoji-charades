@@ -49,7 +49,6 @@ declare module 'vue' {
     UiInput: typeof import('./components/UiInput.vue')['default']
     UiLeaderboard: typeof import('./components/UiLeaderboard.vue')['default']
     UiLeaderboardItem: typeof import('./components/UiLeaderboardItem.vue')['default']
-    UiLeaderboardRow: typeof import('./components/UiLeaderboardRow.vue')['default']
     UiLoader: typeof import('./components/UiLoader.vue')['default']
     UiOverlay: typeof import('./components/UiOverlay.vue')['default']
     UiPageHeader: typeof import('./components/UiPageHeader.vue')['default']
