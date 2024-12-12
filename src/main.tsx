@@ -25,13 +25,13 @@ Devvit.configure({
 });
 
 Devvit.addMenuItem({
-  label: "Add Emoji Game post",
+  label: "Add Emoji Charades post",
   location: "subreddit",
   forUserType: "moderator",
   onPress: async (_event, context) => {
     const subreddit = await context.reddit.getCurrentSubreddit();
     const post = await context.reddit.submitPost({
-      title: "Emoji Game",
+      title: "Emoji Charades",
       subredditName: subreddit.name,
       preview: <Loading />,
     });
@@ -40,7 +40,7 @@ Devvit.addMenuItem({
 });
 
 Devvit.addCustomPostType({
-  name: "Emoji Game",
+  name: "Emoji Charades",
   height: "tall",
   render: (context) => {
     const [webviewMounted, setWebviewMounted] = useState(false);
