@@ -1,6 +1,7 @@
 <template>
   <div class="grid grid-cols-[min-content_1fr_1fr] w-full gap-x-4 gap-y-2">
     <ui-leaderboard-item v-for="item in items" :key="item.username" v-bind="item" />
+    <ui-leaderboard-item v-if="you" v-bind="you" />
   </div>
 </template>
 
@@ -9,5 +10,6 @@ import { LeaderboardItem } from "../../shared/types/message";
 
 defineProps<{
   items: LeaderboardItem[];
+  you?: LeaderboardItem;
 }>();
 </script>

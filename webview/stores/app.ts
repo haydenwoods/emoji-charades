@@ -30,6 +30,8 @@ export const useAppStore = defineStore("app", () => {
 
   const user = ref<InitialDataEvent["data"]["user"]>();
   const player = ref<Player>();
+  const playerXP = ref<InitialDataEvent["data"]["playerXP"]>();
+  const playerRank = ref<InitialDataEvent["data"]["playerRank"]>();
 
   const puzzle = ref<Puzzle>();
 
@@ -58,6 +60,8 @@ export const useAppStore = defineStore("app", () => {
 
     user,
     player,
+    playerXP,
+    playerRank,
 
     puzzle,
 

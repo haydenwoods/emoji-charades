@@ -2,8 +2,8 @@ import { TOPICS } from "@shared/constants/topics";
 
 import { Message, InitialDataEvent } from "@shared/types/message";
 
-const HAS_POST = true;
-const IS_SOLVED = false;
+const IS_PUZZLE = false;
+const IS_PUZZLE_SOLVED = false;
 
 const sendMessage = (message: Message) => {
   window.postMessage({
@@ -34,7 +34,7 @@ const onMountedEvent = () => {
     username: "Spleentacular",
   };
 
-  if (HAS_POST) {
+  if (IS_PUZZLE) {
     data.puzzle = {
       id: "t3_12345",
       topic,
@@ -51,7 +51,7 @@ const onMountedEvent = () => {
     createdAt: now,
   };
 
-  if (IS_SOLVED && data.puzzle) {
+  if (IS_PUZZLE_SOLVED && data.puzzle) {
     data.player.completedPuzzles.push({
       id: data.puzzle.id,
       guesses: [],
