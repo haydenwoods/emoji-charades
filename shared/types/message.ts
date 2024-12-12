@@ -1,5 +1,5 @@
-import { DBPost } from "./db/post.js";
-import { DBUser } from "./db/user.js";
+import { Puzzle } from "./db/puzzle.js";
+import { Player } from "./db/player.js";
 import { Topic } from "./topic.js";
 
 export type LeaderboardItem = {
@@ -24,11 +24,10 @@ export type InitialDataEvent = {
       id: string;
       username: string;
     };
-    userXP?: number;
-    userRank?: number;
-
-    dbUser?: DBUser;
-    dbPost?: DBPost;
+    player?: Player;
+    playerXP?: number;
+    playerRank?: number;
+    puzzle?: Puzzle;
   };
 };
 
@@ -45,23 +44,23 @@ export type CreateResponse = {
 };
 
 export type GuessRequest = {
-  type: "GUESS_REQUEST";
+  type: "GUESS_PUZZLE_REQUEST";
   data: {
     input: string;
   };
 };
 export type GuessResponse = {
-  type: "GUESS_RESPONSE";
+  type: "GUESS_PUZZLE_RESPONSE";
   data: {
     correct: boolean;
   };
 };
 
-export type LeaderboardRequest = {
-  type: "LEADERBOARD_REQUEST";
+export type GetLeaderboardRequest = {
+  type: "GET_LEADERBOARD_REQUEST";
 };
-export type LeaderboardResponse = {
-  type: "LEADERBOARD_RESPONSE";
+export type GetLeaderboardResponse = {
+  type: "GET_LEADERBOARD_RESPONSE";
   data: {
     leaderboard: LeaderboardItem[];
   };
@@ -75,5 +74,5 @@ export type Message =
   | CreateResponse
   | GuessRequest
   | GuessResponse
-  | LeaderboardRequest
-  | LeaderboardResponse;
+  | GetLeaderboardRequest
+  | GetLeaderboardResponse;

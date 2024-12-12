@@ -25,8 +25,8 @@ const onMountedEvent = () => {
   const topic = TOPICS.find(({ name }) => name === "Parks and Recreation") ?? TOPICS[0];
 
   const data: InitialDataEvent["data"] = {
-    userXP: 248,
-    userRank: 1789,
+    playerXP: 248,
+    playerRank: 1789,
   };
 
   data.user = {
@@ -35,7 +35,7 @@ const onMountedEvent = () => {
   };
 
   if (HAS_POST) {
-    data.dbPost = {
+    data.puzzle = {
       id: "t3_12345",
       topic,
       clue: ["📺", "🛝", "➕", "🏃"],
@@ -44,15 +44,16 @@ const onMountedEvent = () => {
     };
   }
 
-  data.dbUser = {
+  data.player = {
     id: data.user.id,
-    playedPosts: [],
+    username: "Spleentacular",
+    completedPuzzles: [],
     createdAt: now,
   };
 
-  if (IS_SOLVED && data.dbPost) {
-    data.dbUser.playedPosts.push({
-      id: data.dbPost.id,
+  if (IS_SOLVED && data.puzzle) {
+    data.player.completedPuzzles.push({
+      id: data.puzzle.id,
       guesses: [],
       createdAt: now,
       completedAt: now,
@@ -77,10 +78,10 @@ export const mockMessages = () => {
         return sendMessage({
           type: "CREATE_RESPONSE",
         });
-      case "LEADERBOARD_REQUEST":
+      case "GET_LEADERBOARD_REQUEST":
         await timeout(1500);
         return sendMessage({
-          type: "LEADERBOARD_RESPONSE",
+          type: "GET_LEADERBOARD_RESPONSE",
           data: {
             leaderboard: [
               { username: "Spleentacular", xp: 6392, rank: 1 },

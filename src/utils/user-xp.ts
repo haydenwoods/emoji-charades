@@ -1,5 +1,4 @@
 import { RedisClient } from "@devvit/public-api";
-import { LeaderboardItem } from "@shared/types/message.js";
 
 export const KEY: string = "user-xp";
 

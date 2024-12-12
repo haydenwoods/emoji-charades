@@ -3,10 +3,11 @@ import { Devvit } from "@devvit/public-api";
 import { sendMessage } from "@/utils/message.js";
 
 import { CreateRequest } from "@shared/types/message.js";
-import { DBPost } from "@shared/types/db/post.js";
+import { Puzzle } from "@shared/types/db/puzzle.js";
 import { MessageHandler } from "@/types/message.js";
 import { Loading } from "@/components/Loading.js";
-import { setObject } from "@/utils/db.js";
+import { setObject } from "@/utils/db/index.js";
+import { getPuzzleKey } from "@/utils/db/keys.js";
 
 export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, context }) => {
   const { userId } = context;
@@ -22,7 +23,7 @@ export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, 
     preview: <Loading />,
   });
 
-  await setObject<DBPost>(context.redis, `post:${post.id}`, {
+  await setObject<Puzzle>(context.redis, getPuzzleKey(post.id), {
     id: post.id,
     topic,
     clue,

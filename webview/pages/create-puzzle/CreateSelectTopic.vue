@@ -58,6 +58,6 @@ const rerollTopicLabel = computed<string>(() => {
 const onNewTopicClicked = useThrottleFn(createStore.rerollTopic, 500);
 
 const onStartClicked = () => {
-  appStore.navigateTo(Page.CREATE_TYPE_CLUE);
+  appStore.navigateTo(Page.CREATE_PUZZLE_TYPE_CLUE);
 };
 </script>

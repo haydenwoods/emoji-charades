@@ -5,7 +5,7 @@
       <h2 class="text-neutral-500 text-center">Clue created by u/Spleentacular</h2>
     </div>
 
-    <ui-emojis v-if="dbPost?.clue" :emojis="dbPost.clue" />
+    <ui-emojis v-if="puzzle?.clue" :emojis="puzzle.clue" />
 
     <div id="tools" class="flex items-center gap-x-2 max-w-xl">
       <ui-input
@@ -62,7 +62,7 @@ import { animatePopIn, animateShake } from "../../utils/animate";
 import { sendMessage } from "../../utils/messages";
 
 const appStore = useAppStore();
-const { dbPost } = storeToRefs(appStore);
+const { puzzle } = storeToRefs(appStore);
 
 const input = ref<string>("");
 const showCorrectOverlay = ref<boolean>(false);
@@ -72,13 +72,13 @@ const submit = () => {
   const trimmedInput = input.value.trim();
   if (trimmedInput.length <= 0) return;
 
-  if (!dbPost.value) return;
-  const { topic } = dbPost.value;
+  if (!puzzle.value) return;
+  const { topic } = puzzle.value;
 
   const correct = isGuessSimilar(trimmedInput, topic);
 
   sendMessage({
-    type: "GUESS_REQUEST",
+    type: "GUESS_PUZZLE_REQUEST",
     data: {
       input: trimmedInput,
     },
@@ -88,7 +88,7 @@ const submit = () => {
     showCorrectOverlay.value = true;
 
     setTimeout(() => {
-      appStore.navigateTo(Page.SUMMARY);
+      appStore.navigateTo(Page.PUZZLE_SUMMARY);
     }, 2000);
   } else {
     animateShake("#tools");

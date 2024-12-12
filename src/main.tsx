@@ -15,8 +15,8 @@ import { onLeaderboardRequest } from "./messages/onLeaderboardRequest.js";
 const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
   MOUNTED_EVENT: onMountedEvent,
   CREATE_REQUEST: onCreateRequest,
-  GUESS_REQUEST: onGuessRequest,
-  LEADERBOARD_REQUEST: onLeaderboardRequest,
+  GUESS_PUZZLE_REQUEST: onGuessRequest,
+  GET_LEADERBOARD_REQUEST: onLeaderboardRequest,
 };
 
 Devvit.configure({

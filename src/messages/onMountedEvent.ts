@@ -2,11 +2,12 @@ import { InitialDataEvent, MountedEvent } from "@shared/types/message.js";
 
 import { sendMessage } from "@/utils/message.js";
 import { getUserRank, getUserXP } from "@/utils/user-xp.js";
-import { getObject } from "@/utils/db.js";
+import { getObject } from "@/utils/db/index.js";
 
 import { MessageHandler } from "@/types/message.js";
-import { DBPost } from "@shared/types/db/post.js";
-import { DBUser } from "@shared/types/db/user.js";
+import { Puzzle } from "@shared/types/db/puzzle.js";
+import { Player } from "@shared/types/db/player.js";
+import { getPlayerKey, getPuzzleKey } from "@/utils/db/keys.js";
 
 export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, app }) => {
   app.setWebviewMounted(true);
@@ -21,24 +22,24 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
     user,
   };
 
+  const getPlayer = async () => {
+    data.player = await getObject<Player>(context.redis, getPlayerKey(userId));
+  };
+
   const _getUserXP = async () => {
-    data.userXP = await getUserXP(context.redis, user.username);
+    data.playerXP = await getUserXP(context.redis, user.username);
   };
 
   const _getUserRank = async () => {
-    data.userRank = await getUserRank(context.redis, user.username);
+    data.playerRank = await getUserRank(context.redis, user.username);
   };
 
-  const getDBUser = async () => {
-    data.dbUser = await getObject<DBUser>(context.redis, `user:${userId}`);
-  };
-
-  const getDBPost = async () => {
+  const getPuzzle = async () => {
     if (!postId) return;
-    data.dbPost = await getObject<DBPost>(context.redis, `post:${postId}`);
+    data.puzzle = await getObject<Puzzle>(context.redis, getPuzzleKey(postId));
   };
 
-  await Promise.all([_getUserXP(), _getUserRank(), getDBUser(), getDBPost()]);
+  await Promise.all([_getUserXP(), _getUserRank(), getPlayer(), getPuzzle()]);
 
   sendMessage(context, {
     type: "INITIAL_DATA_EVENT",

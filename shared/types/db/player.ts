@@ -5,14 +5,15 @@ type Guess = {
   correct: boolean;
 } & Timestamped;
 
-type PlayedPost = {
+type CompletedPuzzle = {
   id: string;
   guesses: Guess[];
   xpGained?: number;
   completedAt?: string;
 } & Timestamped;
 
-export type DBUser = {
+export type Player = {
   id: string;
-  playedPosts: PlayedPost[];
+  username: string;
+  completedPuzzles: CompletedPuzzle[];
 } & Timestamped;

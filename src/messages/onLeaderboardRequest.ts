@@ -2,10 +2,10 @@ import { sendMessage } from "@/utils/message.js";
 
 import { KEY as USER_XP_KEY } from "@/utils/user-xp.js";
 
-import { LeaderboardItem, LeaderboardRequest } from "@shared/types/message.js";
+import { LeaderboardItem, GetLeaderboardRequest } from "@shared/types/message.js";
 import { MessageHandler } from "@/types/message.js";
 
-export const onLeaderboardRequest: MessageHandler<LeaderboardRequest> = async ({ context }) => {
+export const onLeaderboardRequest: MessageHandler<GetLeaderboardRequest> = async ({ context }) => {
   const { userId } = context;
   if (!userId) return;
 
@@ -24,7 +24,7 @@ export const onLeaderboardRequest: MessageHandler<LeaderboardRequest> = async ({
   }));
 
   sendMessage(context, {
-    type: "LEADERBOARD_RESPONSE",
+    type: "GET_LEADERBOARD_RESPONSE",
     data: {
       leaderboard,
     },

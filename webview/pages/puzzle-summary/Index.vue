@@ -6,8 +6,6 @@
         <ui-topic-category-tag :category="topic.category" />
       </div>
       <h1 class="text-2xl text-neutral-950 font-semibold text-center">"{{ topic.name }}"</h1>
-
-      <ui-emojis size="xs" :emojis="dbPost.clue" />
     </div>
 
     <div class="flex items-center mt-auto gap-x-2">
@@ -20,7 +18,7 @@
       <ui-button
         label="Create your own"
         variant="secondary"
-        @click="appStore.navigateTo(Page.CREATE_SELECT_TOPIC)"
+        @click="appStore.navigateTo(Page.CREATE_PUZZLE_SELECT_TOPIC)"
       >
         <template #icon>
           <i-noto-plus />
@@ -37,9 +35,9 @@ import { computed } from "vue";
 import { Page, useAppStore } from "../../stores/app";
 
 const appStore = useAppStore();
-const { dbPost } = storeToRefs(appStore);
+const { puzzle } = storeToRefs(appStore);
 
 const topic = computed(() => {
-  return dbPost.value.topic;
+  return puzzle.value.topic;
 });
 </script>

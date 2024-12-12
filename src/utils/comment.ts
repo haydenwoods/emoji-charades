@@ -1,6 +1,8 @@
-import { DBUser } from "@shared/types/db/user.js";
+import { Player } from "@shared/types/db/player.js";
 
-export const getPostCompletedCommentText = (playedPost: DBUser["playedPosts"][number]): string => {
+export const getPostCompletedCommentText = (
+  playedPost: Player["completedPuzzles"][number],
+): string => {
   const guessCount = playedPost.guesses.length;
 
   if (guessCount === 1) {

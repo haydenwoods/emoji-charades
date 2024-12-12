@@ -22,7 +22,7 @@
         <button
           type="button"
           class="size-full bg-neutral-200 border-2 border-neutral-300 p-4 aspect-square rounded-xl flex flex-col gap-y-2 items-center justify-center text-neutral-800 not-disabled:cursor-pointer hover:scale-103 transition-transform active:scale-97"
-          @click="appStore.navigateTo(Page.CREATE_SELECT_TOPIC)"
+          @click="appStore.navigateTo(Page.CREATE_PUZZLE_SELECT_TOPIC)"
         >
           <i-noto-plus class="text-5xl" />
           <span class="text-xl font-medium text-neutral-900">Create</span>

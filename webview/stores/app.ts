@@ -1,23 +1,23 @@
-import { computed, readonly, ref } from "vue";
+import { readonly, ref } from "vue";
 import { defineStore } from "pinia";
 
 import { InitialDataEvent } from "@shared/types/message";
-import { DBUser } from "@shared/types/db/user";
-import { DBPost } from "@shared/types/db/post";
+import { Player } from "@shared/types/db/player";
+import { Puzzle } from "@shared/types/db/puzzle";
 
 export enum Page {
   MENU,
   PLAY,
-  CREATE_SELECT_TOPIC,
-  CREATE_TYPE_CLUE,
-  GUESS,
-  SUMMARY,
+  CREATE_PUZZLE_SELECT_TOPIC,
+  CREATE_PUZZLE_TYPE_CLUE,
+  GUESS_PUZZLE,
+  PUZZLE_SUMMARY,
   ABOUT,
   LEADERBOARD,
 }
 
 type LoadingOverlayData = {
-  id: "CREATE_REQUEST" | "GUESS_REQUEST" | "LEADERBOARD_REQUEST";
+  id: "CREATE_REQUEST" | "GUESS_PUZZLE_REQUEST" | "GET_LEADERBOARD_REQUEST";
   label: string;
 };
 
@@ -29,17 +29,9 @@ export const useAppStore = defineStore("app", () => {
   const page = ref<Page>(Page.MENU);
 
   const user = ref<InitialDataEvent["data"]["user"]>();
-  const dbUser = ref<DBUser>();
+  const player = ref<Player>();
 
-  const dbPost = ref<DBPost>();
-
-  // const isPuzzle = computed(() => {
-  //   return Boolean(dbPost.value);
-  // });
-
-  // conts isPuzzleCompleted = computed(() => {
-  //   return
-  // });
+  const puzzle = ref<Puzzle>();
 
   const navigateTo = (newPage: Page) => {
     page.value = newPage;
@@ -65,9 +57,9 @@ export const useAppStore = defineStore("app", () => {
     page: readonly(page),
 
     user,
-    dbUser,
+    player,
 
-    dbPost,
+    puzzle,
 
     navigateTo,
   };

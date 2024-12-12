@@ -23,10 +23,10 @@ const leaderboardStore = useLeaderboardStore();
 const { leaderboard } = storeToRefs(leaderboardStore);
 
 onMounted(() => {
-  appStore.startLoadingOverlay({ id: "LEADERBOARD_REQUEST", label: "Loading" });
+  appStore.startLoadingOverlay({ id: "GET_LEADERBOARD_REQUEST", label: "Loading" });
 
   sendMessage({
-    type: "LEADERBOARD_REQUEST",
+    type: "GET_LEADERBOARD_REQUEST",
   });
 });
 </script>
