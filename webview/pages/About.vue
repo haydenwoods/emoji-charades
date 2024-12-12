@@ -15,7 +15,7 @@
       </p>
 
       <div class="flex flex-col gap-y-1">
-        <ui-emojis :emojis="['🎬', '🕖', '💼', '🍊']" size="sm" />
+        <ui-emojis :emojis="['🎬', '🕖', '💼', '🍊']" size="sm" :animate="false" />
         <span class="text-neutral-600 text-base">For example: "A Clockwork Orange"</span>
       </div>
 
@@ -36,8 +36,10 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { Category } from "../../shared/types/category";
 import { Page, useAppStore } from "../stores/app";
+import { animatePopIn } from "../utils/animate";
 
 const EXAMPLE_CATEGORIES: Category[] = [Category.MOVIE, Category.TV_SHOW, Category.IDIOM];
 

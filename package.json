@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "vite",
     "dev:playtest": "npm-run-all --parallel build:watch playtest",
-    "playtest": "devvit playtest spleentacular --connect --verbose",
+    "playtest": "devvit playtest EmojiCharades --connect --verbose",
     "build": "vite build",
     "build:watch": "vite build --watch",
     "lint": "eslint . --fix",

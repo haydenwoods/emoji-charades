@@ -3,9 +3,7 @@
     <div class="flex flex-col items-center gap-y-8">
       <div id="title" class="flex flex-col gap-y-2 items-center">
         <h1 class="text-5xl font-semibold text-center text-neutral-900">Emoji Charades</h1>
-        <h2 class="text-xl text-center text-neutral-800">
-          Reddit <i-noto-red-heart class="inline pb-[4px]" /> emojis... right?
-        </h2>
+        <h2 class="text-xl text-center text-neutral-800">Reddit loves emojis... right?</h2>
       </div>
 
       <div id="buttons" class="grid grid-cols-2 max-w-2xs w-full gap-4">
