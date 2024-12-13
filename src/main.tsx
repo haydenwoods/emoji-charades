@@ -11,12 +11,14 @@ import { onMountedEvent } from "./messages/onMountedEvent.js";
 import { onCreateRequest } from "./messages/onCreateRequest.js";
 import { onGuessRequest } from "./messages/onGuessRequest.js";
 import { onLeaderboardRequest } from "./messages/onLeaderboardRequest.js";
+import { onPlayRequest } from "./messages/onPlayRequest.js";
 
 const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
   MOUNTED_EVENT: onMountedEvent,
   CREATE_REQUEST: onCreateRequest,
   GUESS_PUZZLE_REQUEST: onGuessRequest,
   GET_LEADERBOARD_REQUEST: onLeaderboardRequest,
+  PLAY_REQUEST: onPlayRequest,
 };
 
 Devvit.configure({

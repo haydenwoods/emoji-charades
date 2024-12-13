@@ -36,12 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { Category } from "../../shared/types/category";
 import { Page, useAppStore } from "../stores/app";
-import { animatePopIn } from "../utils/animate";
 
-const EXAMPLE_CATEGORIES: Category[] = [Category.MOVIE, Category.TV_SHOW, Category.IDIOM];
+import { Category } from "../../shared/types/category";
+
+const EXAMPLE_CATEGORIES: Category[] = [Category.MOVIE, Category.TV_SHOW, Category.PHRASE];
 
 const appStore = useAppStore();
 </script>

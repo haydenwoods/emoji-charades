@@ -7,7 +7,7 @@ export const CATEGORY_TO_NAME: Record<Category, string> = {
   [Category.BOOK]: "Book",
   [Category.CHARACTER]: "Character",
   [Category.FAMOUS_PERSON]: "Famous Person",
-  [Category.IDIOM]: "Idiom",
+  [Category.PHRASE]: "Phrase",
 };
 
 export const CATEGORY_TO_COLOR: Record<
@@ -20,5 +20,5 @@ export const CATEGORY_TO_COLOR: Record<
   [Category.BOOK]: "blue",
   [Category.CHARACTER]: "indigo",
   [Category.FAMOUS_PERSON]: "yellow",
-  [Category.IDIOM]: "indigo",
+  [Category.PHRASE]: "indigo",
 };

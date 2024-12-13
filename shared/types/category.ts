@@ -5,5 +5,5 @@ export enum Category {
   BOOK,
   CHARACTER,
   FAMOUS_PERSON,
-  IDIOM,
+  PHRASE,
 }

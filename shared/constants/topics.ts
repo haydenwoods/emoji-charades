@@ -11,6 +11,50 @@ export const TOPICS: Topic[] = [
     name: "Dune",
     category: Category.MOVIE,
   },
+  {
+    name: "In Bruges",
+    category: Category.MOVIE,
+  },
+  {
+    name: "Blackberry",
+    category: Category.MOVIE,
+  },
+  {
+    name: "The Wolf of Wall Street",
+    category: Category.MOVIE,
+  },
+  {
+    name: "Fight Club",
+    category: Category.MOVIE,
+  },
+  {
+    name: "Alien",
+    category: Category.MOVIE,
+  },
+  {
+    name: "The Godfather",
+    category: Category.MOVIE,
+  },
+  {
+    name: "Goodfellas",
+    category: Category.MOVIE,
+  },
+  {
+    name: "Saving Private Ryan",
+    category: Category.MOVIE,
+  },
+  {
+    name: "The Truman Show",
+    category: Category.MOVIE,
+  },
+  {
+    name: "Die Hard",
+    category: Category.MOVIE,
+  },
+  {
+    name: "Ferris Bueller's Day Off",
+    category: Category.MOVIE,
+  },
   // TV Shows
   {
     name: "Silicon Valley",
@@ -51,9 +95,9 @@ export const TOPICS: Topic[] = [
     name: "Tom Hanks",
     category: Category.FAMOUS_PERSON,
   },
-  // Idiom
+  // Phrase
   {
     name: "Cost an arm and a leg",
-    category: Category.IDIOM,
+    category: Category.PHRASE,
   },
 ];

@@ -33,6 +33,7 @@ import { MessageHandler } from "./types/message";
 
 import LoadingPage from "./pages/Loading.vue";
 import MenuPage from "./pages/menu/Index.vue";
+import PlayPage from "./pages/Play.vue";
 import CreatePuzzleSelectTopicPage from "./pages/create-puzzle/CreateSelectTopic.vue";
 import CreatePuzzleTypeCluePage from "./pages/create-puzzle/CreateTypeClue.vue";
 import GuessPuzzlePage from "./pages/guess-puzzle/Index.vue";
@@ -45,7 +46,7 @@ const { loading, showLoadingOverlay, loadingOverlayData, page } = storeToRefs(ap
 
 const PAGE_TO_COMPONENT: Record<Page, Component> = {
   [Page.MENU]: MenuPage,
-  [Page.PLAY]: MenuPage,
+  [Page.PLAY]: PlayPage,
   [Page.CREATE_PUZZLE_SELECT_TOPIC]: CreatePuzzleSelectTopicPage,
   [Page.CREATE_PUZZLE_TYPE_CLUE]: CreatePuzzleTypeCluePage,
   [Page.GUESS_PUZZLE]: GuessPuzzlePage,

@@ -25,8 +25,8 @@ const onMountedEvent = () => {
   const topic = TOPICS.find(({ name }) => name === "Parks and Recreation") ?? TOPICS[0];
 
   const data: InitialDataEvent["data"] = {
-    playerXP: 248,
-    playerRank: 1789,
+    playerXP: 24,
+    playerRank: 17593,
   };
 
   data.user = {

@@ -30,7 +30,7 @@ const CATEGORY_TO_ICON: Record<Category, any> = {
   [Category.BOOK]: NotoOpenBook,
   [Category.CHARACTER]: NotoBustInSilhouette,
   [Category.FAMOUS_PERSON]: NotoGlowingStar,
-  [Category.IDIOM]: NotoSpeechBalloon,
+  [Category.PHRASE]: NotoSpeechBalloon,
 };
 
 const props = defineProps<{

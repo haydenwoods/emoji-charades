@@ -22,7 +22,6 @@ declare module 'vue' {
     INotoPlayButton: typeof import('~icons/noto/play-button')['default']
     INotoPlus: typeof import('~icons/noto/plus')['default']
     INotoQuestionMark: typeof import('~icons/noto/question-mark')['default']
-    INotoRedHeart: typeof import('~icons/noto/red-heart')['default']
     INotoRedQuestionMark: typeof import('~icons/noto/red-question-mark')['default']
     INotoSevenOclock: typeof import('~icons/noto/seven-oclock')['default']
     INotoSixOclock: typeof import('~icons/noto/six-oclock')['default']

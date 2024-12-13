@@ -66,6 +66,17 @@ export type GetLeaderboardResponse = {
   };
 };
 
+export type PlayRequest = {
+  type: "PLAY_REQUEST";
+};
+export type PlayResponse = {
+  type: "PLAY_RESPONSE";
+  data: {
+    success: boolean;
+    error?: string;
+  };
+};
+
 export type Message =
   | MountedEvent
   | LoadedEvent
@@ -75,4 +86,6 @@ export type Message =
   | GuessRequest
   | GuessResponse
   | GetLeaderboardRequest
-  | GetLeaderboardResponse;
+  | GetLeaderboardResponse
+  | PlayRequest
+  | PlayResponse;

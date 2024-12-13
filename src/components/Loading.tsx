@@ -10,15 +10,6 @@ export const Loading = () => {
       gap="small"
     >
       <image url="loader.gif" imageWidth={72} imageHeight={72} description="Loading spinner GIF" />
-      <text
-        style="body"
-        size="xxlarge"
-        color="#171717"
-        alignment="middle center"
-        selectable={false}
-      >
-        Loading
-      </text>
     </vstack>
   );
 };
