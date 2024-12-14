@@ -1,13 +1,13 @@
 <template>
   <div class="mx-auto">
     <icon v-if="icon" class="text-3xl" />
-    <span v-else class="text-xl text-neutral-600">{{ rank }}</span>
+    <span v-else class="text-xl text-slate-600">{{ rank }}</span>
   </div>
 
-  <span class="text-neutral-800" :class="isPodium ? 'font-medium text-2xl  ' : 'text-xl '">
+  <span class="text-slate-800" :class="isPodium ? 'font-medium text-2xl  ' : 'text-xl '">
     {{ username }}
   </span>
-  <span class="ml-auto text-neutral-800" :class="isPodium ? 'text-2xl font-medium ' : 'text-lg '">
+  <span class="ml-auto text-slate-800" :class="isPodium ? 'text-2xl font-medium ' : 'text-lg '">
     {{ xp }}
   </span>
 </template>

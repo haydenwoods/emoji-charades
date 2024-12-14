@@ -17,7 +17,7 @@ const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> 
   MOUNTED_EVENT: onMountedEvent,
   CREATE_REQUEST: onCreateRequest,
   GUESS_PUZZLE_REQUEST: onGuessRequest,
-  GET_LEADERBOARD_REQUEST: onLeaderboardRequest,
+  LEADERBOARD_REQUEST: onLeaderboardRequest,
   PLAY_REQUEST: onPlayRequest,
 };
 

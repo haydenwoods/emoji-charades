@@ -7,7 +7,7 @@
     </ui-page-header>
 
     <div
-      class="flex flex-col gap-y-5 items-center text-center text-neutral-900 my-auto max-w-xl text-xl"
+      class="flex flex-col gap-y-5 items-center text-center text-slate-900 my-auto max-w-xl text-xl"
     >
       <p>
         You will be shown a clue made from emojis. Your goal is to try and
@@ -16,7 +16,7 @@
 
       <div class="flex flex-col gap-y-1">
         <ui-emojis :emojis="['🎬', '🕖', '💼', '🍊']" size="sm" :animate="false" />
-        <span class="text-neutral-600 text-base">For example: "A Clockwork Orange"</span>
+        <span class="text-slate-600 text-base">For example: "A Clockwork Orange"</span>
       </div>
 
       <p>It could be anything from categories such as:</p>

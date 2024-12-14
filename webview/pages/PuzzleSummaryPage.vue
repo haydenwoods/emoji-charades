@@ -2,10 +2,10 @@
   <div class="size-full flex flex-col items-center">
     <div class="flex flex-col items-center gap-y-1">
       <div class="flex items-center gap-x-1.5">
-        <h2 class="text-neutral-800 font-medium">The topic was a</h2>
+        <h2 class="text-slate-800 font-medium">The topic was a</h2>
         <ui-topic-category-tag :category="topic.category" />
       </div>
-      <h1 class="text-2xl text-neutral-950 font-semibold text-center">"{{ topic.name }}"</h1>
+      <h1 class="text-2xl text-slate-950 font-semibold text-center">"{{ topic.name }}"</h1>
     </div>
 
     <div class="flex items-center mt-auto gap-x-2">

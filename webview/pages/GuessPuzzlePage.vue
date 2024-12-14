@@ -2,7 +2,7 @@
   <div class="relative size-full flex flex-col items-center justify-between">
     <div id="header" class="flex flex-col gap-y-0.5 items-center">
       <h1 class="text-2xl font-medium text-center">What do these emojis represent?</h1>
-      <h2 class="text-neutral-500 text-center">Clue created by u/Spleentacular</h2>
+      <h2 class="text-slate-500 text-center">Clue created by u/Spleentacular</h2>
     </div>
 
     <ui-emojis v-if="puzzle?.clue" :emojis="puzzle.clue" />
@@ -24,7 +24,7 @@
             @click="input = ''"
           >
             <i-material-symbols-cancel-outline-rounded
-              class="text-xl text-neutral-600 in-disabled:text-neutral-400"
+              class="text-xl text-slate-600 in-disabled:text-slate-400"
             />
           </button>
         </template>

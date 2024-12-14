@@ -55,7 +55,7 @@ const cvaButton = cva(
           "inset-shadow-sm inset-shadow-amber-400/40",
           "border-2 border-amber-400",
         ],
-        secondary: ["bg-white", "border-2 border-neutral-300 "],
+        secondary: ["bg-white", "border-2 border-slate-300 "],
         plain: [],
       },
       size: {
@@ -92,8 +92,8 @@ const cvaLabel = cva(["font-medium whitespace-nowrap"], {
   variants: {
     variant: {
       primary: ["text-amber-900"],
-      secondary: ["text-neutral-600"],
-      plain: ["text-neutral-800"],
+      secondary: ["text-slate-600"],
+      plain: ["text-slate-800"],
     },
     size: {
       xs: "text-base",
@@ -107,8 +107,8 @@ const cvaIcon = cva([], {
   variants: {
     variant: {
       primary: ["text-amber-950"],
-      secondary: ["text-neutral-600"],
-      plain: ["text-neutral-800"],
+      secondary: ["text-slate-600"],
+      plain: ["text-slate-800"],
     },
     size: {
       xs: "text-base",

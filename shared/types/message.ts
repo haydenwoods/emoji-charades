@@ -8,20 +8,16 @@ export type LeaderboardItem = {
   rank: number;
 };
 
-export interface Message {
-  type: string;
-}
-
 // Events
-export interface MountedEvent extends Message {
+export type MountedEvent = {
   type: "MOUNTED_EVENT";
-}
+};
 
-export interface LoadedEvent extends Message {
+export type LoadedEvent = {
   type: "LOADED_EVENT";
-}
+};
 
-export interface InitialDataEvent extends Message {
+export type InitialDataEvent = {
   type: "INITIAL_DATA_EVENT";
   data: {
     user?: {
@@ -33,50 +29,63 @@ export interface InitialDataEvent extends Message {
     playerRank?: number;
     puzzle?: Puzzle;
   };
-}
+};
 
 // Request and Response
-export interface CreateRequest extends Message {
+export type CreateRequest = {
   type: "CREATE_REQUEST";
   data: {
     topic: Topic;
     clue: string[];
   };
-}
-export interface CreateResponse extends Message {
+};
+export type CreateResponse = {
   type: "CREATE_RESPONSE";
-}
+};
 
-export interface GuessRequest extends Message {
+export type GuessRequest = {
   type: "GUESS_PUZZLE_REQUEST";
   data: {
     input: string;
   };
-}
-export interface GuessResponse extends Message {
+};
+export type GuessResponse = {
   type: "GUESS_PUZZLE_RESPONSE";
   data: {
     correct: boolean;
   };
-}
+};
 
-export interface LeaderboardRequest extends Message {
+export type LeaderboardRequest = {
   type: "LEADERBOARD_REQUEST";
-}
-export interface LeaderboardResponse extends Message {
+};
+export type LeaderboardResponse = {
   type: "LEADERBOARD_RESPONSE";
   data: {
     leaderboard: LeaderboardItem[];
   };
-}
+};
 
-export interface PlayRequest extends Message {
+export type PlayRequest = {
   type: "PLAY_REQUEST";
-}
-export interface PlayResponse extends Message {
+};
+export type PlayResponse = {
   type: "PLAY_RESPONSE";
   data: {
     success: boolean;
     error?: string;
   };
-}
+};
+
+export type Message =
+  | MountedEvent
+  | LoadedEvent
+  | InitialDataEvent
+  | CreateRequest
+  | CreateResponse
+  | GuessRequest
+  | GuessResponse
+  | LeaderboardRequest
+  | LeaderboardResponse
+  | PlayRequest
+  | PlayResponse;

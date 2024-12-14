@@ -53,7 +53,7 @@
 
       <div
         v-else
-        class="size-full scale-95 bg-white inset-ring-2 inset-ring-neutral-200 opacity-40 rounded-full"
+        class="size-full scale-95 bg-white inset-ring-2 inset-ring-slate-200 opacity-40 rounded-full"
       ></div>
     </div>
   </div>

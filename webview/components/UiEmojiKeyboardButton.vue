@@ -42,11 +42,7 @@ const cvaButton = cva(
   {
     variants: {
       variant: {
-        key: [
-          "bg-white",
-          "border-2 border-neutral-300",
-          "inset-shadow-sm inset-shadow-neutral-200/20",
-        ],
+        key: ["bg-white", "border-2 border-slate-300", "inset-shadow-sm inset-shadow-slate-200/20"],
         action: [
           "bg-blue-300",
           "inset-shadow-sm inset-shadow-white/10",
@@ -60,7 +56,7 @@ const cvaButton = cva(
 const cvaIcon = cva(["text-3xl md:text-4xl"], {
   variants: {
     variant: {
-      key: ["text-neutral-900"],
+      key: ["text-slate-900"],
       action: ["text-blue-900 in-disabled:text-blue-300"],
     },
   },
