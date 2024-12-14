@@ -3,7 +3,7 @@
     <loading-page v-if="loading" />
 
     <transition v-else name="fade" mode="out-in">
-      <component :key="page" :is="PAGE_TO_COMPONENT[page]" />
+      <component :is="PAGE_TO_COMPONENT[page]" :key="page" />
     </transition>
 
     <!-- Loading overlay -->

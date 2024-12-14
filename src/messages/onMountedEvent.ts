@@ -18,7 +18,7 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
   const user = await context.reddit.getUserById(userId);
   if (!user) return;
 
-  let data: InitialDataEvent["data"] = {
+  const data: InitialDataEvent["data"] = {
     user,
   };
 

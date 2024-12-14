@@ -28,7 +28,7 @@ export const useCreateStore = defineStore("create", () => {
       exclude: rerollTopicExclude.value,
     });
 
-    if (!topic) return;
+    if (!topic.value) return;
     topic.value = randomTopic;
 
     // Check if there is no other topics remaining, set hasTopicsRemaining accordingly

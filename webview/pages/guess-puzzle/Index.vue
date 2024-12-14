@@ -10,9 +10,9 @@
     <div id="tools" class="flex items-center gap-x-2 max-w-xl">
       <ui-input
         id="input"
+        v-model="input"
         placeholder="Guess..."
         autofocus
-        v-model="input"
         @keydown.enter="onKeydownEnter"
       >
         <template #after>

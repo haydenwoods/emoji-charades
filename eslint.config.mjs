@@ -1,6 +1,5 @@
 import vue from "eslint-plugin-vue";
 import vueTS from "@vue/eslint-config-typescript";
-import tailwind from "eslint-plugin-tailwindcss";
 import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
 
 export default [
@@ -14,7 +13,7 @@ export default [
   },
   ...vue.configs["flat/recommended"],
   ...vueTS(),
-  ...tailwind.configs["flat/recommended"],
+  // ...tailwind.configs["flat/recommended"],
   {
     rules: {
       "tailwindcss/no-custom-classname": "off",

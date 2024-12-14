@@ -7,6 +7,7 @@
 
     <input
       ref="input"
+      v-model="modelValue"
       type="text"
       class="font-medium text-xl min-w-0 placeholder:text-neutral-400 !outline-none py-3 w-full"
       :class="[
@@ -16,7 +17,6 @@
       :placeholder="placeholder"
       :maxlength="maxlength"
       @keydown.enter="emit('submit')"
-      v-model="modelValue"
     />
 
     <slot name="after">

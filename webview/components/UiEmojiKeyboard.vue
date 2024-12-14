@@ -8,12 +8,12 @@
   >
     <!-- Search -->
     <ui-input
+      v-model="search"
       class="h-[52px] col-span-4 row-start-1 col-start-1 self-end"
       placeholder="Search emojis..."
       maxlength="16"
       autofocus
       show-clear
-      v-model="search"
     />
 
     <!-- Backspace -->
