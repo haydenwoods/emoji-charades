@@ -18,7 +18,8 @@ import { useLeaderboardStore } from "../stores/leaderboard";
 
 import { sendMessage } from "../utils/messages";
 
-import { LeaderboardItem } from "../../shared/types/message";
+import { LeaderboardResponse, LeaderboardItem } from "../../shared/types/message";
+import { useMessageListener } from "../composables/useMessageListener";
 
 const appStore = useAppStore();
 const leaderboardStore = useLeaderboardStore();
@@ -34,11 +35,16 @@ const you = computed<LeaderboardItem | undefined>(() => {
   };
 });
 
+useMessageListener<LeaderboardResponse>("LEADERBOARD_RESPONSE", ({ data }) => {
+  leaderboard.value = data.leaderboard;
+  appStore.stopLoadingOverlay("LEADERBOARD_REQUEST");
+});
+
 onMounted(() => {
-  appStore.startLoadingOverlay({ id: "GET_LEADERBOARD_REQUEST", label: "Loading" });
+  appStore.startLoadingOverlay({ id: "LEADERBOARD_REQUEST", label: "Loading" });
 
   sendMessage({
-    type: "GET_LEADERBOARD_REQUEST",
+    type: "LEADERBOARD_REQUEST",
   });
 });
 </script>

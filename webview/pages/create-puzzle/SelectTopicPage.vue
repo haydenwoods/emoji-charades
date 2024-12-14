@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted } from "vue";
+import { computed, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
 import { Page, useAppStore } from "../../stores/app";

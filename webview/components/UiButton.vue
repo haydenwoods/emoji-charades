@@ -30,6 +30,8 @@ withDefaults(
     padded?: boolean;
   }>(),
   {
+    label: undefined,
+    emoji: undefined,
     variant: "primary",
     size: "md",
     padded: true,

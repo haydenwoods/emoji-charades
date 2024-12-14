@@ -5,7 +5,7 @@ import { sendMessage } from "@/utils/messages";
 import { InitialDataEvent } from "@shared/types/message";
 import { MessageHandler } from "@/types/message";
 
-export const onInitialDataEvent: MessageHandler<InitialDataEvent> = ({ message }) => {
+export const onInitialDataEvent: MessageHandler<InitialDataEvent> = (message) => {
   const { user, player, playerXP, playerRank, puzzle } = message.data;
 
   const appStore = useAppStore();

@@ -78,10 +78,10 @@ export const mockMessages = () => {
         return sendMessage({
           type: "CREATE_RESPONSE",
         });
-      case "GET_LEADERBOARD_REQUEST":
+      case "LEADERBOARD_REQUEST":
         await timeout(1500);
         return sendMessage({
-          type: "GET_LEADERBOARD_RESPONSE",
+          type: "LEADERBOARD_RESPONSE",
           data: {
             leaderboard: [
               { username: "Spleentacular", xp: 6392, rank: 1 },

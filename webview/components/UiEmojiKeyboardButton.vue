@@ -25,6 +25,8 @@ withDefaults(
   }>(),
   {
     variant: "key",
+    emoji: undefined,
+    icon: undefined,
   },
 );
 

@@ -17,7 +17,7 @@ export enum Page {
 }
 
 type LoadingOverlayData = {
-  id: "CREATE_REQUEST" | "GUESS_PUZZLE_REQUEST" | "GET_LEADERBOARD_REQUEST" | "PLAY_REQUEST";
+  id: "CREATE_REQUEST" | "GUESS_PUZZLE_REQUEST" | "LEADERBOARD_REQUEST" | "PLAY_REQUEST";
   label: string;
 };
 

@@ -8,16 +8,20 @@ export type LeaderboardItem = {
   rank: number;
 };
 
+export interface Message {
+  type: string;
+}
+
 // Events
-export type MountedEvent = {
+export interface MountedEvent extends Message {
   type: "MOUNTED_EVENT";
-};
+}
 
-export type LoadedEvent = {
+export interface LoadedEvent extends Message {
   type: "LOADED_EVENT";
-};
+}
 
-export type InitialDataEvent = {
+export interface InitialDataEvent extends Message {
   type: "INITIAL_DATA_EVENT";
   data: {
     user?: {
@@ -29,63 +33,50 @@ export type InitialDataEvent = {
     playerRank?: number;
     puzzle?: Puzzle;
   };
-};
+}
 
 // Request and Response
-export type CreateRequest = {
+export interface CreateRequest extends Message {
   type: "CREATE_REQUEST";
   data: {
     topic: Topic;
     clue: string[];
   };
-};
-export type CreateResponse = {
+}
+export interface CreateResponse extends Message {
   type: "CREATE_RESPONSE";
-};
+}
 
-export type GuessRequest = {
+export interface GuessRequest extends Message {
   type: "GUESS_PUZZLE_REQUEST";
   data: {
     input: string;
   };
-};
-export type GuessResponse = {
+}
+export interface GuessResponse extends Message {
   type: "GUESS_PUZZLE_RESPONSE";
   data: {
     correct: boolean;
   };
-};
+}
 
-export type GetLeaderboardRequest = {
-  type: "GET_LEADERBOARD_REQUEST";
-};
-export type GetLeaderboardResponse = {
-  type: "GET_LEADERBOARD_RESPONSE";
+export interface LeaderboardRequest extends Message {
+  type: "LEADERBOARD_REQUEST";
+}
+export interface LeaderboardResponse extends Message {
+  type: "LEADERBOARD_RESPONSE";
   data: {
     leaderboard: LeaderboardItem[];
   };
-};
+}
 
-export type PlayRequest = {
+export interface PlayRequest extends Message {
   type: "PLAY_REQUEST";
-};
-export type PlayResponse = {
+}
+export interface PlayResponse extends Message {
   type: "PLAY_RESPONSE";
   data: {
     success: boolean;
     error?: string;
   };
-};
-
-export type Message =
-  | MountedEvent
-  | LoadedEvent
-  | InitialDataEvent
-  | CreateRequest
-  | CreateResponse
-  | GuessRequest
-  | GuessResponse
-  | GetLeaderboardRequest
-  | GetLeaderboardResponse
-  | PlayRequest
-  | PlayResponse;
+}

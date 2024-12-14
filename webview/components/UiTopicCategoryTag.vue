@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { Component, computed } from "vue";
 
 import { CATEGORY_TO_COLOR, CATEGORY_TO_NAME } from "../../shared/constants/categories";
 
@@ -23,7 +23,7 @@ import NotoBustInSilhouette from "~icons/noto/bust-in-silhouette";
 import NotoGlowingStar from "~icons/noto/glowing-star";
 import NotoSpeechBalloon from "~icons/noto/speech-balloon";
 
-const CATEGORY_TO_ICON: Record<Category, any> = {
+const CATEGORY_TO_ICON: Record<Category, Component> = {
   [Category.MOVIE]: NotoFilmProjector,
   [Category.TV_SHOW]: NotoTelevision,
   [Category.VIDEO_GAME]: NotoVideoGame,

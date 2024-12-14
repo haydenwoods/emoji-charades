@@ -51,9 +51,9 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 
-import { animatePopIn } from "../../utils/animate";
+import { animatePopIn } from "../utils/animate";
 
-import { Page, useAppStore } from "../../stores/app";
+import { Page, useAppStore } from "../stores/app";
 
 const appStore = useAppStore();
 

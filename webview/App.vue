@@ -1,8 +1,6 @@
 <template>
   <div class="size-full p-6 md:p-8">
-    <loading-page v-if="loading" />
-
-    <transition v-else name="fade" mode="out-in">
+    <transition v-if="!loading" name="fade" mode="out-in">
       <component :is="PAGE_TO_COMPONENT[page]" :key="page" />
     </transition>
 
@@ -16,60 +14,27 @@
 </template>
 
 <script setup lang="ts">
-import { type Component, onMounted } from "vue";
-import { useEventListener } from "@vueuse/core";
+import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
-import { useAppStore, Page } from "./stores/app";
+import { PAGE_TO_COMPONENT } from "./constants/pages";
+
+import { useAppStore } from "./stores/app";
 
 import { sendMessage } from "./utils/messages";
 
+import { useMessageListener } from "./composables/useMessageListener";
+
 import { onInitialDataEvent } from "./messages/onInitialDataEvent";
 import { onCreateResponse } from "./messages/onCreateResponse";
-import { onLeaderboardResponse } from "./messages/onLeaderboardResponse";
 
-import { Message } from "../shared/types/message";
-import { MessageHandler } from "./types/message";
-
-import LoadingPage from "./pages/Loading.vue";
-import MenuPage from "./pages/menu/Index.vue";
-import PlayPage from "./pages/Play.vue";
-import CreatePuzzleSelectTopicPage from "./pages/create-puzzle/CreateSelectTopic.vue";
-import CreatePuzzleTypeCluePage from "./pages/create-puzzle/CreateTypeClue.vue";
-import GuessPuzzlePage from "./pages/guess-puzzle/Index.vue";
-import PuzzleSummaryPage from "./pages/puzzle-summary/Index.vue";
-import AboutPage from "./pages/About.vue";
-import LeaderboardPage from "./pages/Leaderboard.vue";
+import { CreateResponse, InitialDataEvent } from "../shared/types/message";
 
 const appStore = useAppStore();
 const { loading, showLoadingOverlay, loadingOverlayData, page } = storeToRefs(appStore);
 
-const PAGE_TO_COMPONENT: Record<Page, Component> = {
-  [Page.MENU]: MenuPage,
-  [Page.PLAY]: PlayPage,
-  [Page.CREATE_PUZZLE_SELECT_TOPIC]: CreatePuzzleSelectTopicPage,
-  [Page.CREATE_PUZZLE_TYPE_CLUE]: CreatePuzzleTypeCluePage,
-  [Page.GUESS_PUZZLE]: GuessPuzzlePage,
-  [Page.PUZZLE_SUMMARY]: PuzzleSummaryPage,
-  [Page.ABOUT]: AboutPage,
-  [Page.LEADERBOARD]: LeaderboardPage,
-};
-
-const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
-  INITIAL_DATA_EVENT: onInitialDataEvent,
-  CREATE_RESPONSE: onCreateResponse,
-  GET_LEADERBOARD_RESPONSE: onLeaderboardResponse,
-};
-
-useEventListener(window, "message", async (event) => {
-  if (event.data.type === "devvit-message") {
-    const message = event.data.data.message as Message;
-    console.log(`Received message (${message.type})`, message);
-
-    const messageHandler = MESSAGE_TO_HANDLER[message.type];
-    await messageHandler?.({ message });
-  }
-});
+useMessageListener<InitialDataEvent>("INITIAL_DATA_EVENT", onInitialDataEvent);
+useMessageListener<CreateResponse>("CREATE_RESPONSE", onCreateResponse);
 
 onMounted(() => {
   sendMessage({

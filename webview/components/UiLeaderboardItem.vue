@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { Component, computed } from "vue";
 
 import Noto1stPlaceMedal from "~icons/noto/1st-place-medal";
 import Noto2ndPlaceMedal from "~icons/noto/2nd-place-medal";
@@ -25,7 +25,7 @@ const props = defineProps<{
   rank: number;
 }>();
 
-const icon = computed(() => {
+const icon = computed<Component | undefined>(() => {
   switch (props.rank) {
     case 1:
       return Noto1stPlaceMedal;
@@ -33,6 +33,8 @@ const icon = computed(() => {
       return Noto2ndPlaceMedal;
     case 3:
       return Noto3rdPlaceMedal;
+    default:
+      return undefined;
   }
 });
 

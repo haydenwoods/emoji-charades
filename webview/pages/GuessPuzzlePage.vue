@@ -55,11 +55,11 @@
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 
-import { Page, useAppStore } from "../../stores/app";
+import { Page, useAppStore } from "../stores/app";
 
-import { isGuessSimilar } from "../../../shared/utils/topics";
-import { animatePopIn, animateShake } from "../../utils/animate";
-import { sendMessage } from "../../utils/messages";
+import { isGuessSimilar } from "../../shared/utils/topics";
+import { animatePopIn, animateShake } from "../utils/animate";
+import { sendMessage } from "../utils/messages";
 
 const appStore = useAppStore();
 const { puzzle } = storeToRefs(appStore);

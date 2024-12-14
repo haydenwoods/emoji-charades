@@ -25,6 +25,7 @@ const props = withDefaults(
     open?: boolean;
   }>(),
   {
+    label: undefined,
     open: true,
     theme: "primary",
   },

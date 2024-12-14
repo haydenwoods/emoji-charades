@@ -32,7 +32,7 @@
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
 
-import { Page, useAppStore } from "../../stores/app";
+import { Page, useAppStore } from "../stores/app";
 
 const appStore = useAppStore();
 const { puzzle } = storeToRefs(appStore);
