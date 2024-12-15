@@ -1,6 +1,6 @@
 <template>
   <div class="size-full flex flex-col items-center gap-y-6">
-    <ui-page-header title="Leaderboard" @click:back="appStore.navigateTo(Page.MENU)">
+    <ui-page-header title="Leaderboard" @click:back="appStore.navigateTo(appStore.mainPage)">
       <template #title:icon>
         <i-noto-trophy />
       </template>
@@ -13,7 +13,7 @@
 import { computed, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
-import { Page, useAppStore } from "../stores/app";
+import { useAppStore } from "../stores/app";
 import { useLeaderboardStore } from "../stores/leaderboard";
 
 import { sendMessage } from "../utils/messages";
@@ -27,7 +27,7 @@ const { player, playerXP, playerRank } = storeToRefs(appStore);
 const { leaderboard } = storeToRefs(leaderboardStore);
 
 const you = computed<LeaderboardItem | undefined>(() => {
-  if (!player.value) return;
+  if (!player.value || !playerXP.value || !playerRank.value) return;
   return {
     username: "You",
     xp: playerXP.value,
@@ -41,7 +41,7 @@ useMessageListener<LeaderboardResponse>("LEADERBOARD_RESPONSE", ({ data }) => {
 });
 
 onMounted(() => {
-  appStore.startLoadingOverlay({ id: "LEADERBOARD_REQUEST", label: "Loading" });
+  appStore.startLoadingOverlay("LEADERBOARD_REQUEST");
 
   sendMessage({
     type: "LEADERBOARD_REQUEST",

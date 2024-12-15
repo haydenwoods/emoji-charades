@@ -1,11 +1,20 @@
 <template>
   <div class="w-full flex items-start">
-    <div class="basis-1/5">
-      <ui-button size="xs" variant="plain" label="Back" :padded="false" @click="emit('click:back')">
-        <template #icon>
-          <i-material-symbols-arrow-back-rounded />
-        </template>
-      </ui-button>
+    <div class="basis-1/6">
+      <slot name="left">
+        <ui-button
+          v-if="showBack"
+          size="xs"
+          variant="plain"
+          label="Back"
+          :padded="false"
+          @click="emit('click:back')"
+        >
+          <template #icon>
+            <i-material-symbols-arrow-back-rounded />
+          </template>
+        </ui-button>
+      </slot>
     </div>
 
     <div class="flex-1">
@@ -21,14 +30,23 @@
       </slot>
     </div>
 
-    <div class="basis-1/5"></div>
+    <div class="basis-1/6">
+      <slot name="right"></slot>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  title?: string;
-}>();
+withDefaults(
+  defineProps<{
+    title?: string;
+    showBack?: boolean;
+  }>(),
+  {
+    title: undefined,
+    showBack: true,
+  },
+);
 
 const emit = defineEmits<{
   (event: "click:back"): void;

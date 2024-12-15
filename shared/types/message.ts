@@ -1,7 +1,8 @@
+import { User } from "./user.js";
 import { Puzzle } from "./db/puzzle.js";
 import { Player } from "./db/player.js";
 import { Topic } from "./topic.js";
-import { PuzzleGuess } from "@/utils/puzzle-guesses.js";
+import { PuzzleSummary } from "./puzzle-summary.js";
 
 export type LeaderboardItem = {
   username: string;
@@ -21,15 +22,12 @@ export type LoadedEvent = {
 export type InitialDataEvent = {
   type: "INITIAL_DATA_EVENT";
   data: {
-    user?: {
-      id: string;
-      username: string;
-    };
+    user?: User;
     player?: Player;
     playerXP?: number;
     playerRank?: number;
     puzzle?: Puzzle;
-    puzzleGuesses?: PuzzleGuess[];
+    puzzleSummary?: PuzzleSummary;
   };
 };
 
@@ -79,6 +77,16 @@ export type PlayResponse = {
   };
 };
 
+export type PuzzleSummaryRequest = {
+  type: "PUZZLE_SUMMARY_REQUEST";
+};
+export type PuzzleSummaryResponse = {
+  type: "PUZZLE_SUMMARY_RESPONSE";
+  data: {
+    puzzleSummary: PuzzleSummary;
+  };
+};
+
 export type Message =
   | MountedEvent
   | LoadedEvent
@@ -90,4 +98,6 @@ export type Message =
   | LeaderboardRequest
   | LeaderboardResponse
   | PlayRequest
-  | PlayResponse;
+  | PlayResponse
+  | PuzzleSummaryRequest
+  | PuzzleSummaryResponse;

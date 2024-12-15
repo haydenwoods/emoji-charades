@@ -9,7 +9,10 @@ export const onLeaderboardRequest: MessageHandler<LeaderboardRequest> = async ({
   const { userId } = context;
   if (!userId) return;
 
-  const elements = await context.redis.zRange(USER_XP_KEY, 0, 9);
+  const elements = await context.redis.zRange(USER_XP_KEY, 0, 9, {
+    reverse: true,
+    by: "score",
+  });
   const usernames = await Promise.all(
     elements.map(async ({ member: userId }) => {
       const user = await context.reddit.getUserById(userId);

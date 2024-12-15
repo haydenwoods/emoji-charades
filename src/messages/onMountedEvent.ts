@@ -3,12 +3,12 @@ import { InitialDataEvent, MountedEvent } from "@shared/types/message.js";
 import { sendMessage } from "@/utils/message.js";
 import { getUserRank, getUserXP } from "@/utils/user-xp.js";
 import { getObject } from "@/utils/db/index.js";
+import { getPlayerKey, getPuzzleKey } from "@/utils/db/keys.js";
 
 import { MessageHandler } from "@/types/message.js";
 import { Puzzle } from "@shared/types/db/puzzle.js";
 import { Player } from "@shared/types/db/player.js";
-import { getPlayerKey, getPuzzleKey } from "@/utils/db/keys.js";
-import { getPuzzleGuesses } from "@/utils/puzzle-guesses.js";
+import { getPuzzleSummary } from "@/utils/puzzle-summary.js";
 
 export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, app }) => {
   app.setWebviewMounted(true);
@@ -40,12 +40,12 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
     data.puzzle = await getObject<Puzzle>(context.redis, getPuzzleKey(postId));
   };
 
-  const _getPuzzleGuesses = async () => {
+  const _getPuzzleSummary = async () => {
     if (!postId) return;
-    data.puzzleGuesses = await getPuzzleGuesses(context.redis, postId, 5);
+    data.puzzleSummary = await getPuzzleSummary(context.redis, postId);
   };
 
-  await Promise.all([_getUserXP(), _getUserRank(), getPlayer(), getPuzzle(), _getPuzzleGuesses()]);
+  await Promise.all([_getUserXP(), _getUserRank(), getPlayer(), getPuzzle(), _getPuzzleSummary()]);
 
   sendMessage(context, {
     type: "INITIAL_DATA_EVENT",

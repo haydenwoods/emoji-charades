@@ -2,12 +2,7 @@ import { RedisClient } from "@devvit/public-api";
 
 import { getPuzzleGuessCountKey, getPuzzleGuessesKey } from "./db/keys.js";
 
-export type PuzzleGuess = {
-  guess: string;
-  count: number;
-  percentage: number;
-  rank: number;
-};
+import { PuzzleGuess } from "@shared/types/puzzle-guess.js";
 
 export const addPuzzleGuess = async (
   redis: RedisClient,
@@ -20,21 +15,25 @@ export const addPuzzleGuess = async (
   ]);
 };
 
-export const getPuzzleGuesses = async (
+export const getPuzzleGuessRange = async (
   redis: RedisClient,
   postId: string,
+  min: number = 0,
   max: number,
 ): Promise<PuzzleGuess[]> => {
   const guessCountString = await redis.get(getPuzzleGuessCountKey(postId));
   if (!guessCountString) return [];
 
   const guessCount = parseInt(guessCountString);
-  const guesses = await redis.zRange(getPuzzleGuessesKey(postId), 0, max - 1);
+  const guesses = await redis.zRange(getPuzzleGuessesKey(postId), min, max - 1, {
+    reverse: true,
+    by: "score",
+  });
 
   return guesses.map<PuzzleGuess>(({ member: guess, score: count }, index) => ({
     guess,
     count,
-    percentage: count / guessCount,
+    percentage: (count / guessCount) * 100,
     rank: index + 1,
   }));
 };

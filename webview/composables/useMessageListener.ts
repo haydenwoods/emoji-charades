@@ -1,7 +1,7 @@
 import { useEventListener } from "@vueuse/core";
 
-import { Message } from "@shared/types/message";
-import { MessageHandler } from "@/types/message";
+import { Message } from "../../shared/types/message";
+import { MessageHandler } from "../types/message";
 
 export const useMessageListener = <T extends Message = Message>(
   type: Message["type"],

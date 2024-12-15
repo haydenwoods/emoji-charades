@@ -1,6 +1,6 @@
 <template>
   <div class="size-full flex flex-col items-center gap-y-6">
-    <ui-page-header title="What is this?" @click:back="appStore.navigateTo(Page.MENU)">
+    <ui-page-header title="What is this?" @click:back="appStore.navigateTo(appStore.mainPage)">
       <template #title:icon>
         <i-noto-red-question-mark />
       </template>
@@ -14,7 +14,7 @@
         <span class="font-medium">work out what it means</span>.
       </p>
 
-      <div class="flex flex-col gap-y-1">
+      <div class="flex flex-col gap-y-3">
         <ui-emojis :emojis="['🎬', '🕖', '💼', '🍊']" size="sm" :animate="false" />
         <span class="text-slate-600 text-base">For example: "A Clockwork Orange"</span>
       </div>
@@ -25,7 +25,7 @@
         <ui-topic-category-tag
           v-for="category in EXAMPLE_CATEGORIES"
           :key="category"
-          size="md"
+          size="lg"
           :category="category"
         />
       </div>
@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { Page, useAppStore } from "../stores/app";
+import { useAppStore } from "../stores/app";
 
 import { Category } from "../../shared/types/category";
 

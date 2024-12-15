@@ -3,7 +3,7 @@ import { TOPICS } from "@shared/constants/topics";
 import { Message, InitialDataEvent } from "@shared/types/message";
 
 const IS_PUZZLE = true;
-const IS_PUZZLE_SOLVED = true;
+const IS_PUZZLE_SOLVED = false;
 
 const sendMessage = (message: Message) => {
   window.postMessage({
@@ -59,13 +59,15 @@ const onMountedEvent = () => {
       completedAt: now,
     });
 
-    data.puzzleGuesses = [
-      { guess: "Parks and Recreation", count: 1892, percentage: 72, rank: 1 },
-      { guess: "The Office", count: 482, percentage: 12, rank: 2 },
-      { guess: "Community", count: 352, percentage: 8, rank: 3 },
-      { guess: "Friends", count: 174, percentage: 4, rank: 4 },
-      { guess: "Mr Robot", count: 24, percentage: 1, rank: 5 },
-    ];
+    data.puzzleSummary = {
+      mostCommonGuesses: [
+        { guess: "Parks and Recreation", count: 1892, percentage: 72, rank: 1 },
+        { guess: "The Office", count: 482, percentage: 22, rank: 2 },
+        { guess: "Community", count: 352, percentage: 8, rank: 3 },
+        { guess: "Friends", count: 174, percentage: 4, rank: 4 },
+        { guess: "Mr Robot", count: 24, percentage: 1, rank: 5 },
+      ],
+    };
   }
 
   sendMessage({
@@ -103,6 +105,22 @@ export const mockMessages = () => {
               { username: "Peter", xp: 820, rank: 9 },
               { username: "Ron", xp: 566, rank: 10 },
             ],
+          },
+        });
+      case "PUZZLE_SUMMARY_REQUEST":
+        await timeout(1000);
+        return sendMessage({
+          type: "PUZZLE_SUMMARY_RESPONSE",
+          data: {
+            puzzleSummary: {
+              mostCommonGuesses: [
+                { guess: "Parks and Recreation", count: 1892, percentage: 72, rank: 1 },
+                { guess: "The Office", count: 482, percentage: 22, rank: 2 },
+                { guess: "Community", count: 352, percentage: 8, rank: 3 },
+                { guess: "Friends", count: 174, percentage: 4, rank: 4 },
+                { guess: "Mr Robot", count: 24, percentage: 1, rank: 5 },
+              ],
+            },
           },
         });
     }

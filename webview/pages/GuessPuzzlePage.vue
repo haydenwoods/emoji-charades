@@ -1,37 +1,35 @@
 <template>
   <div class="relative size-full flex flex-col items-center justify-between">
-    <div id="header" class="flex flex-col gap-y-0.5 items-center">
-      <h1 class="text-2xl font-medium text-center">What do these emojis represent?</h1>
-      <h2 class="text-slate-500 text-center">Clue created by u/Spleentacular</h2>
-    </div>
+    <ui-page-header class="pop-in">
+      <template #left>
+        <ui-button size="xs" variant="plain" @click="appStore.navigateTo(Page.ABOUT)">
+          <template #icon>
+            <i-material-symbols-help-outline-rounded class="text-2xl" />
+          </template>
+        </ui-button>
+      </template>
+
+      <template #title>
+        <div class="flex flex-col gap-y-0.5 items-center">
+          <h1 class="text-2xl font-medium text-center">What do these emojis represent?</h1>
+          <h2 class="text-slate-500 text-center">Clue created by u/Spleentacular</h2>
+        </div>
+      </template>
+    </ui-page-header>
 
     <ui-emojis v-if="puzzle?.clue" :emojis="puzzle.clue" />
 
-    <div id="tools" class="flex items-center gap-x-2 max-w-xl">
+    <ui-buttons-row id="tools" class="pop-in max-w-2xl">
       <ui-input
-        id="input"
         v-model="input"
         placeholder="Guess..."
         autofocus
+        show-clear
         @keydown.enter="onKeydownEnter"
-      >
-        <template #after>
-          <button
-            id="submit-button"
-            type="button"
-            class="not-disabled:cursor-pointer p-1 flex items-center justify-center transition-colors"
-            :class="input.length > 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'"
-            @click="input = ''"
-          >
-            <i-material-symbols-cancel-outline-rounded
-              class="text-xl text-slate-600 in-disabled:text-slate-400"
-            />
-          </button>
-        </template>
-      </ui-input>
+      />
 
-      <ui-button id="submit" label="Submit" @click="submit" />
-    </div>
+      <ui-button id="submit-button" label="Submit" @click="submit" />
+    </ui-buttons-row>
 
     <ui-overlay theme="success" label="Correct" :open="showCorrectOverlay">
       <template #icon>
@@ -105,7 +103,6 @@ const onKeydownEnter = (event: KeyboardEvent) => {
 };
 
 onMounted(() => {
-  animatePop("#header");
-  animatePop("#tools");
+  animatePop(".pop-in", "in", true);
 });
 </script>

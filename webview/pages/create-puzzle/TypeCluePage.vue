@@ -1,14 +1,8 @@
 <template>
   <div class="size-full flex flex-col items-center">
-    <ui-page-header @click:back="appStore.navigateTo(Page.MENU)">
+    <ui-page-header @click:back="appStore.navigateTo(appStore.mainPage)">
       <template #title>
-        <div class="flex flex-col items-center gap-y-1">
-          <div class="flex items-center gap-x-1.5">
-            <h2 class="text-slate-800 font-medium">Your topic is a</h2>
-            <ui-topic-category-tag :category="topic.category" />
-          </div>
-          <h1 class="text-2xl text-slate-950 font-semibold text-center">"{{ topic.name }}"</h1>
-        </div>
+        <ui-topic-title :topic="topic" />
       </template>
     </ui-page-header>
 
@@ -26,7 +20,7 @@
 import { ref, toRaw } from "vue";
 import { storeToRefs } from "pinia";
 
-import { Page, useAppStore } from "../../stores/app";
+import { useAppStore } from "../../stores/app";
 import { useCreateStore } from "../../stores/create";
 
 import { sendMessage } from "../../utils/messages";
@@ -54,10 +48,7 @@ const onClickBackspace = () => {
 const onClickSubmit = () => {
   if (clue.value.length <= 0) return;
 
-  appStore.startLoadingOverlay({
-    id: "CREATE_REQUEST",
-    label: "Creating",
-  });
+  appStore.startLoadingOverlay("CREATE_REQUEST", "Creating");
 
   sendMessage({
     type: "CREATE_REQUEST",

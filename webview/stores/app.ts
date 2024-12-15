@@ -1,9 +1,10 @@
-import { readonly, ref } from "vue";
+import { computed, readonly, ref } from "vue";
 import { defineStore } from "pinia";
 
-import { InitialDataEvent } from "@shared/types/message";
-import { Player } from "@shared/types/db/player";
-import { Puzzle } from "@shared/types/db/puzzle";
+import { Player } from "../../shared/types/db/player";
+import { Puzzle } from "../../shared/types/db/puzzle";
+import { PuzzleSummary } from "../../shared/types/puzzle-summary";
+import { User } from "../../shared/types/user";
 
 export enum Page {
   MENU,
@@ -17,31 +18,50 @@ export enum Page {
 }
 
 type LoadingOverlayData = {
-  id: "CREATE_REQUEST" | "GUESS_PUZZLE_REQUEST" | "LEADERBOARD_REQUEST" | "PLAY_REQUEST";
+  id: string;
   label: string;
 };
 
 export const useAppStore = defineStore("app", () => {
+  // Loading
   const loading = ref<boolean>(true);
   const showLoadingOverlay = ref<boolean>(false);
   const loadingOverlayData = ref<LoadingOverlayData>();
 
+  // Navigation
   const page = ref<Page>(Page.MENU);
 
-  const user = ref<InitialDataEvent["data"]["user"]>();
+  // User
+  const user = ref<User>();
   const player = ref<Player>();
-  const playerXP = ref<InitialDataEvent["data"]["playerXP"]>();
-  const playerRank = ref<InitialDataEvent["data"]["playerRank"]>();
+  const playerXP = ref<number>();
+  const playerRank = ref<number>();
 
+  // Puzzle
   const puzzle = ref<Puzzle>();
-  const puzzleGuesses = ref<InitialDataEvent["data"]["puzzleGuesses"]>();
+  const puzzleSummary = ref<PuzzleSummary>();
+
+  const mainPage = computed<Page>(() => {
+    if (!puzzle.value || !player.value) {
+      return Page.MENU;
+    }
+
+    const playedPuzzle = player.value.playedPuzzles.find(({ id }) => id === puzzle.value!.id);
+    const isPuzzleCompleted = Boolean(playedPuzzle?.completedAt);
+
+    if (isPuzzleCompleted) {
+      return Page.PUZZLE_SUMMARY;
+    } else {
+      return Page.GUESS_PUZZLE;
+    }
+  });
 
   const navigateTo = (newPage: Page) => {
     page.value = newPage;
   };
 
-  const startLoadingOverlay = (data: LoadingOverlayData) => {
-    loadingOverlayData.value = data;
+  const startLoadingOverlay = (id: string, label: string = "Loading") => {
+    loadingOverlayData.value = { id, label };
     showLoadingOverlay.value = true;
   };
 
@@ -54,19 +74,16 @@ export const useAppStore = defineStore("app", () => {
     loading,
     showLoadingOverlay,
     loadingOverlayData: readonly(loadingOverlayData),
-    startLoadingOverlay,
-    stopLoadingOverlay,
-
     page: readonly(page),
-
     user,
     player,
     playerXP,
     playerRank,
-
     puzzle,
-    puzzleGuesses,
-
+    puzzleSummary,
+    mainPage,
     navigateTo,
+    startLoadingOverlay,
+    stopLoadingOverlay,
   };
 });

@@ -12,6 +12,7 @@ import { onCreateRequest } from "./messages/onCreateRequest.js";
 import { onGuessRequest } from "./messages/onGuessRequest.js";
 import { onLeaderboardRequest } from "./messages/onLeaderboardRequest.js";
 import { onPlayRequest } from "./messages/onPlayRequest.js";
+import { onPuzzleSummaryRequest } from "./messages/onPuzzleSummaryRequest.js";
 
 const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
   MOUNTED_EVENT: onMountedEvent,
@@ -19,6 +20,7 @@ const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> 
   GUESS_PUZZLE_REQUEST: onGuessRequest,
   LEADERBOARD_REQUEST: onLeaderboardRequest,
   PLAY_REQUEST: onPlayRequest,
+  PUZZLE_SUMMARY_REQUEST: onPuzzleSummaryRequest,
 };
 
 Devvit.configure({

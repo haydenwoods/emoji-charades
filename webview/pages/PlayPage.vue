@@ -12,10 +12,7 @@ import { sendMessage } from "../utils/messages";
 const appStore = useAppStore();
 
 onMounted(() => {
-  appStore.startLoadingOverlay({
-    id: "PLAY_REQUEST",
-    label: "Finding a Puzzle",
-  });
+  appStore.startLoadingOverlay("PLAY_REQUEST", "Finding a new puzzle");
 
   sendMessage({
     type: "PLAY_REQUEST",

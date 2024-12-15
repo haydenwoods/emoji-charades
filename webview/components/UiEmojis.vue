@@ -1,46 +1,30 @@
 <template>
-  <transition-group
-    tag="div"
-    class="flex items-center gap-0.5 flex-wrap justify-center"
-    @enter="onEnter"
-  >
-    <div
+  <transition-group tag="div" class="flex gap-4 flex-wrap" @enter="onEnter">
+    <span
       v-for="(emoji, i) in emojis"
       :key="i"
-      :class="[
-        'emoji',
-        'font-emoji',
-        'aspect-square',
-        'flex items-center justify-center',
-        'select-none',
-      ]"
+      class="pop-in emoji font-emoji select-none"
+      :class="
+        {
+          xs: 'text-4xl',
+          sm: 'text-5xl',
+          md: 'text-6xl',
+        }[size]
+      "
     >
-      <span
-        :class="
-          {
-            xs: 'text-4xl p-1',
-            sm: 'text-5xl p-1.5',
-            md: 'text-6xl p-2',
-          }[size]
-        "
-      >
-        {{ emoji }}
-      </span>
-    </div>
+      {{ emoji }}
+    </span>
   </transition-group>
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted } from "vue";
-
 import { animatePop } from "../utils/animate";
 
 type Size = "xs" | "sm" | "md";
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     size?: Size;
-    animate?: boolean;
   }>(),
   {
     size: "md",
@@ -53,14 +37,4 @@ const emojis = defineModel<string[]>("emojis");
 const onEnter = (element: Element) => {
   animatePop(element);
 };
-
-onMounted(() => {
-  if (props.animate) {
-    nextTick(() => {
-      try {
-        animatePop(".emoji", "in", true);
-      } catch {}
-    });
-  }
-});
 </script>

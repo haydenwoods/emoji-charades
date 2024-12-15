@@ -11,6 +11,7 @@ declare module 'vue' {
     IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
     IMaterialSymbolsCancelOutlineRounded: typeof import('~icons/material-symbols/cancel-outline-rounded')['default']
     IMaterialSymbolsCheckCircleOutlineRounded: typeof import('~icons/material-symbols/check-circle-outline-rounded')['default']
+    IMaterialSymbolsHelpOutlineRounded: typeof import('~icons/material-symbols/help-outline-rounded')['default']
     INotoEightOclock: typeof import('~icons/noto/eight-oclock')['default']
     INotoElevenOclock: typeof import('~icons/noto/eleven-oclock')['default']
     INotoFiveOclock: typeof import('~icons/noto/five-oclock')['default']
@@ -30,6 +31,7 @@ declare module 'vue' {
     INotoTwelveOclock: typeof import('~icons/noto/twelve-oclock')['default']
     INotoTwoOclock: typeof import('~icons/noto/two-oclock')['default']
     UiButton: typeof import('./components/UiButton.vue')['default']
+    UiButtonsRow: typeof import('./components/UiButtonsRow.vue')['default']
     UiEmojiKeyboard: typeof import('./components/UiEmojiKeyboard.vue')['default']
     UiEmojiKeyboardButton: typeof import('./components/UiEmojiKeyboardButton.vue')['default']
     UiEmojis: typeof import('./components/UiEmojis.vue')['default']
@@ -41,5 +43,6 @@ declare module 'vue' {
     UiPageHeader: typeof import('./components/UiPageHeader.vue')['default']
     UiTag: typeof import('./components/UiTag.vue')['default']
     UiTopicCategoryTag: typeof import('./components/UiTopicCategoryTag.vue')['default']
+    UiTopicTitle: typeof import('./components/UiTopicTitle.vue')['default']
   }
 }

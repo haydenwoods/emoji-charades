@@ -1,16 +1,10 @@
 <template>
-  <div class="size-full flex flex-col gap-y-6 items-center">
-    <div class="pop-in flex flex-col items-center gap-y-1">
-      <div class="flex items-center gap-x-1.5">
-        <h2 class="text-slate-800 font-medium">The topic was a</h2>
-        <ui-topic-category-tag :category="topic.category" />
-      </div>
-      <h1 class="text-2xl text-slate-950 font-semibold text-center">"{{ topic.name }}"</h1>
-    </div>
+  <div v-if="puzzleSummary" class="size-full flex flex-col gap-y-6 items-center justify-between">
+    <ui-topic-title class="pop-in" :topic="topic" past-tense />
 
-    <div v-if="puzzleGuesses?.length" class="flex flex-col gap-y-4 w-full my-auto">
+    <div v-if="puzzleSummary?.mostCommonGuesses.length" class="flex flex-col gap-y-4 w-full">
       <div
-        v-for="puzzleGuess in puzzleGuesses"
+        v-for="puzzleGuess in puzzleSummary.mostCommonGuesses"
         :key="puzzleGuess.guess"
         class="pop-in py-1.5 px-4 bg-slate-200 w-full relative rounded-full overflow-hidden"
       >
@@ -27,7 +21,7 @@
       </div>
     </div>
 
-    <div class="pop-in flex items-center mt-auto gap-x-2">
+    <ui-buttons-row class="pop-in">
       <ui-button label="Play another!" @click="appStore.navigateTo(Page.PLAY)">
         <template #icon>
           <i-noto-play-button />
@@ -43,26 +37,46 @@
           <i-noto-plus />
         </template>
       </ui-button>
-    </div>
+    </ui-buttons-row>
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { computed, onMounted } from "vue";
+import { computed, nextTick, onMounted } from "vue";
 
 import { Page, useAppStore } from "../stores/app";
 
 import { animatePop } from "../utils/animate";
+import { useMessageListener } from "../composables/useMessageListener";
+import { sendMessage } from "../utils/messages";
+import { PuzzleSummaryResponse } from "../../shared/types/message";
 
 const appStore = useAppStore();
-const { puzzle, puzzleGuesses } = storeToRefs(appStore);
+const { puzzle, puzzleSummary } = storeToRefs(appStore);
 
 const topic = computed(() => {
-  return puzzle.value.topic;
+  return puzzle.value?.topic;
+});
+
+useMessageListener<PuzzleSummaryResponse>("PUZZLE_SUMMARY_RESPONSE", (message) => {
+  puzzleSummary.value = message.data.puzzleSummary;
+  appStore.stopLoadingOverlay("PUZZLE_SUMMARY_REQUEST");
+
+  nextTick(() => {
+    animatePop(".pop-in", "in", true);
+  });
 });
 
 onMounted(() => {
-  animatePop(".pop-in", "in", true);
+  if (!puzzleSummary.value) {
+    appStore.startLoadingOverlay("PUZZLE_SUMMARY_REQUEST");
+
+    sendMessage({
+      type: "PUZZLE_SUMMARY_REQUEST",
+    });
+  } else {
+    animatePop(".pop-in", "in", true);
+  }
 });
 </script>

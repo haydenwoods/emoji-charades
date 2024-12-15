@@ -1,20 +1,18 @@
 <template>
   <div class="size-full flex flex-col items-center justify-between">
-    <ui-page-header @click:back="appStore.navigateTo(Page.MENU)" />
+    <ui-page-header @click:back="appStore.navigateTo(appStore.mainPage)" />
 
     <transition name="fade" mode="out-in">
       <div :key="topic.name" class="flex flex-col items-center gap-y-4 my-auto">
-        <div id="topic-category" class="flex items-center gap-x-2.5">
+        <div class="flex items-center gap-x-2.5">
           <h2 class="text-xl text-slate-800 font-medium">Your topic is a</h2>
           <ui-topic-category-tag :category="topic.category" size="lg" />
         </div>
-        <h1 id="topic-name" class="text-5xl text-slate-950 font-semibold text-center">
-          "{{ topic.name }}"
-        </h1>
+        <h1 class="pop-in text-5xl text-slate-950 font-semibold text-center">"{{ topic.name }}"</h1>
       </div>
     </transition>
 
-    <div class="flex items-end gap-x-2">
+    <ui-buttons-row>
       <ui-button
         variant="secondary"
         :label="rerollTopicLabel"
@@ -31,19 +29,17 @@
           <i-noto-play-button />
         </template>
       </ui-button>
-    </div>
+    </ui-buttons-row>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useThrottleFn } from "@vueuse/core";
 
 import { Page, useAppStore } from "../../stores/app";
 import { REROLL_TOPIC_MAX, useCreateStore } from "../../stores/create";
-
-import { useThrottleFn } from "@vueuse/core";
-import { animatePop } from "../../utils/animate";
 
 const appStore = useAppStore();
 
@@ -63,9 +59,4 @@ const onNewTopicClicked = useThrottleFn(createStore.rerollTopic, 500);
 const onStartClicked = () => {
   appStore.navigateTo(Page.CREATE_PUZZLE_TYPE_CLUE);
 };
-
-onMounted(() => {
-  animatePop("#topic-category");
-  animatePop("#topic-name");
-});
 </script>

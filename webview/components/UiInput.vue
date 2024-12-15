@@ -22,10 +22,13 @@
 
     <slot name="after">
       <button
-        v-if="showClear && modelValue && modelValue.length > 0"
+        v-if="showClear"
         id="submit-button"
         type="button"
-        class="not-disabled:cursor-pointer p-1 flex items-center justify-center transition-colors"
+        class="not-disabled:cursor-pointer p-1 flex items-center justify-center transition-opacity"
+        :class="
+          modelValue && modelValue.length > 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        "
         @click="clear"
       >
         <i-material-symbols-cancel-outline-rounded
