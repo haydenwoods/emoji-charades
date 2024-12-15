@@ -17,7 +17,6 @@ declare module 'vue' {
     INotoFourOclock: typeof import('~icons/noto/four-oclock')['default']
     INotoNineOclock: typeof import('~icons/noto/nine-oclock')['default']
     INotoOneOclock: typeof import('~icons/noto/one-oclock')['default']
-    INotoOutboxTray: typeof import('~icons/noto/outbox-tray')['default']
     INotoPersonShrugging: typeof import('~icons/noto/person-shrugging')['default']
     INotoPlayButton: typeof import('~icons/noto/play-button')['default']
     INotoPlus: typeof import('~icons/noto/plus')['default']

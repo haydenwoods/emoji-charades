@@ -23,7 +23,7 @@ export const onPlayRequest: MessageHandler<PlayRequest> = async ({ context }) =>
   const player = await getObject<Player>(context.redis, getPlayerKey(userId));
   if (!player) return sendErrorMessage();
 
-  const completedPuzzleIds = player.completedPuzzles
+  const completedPuzzleIds = player.playedPuzzles
     .filter(({ completedAt }) => Boolean(completedAt))
     .map(({ id }) => id);
 

@@ -8,6 +8,7 @@ import { MessageHandler } from "@/types/message.js";
 import { Puzzle } from "@shared/types/db/puzzle.js";
 import { Player } from "@shared/types/db/player.js";
 import { getPlayerKey, getPuzzleKey } from "@/utils/db/keys.js";
+import { getPuzzleGuesses } from "@/utils/puzzle-guesses.js";
 
 export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, app }) => {
   app.setWebviewMounted(true);
@@ -39,7 +40,12 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
     data.puzzle = await getObject<Puzzle>(context.redis, getPuzzleKey(postId));
   };
 
-  await Promise.all([_getUserXP(), _getUserRank(), getPlayer(), getPuzzle()]);
+  const _getPuzzleGuesses = async () => {
+    if (!postId) return;
+    data.puzzleGuesses = await getPuzzleGuesses(context.redis, postId, 5);
+  };
+
+  await Promise.all([_getUserXP(), _getUserRank(), getPlayer(), getPuzzle(), _getPuzzleGuesses()]);
 
   sendMessage(context, {
     type: "INITIAL_DATA_EVENT",

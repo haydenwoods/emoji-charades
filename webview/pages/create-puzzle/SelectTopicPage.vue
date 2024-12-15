@@ -14,7 +14,7 @@
       </div>
     </transition>
 
-    <div class="flex items-end gap-x-4">
+    <div class="flex items-end gap-x-2">
       <ui-button
         variant="secondary"
         :label="rerollTopicLabel"
@@ -43,7 +43,7 @@ import { Page, useAppStore } from "../../stores/app";
 import { REROLL_TOPIC_MAX, useCreateStore } from "../../stores/create";
 
 import { useThrottleFn } from "@vueuse/core";
-import { animatePopIn } from "../../utils/animate";
+import { animatePop } from "../../utils/animate";
 
 const appStore = useAppStore();
 
@@ -65,7 +65,7 @@ const onStartClicked = () => {
 };
 
 onMounted(() => {
-  animatePopIn("#topic-category");
-  animatePopIn("#topic-name");
+  animatePop("#topic-category");
+  animatePop("#topic-name");
 });
 </script>

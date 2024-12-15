@@ -56,12 +56,24 @@ export const animateShake = (
   );
 };
 
-export const animatePopIn = (element: string | Element | Element[], staggered: boolean = false) => {
+export const animatePop = (
+  element: string | Element | Element[],
+  direction: "in" | "out" = "in",
+  staggered: boolean = false,
+) => {
+  const scale = [0.5, 1];
+  const opacity = [0, 1];
+
+  if (direction === "out") {
+    scale.reverse();
+    opacity.reverse();
+  }
+
   animate(
     element,
     {
-      scale: [0.5, 1],
-      opacity: [0, 1],
+      scale,
+      opacity,
     },
     {
       type: "spring",

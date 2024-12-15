@@ -34,6 +34,7 @@ export const useAppStore = defineStore("app", () => {
   const playerRank = ref<InitialDataEvent["data"]["playerRank"]>();
 
   const puzzle = ref<Puzzle>();
+  const puzzleGuesses = ref<InitialDataEvent["data"]["puzzleGuesses"]>();
 
   const navigateTo = (newPage: Page) => {
     page.value = newPage;
@@ -64,6 +65,7 @@ export const useAppStore = defineStore("app", () => {
     playerRank,
 
     puzzle,
+    puzzleGuesses,
 
     navigateTo,
   };

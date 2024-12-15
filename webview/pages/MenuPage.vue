@@ -1,14 +1,13 @@
 <template>
   <div class="size-full flex items-center justify-center">
     <div class="flex flex-col items-center gap-y-8">
-      <div id="title" class="flex flex-col gap-y-2 items-center">
+      <div class="pop-in flex flex-col gap-y-2 items-center">
         <h1 class="text-5xl font-semibold text-center text-slate-900">Emoji Charades</h1>
         <h2 class="text-xl text-center text-slate-800">Reddit loves emojis... right?</h2>
       </div>
 
-      <div id="buttons" class="grid grid-cols-2 max-w-2xs w-full gap-4">
+      <div class="pop-in grid grid-cols-2 max-w-2xs w-full gap-4">
         <button
-          id="play-button"
           type="button"
           class="size-full bg-amber-300 border-2 border-amber-400 inset-shadow-sm inset-shadow-amber-400/40 p-4 aspect-square rounded-xl flex flex-col gap-y-2 items-center justify-center text-amber-950 not-disabled:cursor-pointer hover:scale-103 transition-transform active:scale-97"
           @click="appStore.navigateTo(Page.PLAY)"
@@ -51,14 +50,13 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 
-import { animatePopIn } from "../utils/animate";
+import { animatePop } from "../utils/animate";
 
 import { Page, useAppStore } from "../stores/app";
 
 const appStore = useAppStore();
 
 onMounted(() => {
-  animatePopIn("#title");
-  animatePopIn("#buttons");
+  animatePop(".pop-in", "in", true);
 });
 </script>

@@ -1,6 +1,7 @@
 import { Puzzle } from "./db/puzzle.js";
 import { Player } from "./db/player.js";
 import { Topic } from "./topic.js";
+import { PuzzleGuess } from "@/utils/puzzle-guesses.js";
 
 export type LeaderboardItem = {
   username: string;
@@ -28,6 +29,7 @@ export type InitialDataEvent = {
     playerXP?: number;
     playerRank?: number;
     puzzle?: Puzzle;
+    puzzleGuesses?: PuzzleGuess[];
   };
 };
 

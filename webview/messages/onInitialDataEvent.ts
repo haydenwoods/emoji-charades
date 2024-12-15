@@ -6,7 +6,7 @@ import { InitialDataEvent } from "@shared/types/message";
 import { MessageHandler } from "@/types/message";
 
 export const onInitialDataEvent: MessageHandler<InitialDataEvent> = (message) => {
-  const { user, player, playerXP, playerRank, puzzle } = message.data;
+  const { user, player, playerXP, playerRank, puzzle, puzzleGuesses } = message.data;
 
   const appStore = useAppStore();
 
@@ -17,9 +17,10 @@ export const onInitialDataEvent: MessageHandler<InitialDataEvent> = (message) =>
 
   if (puzzle) {
     appStore.puzzle = puzzle;
+    appStore.puzzleGuesses = puzzleGuesses;
 
     // Find if the user has already completed the post or not
-    const playedPost = player?.completedPuzzles.find(({ id }) => id === puzzle.id);
+    const playedPost = player?.playedPuzzles?.find(({ id }) => id === puzzle.id);
     const isPostCompleted = Boolean(playedPost?.completedAt);
 
     if (isPostCompleted) {

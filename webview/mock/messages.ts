@@ -3,7 +3,7 @@ import { TOPICS } from "@shared/constants/topics";
 import { Message, InitialDataEvent } from "@shared/types/message";
 
 const IS_PUZZLE = true;
-const IS_PUZZLE_SOLVED = false;
+const IS_PUZZLE_SOLVED = true;
 
 const sendMessage = (message: Message) => {
   window.postMessage({
@@ -47,17 +47,25 @@ const onMountedEvent = () => {
   data.player = {
     id: data.user.id,
     username: "Spleentacular",
-    completedPuzzles: [],
+    playedPuzzles: [],
     createdAt: now,
   };
 
   if (IS_PUZZLE_SOLVED && data.puzzle) {
-    data.player.completedPuzzles.push({
+    data.player.playedPuzzles.push({
       id: data.puzzle.id,
       guesses: [],
       createdAt: now,
       completedAt: now,
     });
+
+    data.puzzleGuesses = [
+      { guess: "Parks and Recreation", count: 1892, percentage: 72, rank: 1 },
+      { guess: "The Office", count: 482, percentage: 12, rank: 2 },
+      { guess: "Community", count: 352, percentage: 8, rank: 3 },
+      { guess: "Friends", count: 174, percentage: 4, rank: 4 },
+      { guess: "Mr Robot", count: 24, percentage: 1, rank: 5 },
+    ];
   }
 
   sendMessage({

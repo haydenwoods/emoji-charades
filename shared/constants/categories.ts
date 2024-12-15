@@ -14,7 +14,7 @@ export const CATEGORY_TO_COLOR: Record<
   Category,
   "blue" | "orange" | "red" | "emerald" | "purple" | "yellow" | "indigo" | "amber"
 > = {
-  [Category.MOVIE]: "emerald",
+  [Category.MOVIE]: "amber",
   [Category.TV_SHOW]: "orange",
   [Category.VIDEO_GAME]: "red",
   [Category.BOOK]: "blue",

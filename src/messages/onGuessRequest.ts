@@ -4,7 +4,7 @@ import { getObject, setObject } from "@/utils/db/index.js";
 import { GuessRequest } from "@shared/types/message.js";
 import { MessageHandler } from "@/types/message.js";
 import { Player } from "@shared/types/db/player.js";
-import { isGuessSimilar } from "@shared/utils/topics.js";
+import { isGuessCorrect } from "@shared/utils/topics.js";
 import { Puzzle } from "@shared/types/db/puzzle.js";
 import { getPostCompletedCommentText } from "@/utils/comment.js";
 import { addUserXP } from "@/utils/user-xp.js";
@@ -14,6 +14,7 @@ import {
   SINGLE_GUESS_XP,
 } from "@/constants/user-xp.js";
 import { getPlayerKey, getPuzzleKey } from "@/utils/db/keys.js";
+import { addPuzzleGuess } from "@/utils/puzzle-guesses.js";
 
 export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, context }) => {
   const { userId, postId } = context;
@@ -26,7 +27,7 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
   const puzzle = await getObject<Puzzle>(context.redis, getPuzzleKey(postId));
   if (!puzzle?.topic) return;
 
-  const correct = isGuessSimilar(input, puzzle.topic);
+  const correct = isGuessCorrect(input, puzzle.topic);
 
   // Find or create the Player
   let player = await getObject<Player>(context.redis, getPlayerKey(userId));
@@ -35,36 +36,36 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
     player = {
       id: userId,
       username: user?.username ?? "",
-      completedPuzzles: [],
+      playedPuzzles: [],
       createdAt: now,
     };
   }
 
-  // Find or create the CompletedPuzzle on the Player
-  let playedPost = player.completedPuzzles.find(({ id }) => id === postId);
-  if (!playedPost) {
-    playedPost = {
+  // Find or create the PlayedPuzzle on the Player
+  let playedPuzzle = player.playedPuzzles.find(({ id }) => id === postId);
+  if (!playedPuzzle) {
+    playedPuzzle = {
       id: postId,
       guesses: [],
       createdAt: now,
     };
-    player.completedPuzzles.push(playedPost);
+    player.playedPuzzles.push(playedPuzzle);
   }
 
-  // Create the guess on the CompletedPuzzle
-  playedPost.guesses.push({
+  // Create the guess on the PlayedPuzzle
+  playedPuzzle.guesses.push({
     correct,
     input,
     createdAt: now,
   });
 
   if (correct) {
-    // Set the playedPost to completed
-    playedPost.completedAt = now;
+    // Set the PlayedPuzzle to completed
+    playedPuzzle.completedAt = now;
 
     // Add XP to the user
     let xpGained = CORRECT_GUESS_XP;
-    if (playedPost.guesses.length <= 1) xpGained += SINGLE_GUESS_XP;
+    if (playedPuzzle.guesses.length <= 1) xpGained += SINGLE_GUESS_XP;
     await addUserXP(context.redis, userId, xpGained);
 
     await Promise.all([
@@ -73,13 +74,16 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
       // Add a comment to the post
       context.reddit.submitComment({
         id: postId,
-        text: getPostCompletedCommentText(playedPost),
+        text: getPostCompletedCommentText(playedPuzzle),
       }),
     ]);
   }
 
   // Update the Player
   await setObject<Player>(context.redis, getPlayerKey(userId), player);
+
+  // Update the puzzles guesses
+  await addPuzzleGuess(context.redis, postId, correct ? puzzle.topic.name : input);
 
   sendMessage(context, {
     type: "GUESS_PUZZLE_RESPONSE",

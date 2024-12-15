@@ -27,7 +27,7 @@ export const getRandomTopic = (options?: {
   };
 };
 
-export const isGuessSimilar = (input: string, topic: Topic): boolean => {
+export const isGuessCorrect = (input: string, topic: Topic): boolean => {
   // Make sure the input isn't just whitespace
   const trimmedInput = input.trim();
   if (trimmedInput.length <= 0) return false;

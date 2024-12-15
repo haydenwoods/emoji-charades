@@ -1,15 +1,16 @@
 import { Player } from "@shared/types/db/player.js";
 
 export const getPostCompletedCommentText = (
-  playedPost: Player["completedPuzzles"][number],
+  playedPost: Player["playedPuzzles"][number],
 ): string => {
   const guessCount = playedPost.guesses.length;
 
   if (guessCount === 1) {
-    return "I got it correct on my first guess!";
+    return "I got it correct on my **first guess!**";
   }
 
-  const guessInputList = playedPost.guesses.reduce<string>((acc, { input }, index) => {
+  const incorrectGuesses = playedPost.guesses.filter(({ correct }) => !correct);
+  const guessList = incorrectGuesses.reduce<string>((acc, { input }, index) => {
     const isFirst = index === 0;
     const isLast = index === playedPost.guesses.length - 1;
     if (isLast) {
@@ -19,5 +20,5 @@ export const getPostCompletedCommentText = (
     }
   }, "");
 
-  return `I got it correct after **${guessCount} guesses!** My guesses were ${guessInputList}.`;
+  return `I got it correct after **${guessCount} guesses!** My guesses were ${guessList}.`;
 };

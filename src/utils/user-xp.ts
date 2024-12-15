@@ -9,13 +9,7 @@ export const addUserXP = async (
   userId: string,
   amount: number,
 ): Promise<void> => {
-  const xp = await redis.zScore(KEY, userId);
-  const exists = xp !== undefined;
-  if (exists) {
-    await redis.zIncrBy(KEY, userId, amount);
-  } else {
-    await redis.zAdd(KEY, { member: userId, score: amount });
-  }
+  await redis.zIncrBy(KEY, userId, amount);
 };
 
 export const getUserXP = async (redis: RedisClient, userId: string): Promise<number> => {

@@ -5,7 +5,7 @@ type Guess = {
   correct: boolean;
 } & Timestamped;
 
-type CompletedPuzzle = {
+type PlayedPuzzle = {
   id: string;
   guesses: Guess[];
   xpGained?: number;
@@ -15,5 +15,5 @@ type CompletedPuzzle = {
 export type Player = {
   id: string;
   username: string;
-  completedPuzzles: CompletedPuzzle[];
+  playedPuzzles: PlayedPuzzle[];
 } & Timestamped;

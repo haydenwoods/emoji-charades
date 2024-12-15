@@ -30,11 +30,7 @@
         </template>
       </ui-input>
 
-      <ui-button id="submit" label="Submit" @click="submit">
-        <template #icon>
-          <i-noto-outbox-tray />
-        </template>
-      </ui-button>
+      <ui-button id="submit" label="Submit" @click="submit" />
     </div>
 
     <ui-overlay theme="success" label="Correct" :open="showCorrectOverlay">
@@ -57,8 +53,8 @@ import { storeToRefs } from "pinia";
 
 import { Page, useAppStore } from "../stores/app";
 
-import { isGuessSimilar } from "../../shared/utils/topics";
-import { animatePopIn, animateShake } from "../utils/animate";
+import { isGuessCorrect } from "../../shared/utils/topics";
+import { animatePop, animateShake } from "../utils/animate";
 import { sendMessage } from "../utils/messages";
 
 const appStore = useAppStore();
@@ -75,7 +71,7 @@ const submit = () => {
   if (!puzzle.value) return;
   const { topic } = puzzle.value;
 
-  const correct = isGuessSimilar(trimmedInput, topic);
+  const correct = isGuessCorrect(trimmedInput, topic);
 
   sendMessage({
     type: "GUESS_PUZZLE_REQUEST",
@@ -109,7 +105,7 @@ const onKeydownEnter = (event: KeyboardEvent) => {
 };
 
 onMounted(() => {
-  animatePopIn("#header");
-  animatePopIn("#tools");
+  animatePop("#header");
+  animatePop("#tools");
 });
 </script>

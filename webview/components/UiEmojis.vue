@@ -1,5 +1,9 @@
 <template>
-  <div class="flex items-center gap-0.5 flex-wrap justify-center">
+  <transition-group
+    tag="div"
+    class="flex items-center gap-0.5 flex-wrap justify-center"
+    @enter="onEnter"
+  >
     <div
       v-for="(emoji, i) in emojis"
       :key="i"
@@ -23,13 +27,13 @@
         {{ emoji }}
       </span>
     </div>
-  </div>
+  </transition-group>
 </template>
 
 <script setup lang="ts">
 import { nextTick, onMounted } from "vue";
 
-import { animatePopIn } from "../utils/animate";
+import { animatePop } from "../utils/animate";
 
 type Size = "xs" | "sm" | "md";
 
@@ -46,11 +50,15 @@ const props = withDefaults(
 
 const emojis = defineModel<string[]>("emojis");
 
+const onEnter = (element: Element) => {
+  animatePop(element);
+};
+
 onMounted(() => {
   if (props.animate) {
     nextTick(() => {
       try {
-        animatePopIn(".emoji", true);
+        animatePop(".emoji", "in", true);
       } catch {}
     });
   }

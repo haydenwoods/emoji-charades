@@ -16,6 +16,7 @@
       ]"
       :placeholder="placeholder"
       :maxlength="maxlength"
+      :autofocus="autofocus"
       @keydown.enter="emit('submit')"
     />
 

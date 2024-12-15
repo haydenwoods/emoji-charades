@@ -33,6 +33,8 @@ import { sendMessage } from "../../utils/messages";
 
 import { Emoji } from "../../types/emoji";
 
+const MAX_CLUE_LENGTH: number = 14;
+
 const appStore = useAppStore();
 const createStore = useCreateStore();
 
@@ -41,6 +43,7 @@ const { topic } = storeToRefs(createStore);
 const clue = ref<string[]>([]);
 
 const onClickKey = (emoji: Emoji) => {
+  if (clue.value.length >= MAX_CLUE_LENGTH) return;
   clue.value.push(emoji.value);
 };
 
