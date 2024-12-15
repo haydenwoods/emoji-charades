@@ -14,8 +14,11 @@ export const onInitialDataEvent: MessageHandler<InitialDataEvent> = (message) =>
   appStore.player = player;
   appStore.playerXP = playerXP;
   appStore.playerRank = playerRank;
-  appStore.puzzle = puzzle;
-  appStore.puzzleSummary = puzzleSummary;
+
+  if (puzzle) {
+    appStore.puzzle = puzzle;
+    appStore.puzzleSummary = puzzleSummary;
+  }
 
   appStore.loading = false;
   appStore.navigateTo(appStore.mainPage);
