@@ -1,6 +1,6 @@
 <template>
   <div class="relative size-full flex flex-col items-center justify-between">
-    <ui-page-header class="pop-in">
+    <ui-page-header>
       <template #left>
         <ui-button size="xs" variant="plain" @click="appStore.navigateTo(Page.ABOUT)">
           <template #icon>

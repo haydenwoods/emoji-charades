@@ -7,19 +7,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AppNotification: typeof import('./components/app/AppNotification.vue')['default']
     AppNotifications: typeof import('./components/app/AppNotifications.vue')['default']
-    AppOverlays: typeof import('./components/app/AppOverlays.vue')['default']
     IMaterialSymbolsArrowBackRounded: typeof import('~icons/material-symbols/arrow-back-rounded')['default']
     IMaterialSymbolsBackspaceOutlineRounded: typeof import('~icons/material-symbols/backspace-outline-rounded')['default']
     IMaterialSymbolsCancelOutlineRounded: typeof import('~icons/material-symbols/cancel-outline-rounded')['default']
-    IMaterialSymbolsCheckCircleOutlineRounded: typeof import('~icons/material-symbols/check-circle-outline-rounded')['default']
     IMaterialSymbolsHelpOutlineRounded: typeof import('~icons/material-symbols/help-outline-rounded')['default']
     INotoEightOclock: typeof import('~icons/noto/eight-oclock')['default']
     INotoElevenOclock: typeof import('~icons/noto/eleven-oclock')['default']
     INotoFiveOclock: typeof import('~icons/noto/five-oclock')['default']
     INotoFourOclock: typeof import('~icons/noto/four-oclock')['default']
-    INotoLightBulb: typeof import('~icons/noto/light-bulb')['default']
     INotoNineOclock: typeof import('~icons/noto/nine-oclock')['default']
     INotoOneOclock: typeof import('~icons/noto/one-oclock')['default']
     INotoPersonShrugging: typeof import('~icons/noto/person-shrugging')['default']
@@ -44,7 +40,6 @@ declare module 'vue' {
     UiLeaderboardItem: typeof import('./components/ui/UiLeaderboardItem.vue')['default']
     UiLoader: typeof import('./components/ui/UiLoader.vue')['default']
     UiNotification: typeof import('./components/ui/UiNotification.vue')['default']
-    UiOverlay: typeof import('./components/ui/UiOverlay.vue')['default']
     UiPageHeader: typeof import('./components/ui/UiPageHeader.vue')['default']
     UiTag: typeof import('./components/ui/UiTag.vue')['default']
     UiTopicCategoryTag: typeof import('./components/ui/UiTopicCategoryTag.vue')['default']
