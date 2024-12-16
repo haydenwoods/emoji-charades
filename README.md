@@ -4,10 +4,8 @@
 
 Emoji Charades is a game where you will be shown a clue made from emojis. Your goal is to try and work out what they represent. It could be anything from a movie, to a common phrase.
 
-For example:
-
-# 🎬 🕖 💼 🍊
-
+For example:\
+🎬 🕖 💼 🍊 \
 This would be a "A Clockwork Orange".
 
 ## How can you play?
