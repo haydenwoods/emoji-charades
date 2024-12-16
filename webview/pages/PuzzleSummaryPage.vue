@@ -46,13 +46,17 @@ import { storeToRefs } from "pinia";
 import { computed, nextTick, onMounted } from "vue";
 
 import { Page, useAppStore } from "../stores/app";
+import { useNotificationStore } from "../stores/notification";
 
 import { animatePop } from "../utils/animate";
-import { useMessageListener } from "../composables/useMessageListener";
 import { sendMessage } from "../utils/messages";
+
+import { useMessageListener } from "../composables/useMessageListener";
+
 import { PuzzleSummaryResponse } from "../../shared/types/message";
 
 const appStore = useAppStore();
+const notificationStore = useNotificationStore();
 const { puzzle, puzzleSummary } = storeToRefs(appStore);
 
 const topic = computed(() => {
@@ -61,7 +65,7 @@ const topic = computed(() => {
 
 useMessageListener<PuzzleSummaryResponse>("PUZZLE_SUMMARY_RESPONSE", (message) => {
   puzzleSummary.value = message.data.puzzleSummary;
-  appStore.stopLoadingOverlay("PUZZLE_SUMMARY_REQUEST");
+  notificationStore.hideNotification("PUZZLE_SUMMARY_REQUEST");
 
   nextTick(() => {
     animatePop(".pop-in", "in", true);
@@ -70,7 +74,7 @@ useMessageListener<PuzzleSummaryResponse>("PUZZLE_SUMMARY_RESPONSE", (message) =
 
 onMounted(() => {
   if (!puzzleSummary.value) {
-    appStore.startLoadingOverlay("PUZZLE_SUMMARY_REQUEST");
+    notificationStore.showLoading("PUZZLE_SUMMARY_REQUEST");
 
     sendMessage({
       type: "PUZZLE_SUMMARY_REQUEST",

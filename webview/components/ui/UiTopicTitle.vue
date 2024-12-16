@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { Topic } from "../../shared/types/topic";
+import { Topic } from "../../../shared/types/topic";
 
 defineProps<{
   topic: Topic;

@@ -9,9 +9,9 @@
 <script setup lang="ts">
 import { Component, computed } from "vue";
 
-import { CATEGORY_TO_COLOR, CATEGORY_TO_NAME } from "../../shared/constants/categories";
+import { CATEGORY_TO_COLOR, CATEGORY_TO_NAME } from "../../../shared/constants/categories";
 
-import { Category } from "../../shared/types/category";
+import { Category } from "../../../shared/types/category";
 
 import { UITagSize } from "./UITag.vue";
 

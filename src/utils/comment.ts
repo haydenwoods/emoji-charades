@@ -12,7 +12,7 @@ export const getPostCompletedCommentText = (
   const incorrectGuesses = playedPost.guesses.filter(({ correct }) => !correct);
   const guessList = incorrectGuesses.reduce<string>((acc, { input }, index) => {
     const isFirst = index === 0;
-    const isLast = index === playedPost.guesses.length - 1;
+    const isLast = index === incorrectGuesses.length - 1;
     if (isLast) {
       return acc + ` and *"${input}"*`;
     } else {

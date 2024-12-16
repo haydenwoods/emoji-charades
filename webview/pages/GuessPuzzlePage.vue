@@ -20,28 +20,24 @@
     <ui-emojis v-if="puzzle?.clue" :emojis="puzzle.clue" />
 
     <ui-buttons-row id="tools" class="pop-in max-w-2xl">
+      <!-- <ui-button variant="secondary">
+        <template #icon>
+          <i-noto-light-bulb />
+        </template>
+      </ui-button> -->
+
       <ui-input
         v-model="input"
         placeholder="Guess..."
         autofocus
         show-clear
+        :maxlength="32"
+        @keydown="onKeydown"
         @keydown.enter="onKeydownEnter"
       />
 
-      <ui-button id="submit-button" label="Submit" @click="submit" />
+      <ui-button label="Submit" @click="submit" />
     </ui-buttons-row>
-
-    <ui-overlay theme="success" label="Correct" :open="showCorrectOverlay">
-      <template #icon>
-        <i-material-symbols-check-circle-outline-rounded />
-      </template>
-    </ui-overlay>
-
-    <ui-overlay theme="error" label="Incorrect" :open="showIncorrectOverlay">
-      <template #icon>
-        <i-material-symbols-cancel-outline-rounded />
-      </template>
-    </ui-overlay>
   </div>
 </template>
 
@@ -49,18 +45,21 @@
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 
+import NotoPartyPopper from "~icons/noto/party-popper";
+import NotoBrokenHeart from "~icons/noto/broken-heart";
+
 import { Page, useAppStore } from "../stores/app";
+import { useNotificationStore } from "../stores/notification";
 
 import { isGuessCorrect } from "../../shared/utils/topics";
 import { animatePop, animateShake } from "../utils/animate";
 import { sendMessage } from "../utils/messages";
 
 const appStore = useAppStore();
+const notificationStore = useNotificationStore();
 const { puzzle } = storeToRefs(appStore);
 
 const input = ref<string>("");
-const showCorrectOverlay = ref<boolean>(false);
-const showIncorrectOverlay = ref<boolean>(false);
 
 const submit = () => {
   const trimmedInput = input.value.trim();
@@ -79,24 +78,37 @@ const submit = () => {
   });
 
   if (correct) {
-    showCorrectOverlay.value = true;
-
+    notificationStore.showNotification(
+      {
+        id: "CORRECT",
+        label: "Correct",
+        icon: NotoPartyPopper,
+        theme: "success",
+      },
+      2000,
+    );
     setTimeout(() => {
       appStore.navigateTo(Page.PUZZLE_SUMMARY);
     }, 2000);
   } else {
     animateShake("#tools");
 
-    showIncorrectOverlay.value = true;
-    setTimeout(() => {
-      showIncorrectOverlay.value = false;
-    }, 1000);
+    notificationStore.showNotification(
+      {
+        id: "INCORRECT",
+        label: "Incorrect",
+        icon: NotoBrokenHeart,
+        theme: "error",
+      },
+      1250,
+    );
   }
 
   input.value = "";
 };
 
 const onKeydownEnter = (event: KeyboardEvent) => {
+  if (notificationStore.isShowing("CORRECT") || notificationStore.isShowing("INCORRECT")) return;
   if (event.repeat) return;
   event.preventDefault();
   submit();

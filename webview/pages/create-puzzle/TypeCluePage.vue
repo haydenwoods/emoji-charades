@@ -21,6 +21,7 @@ import { ref, toRaw } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useAppStore } from "../../stores/app";
+import { useNotificationStore } from "../../stores/notification";
 import { useCreateStore } from "../../stores/create";
 
 import { sendMessage } from "../../utils/messages";
@@ -30,6 +31,7 @@ import { Emoji } from "../../types/emoji";
 const MAX_CLUE_LENGTH: number = 14;
 
 const appStore = useAppStore();
+const notificationStore = useNotificationStore();
 const createStore = useCreateStore();
 
 const { topic } = storeToRefs(createStore);
@@ -48,7 +50,7 @@ const onClickBackspace = () => {
 const onClickSubmit = () => {
   if (clue.value.length <= 0) return;
 
-  appStore.startLoadingOverlay("CREATE_REQUEST", "Creating");
+  notificationStore.showLoading("CREATE_REQUEST", "Creating");
 
   sendMessage({
     type: "CREATE_REQUEST",

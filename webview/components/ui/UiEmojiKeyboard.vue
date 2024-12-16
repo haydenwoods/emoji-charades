@@ -63,9 +63,9 @@
 import { computed, ref } from "vue";
 import { useFuse } from "@vueuse/integrations/useFuse";
 
-import { EMOJIS } from "../constants/emojis";
+import { EMOJIS } from "../../constants/emojis";
 
-import { Emoji } from "../types/emoji";
+import { Emoji } from "../../types/emoji";
 
 const ROWS = 2;
 const COLS = 8;

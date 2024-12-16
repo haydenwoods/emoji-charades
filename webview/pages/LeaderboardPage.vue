@@ -15,6 +15,7 @@ import { storeToRefs } from "pinia";
 
 import { useAppStore } from "../stores/app";
 import { useLeaderboardStore } from "../stores/leaderboard";
+import { useNotificationStore } from "../stores/notification";
 
 import { sendMessage } from "../utils/messages";
 
@@ -22,6 +23,7 @@ import { LeaderboardResponse, LeaderboardItem } from "../../shared/types/message
 import { useMessageListener } from "../composables/useMessageListener";
 
 const appStore = useAppStore();
+const notificationStore = useNotificationStore();
 const leaderboardStore = useLeaderboardStore();
 const { player, playerXP, playerRank } = storeToRefs(appStore);
 const { leaderboard } = storeToRefs(leaderboardStore);
@@ -37,11 +39,11 @@ const you = computed<LeaderboardItem | undefined>(() => {
 
 useMessageListener<LeaderboardResponse>("LEADERBOARD_RESPONSE", ({ data }) => {
   leaderboard.value = data.leaderboard;
-  appStore.stopLoadingOverlay("LEADERBOARD_REQUEST");
+  notificationStore.hideNotification("LEADERBOARD_REQUEST");
 });
 
 onMounted(() => {
-  appStore.startLoadingOverlay("LEADERBOARD_REQUEST");
+  notificationStore.showLoading("LEADERBOARD_REQUEST");
 
   sendMessage({
     type: "LEADERBOARD_REQUEST",

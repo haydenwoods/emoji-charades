@@ -5,14 +5,14 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 
-import { useAppStore } from "../stores/app";
+import { useNotificationStore } from "../stores/notification";
 
 import { sendMessage } from "../utils/messages";
 
-const appStore = useAppStore();
+const notificationStore = useNotificationStore();
 
 onMounted(() => {
-  appStore.startLoadingOverlay("PLAY_REQUEST", "Finding a new puzzle");
+  notificationStore.showLoading("PLAY_REQUEST", "Finding a new puzzle");
 
   sendMessage({
     type: "PLAY_REQUEST",

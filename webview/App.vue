@@ -4,12 +4,7 @@
       <component :is="PAGE_TO_COMPONENT[page]" :key="page" />
     </transition>
 
-    <!-- Loading overlay -->
-    <ui-overlay :open="showLoadingOverlay" :label="loadingOverlayData?.label">
-      <template #icon>
-        <ui-loader />
-      </template>
-    </ui-overlay>
+    <app-notifications />
   </div>
 </template>
 
@@ -31,7 +26,7 @@ import { onCreateResponse } from "./messages/onCreateResponse";
 import { CreateResponse, InitialDataEvent } from "../shared/types/message";
 
 const appStore = useAppStore();
-const { loading, showLoadingOverlay, loadingOverlayData, page } = storeToRefs(appStore);
+const { loading, page } = storeToRefs(appStore);
 
 useMessageListener<InitialDataEvent>("INITIAL_DATA_EVENT", onInitialDataEvent);
 useMessageListener<CreateResponse>("CREATE_RESPONSE", onCreateResponse);

@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { cva } from "class-variance-authority";
 
-import { Emoji } from "../types/emoji";
+import { Emoji } from "../../types/emoji";
 
 type Variant = "key" | "action";
 

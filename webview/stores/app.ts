@@ -17,16 +17,9 @@ export enum Page {
   LEADERBOARD,
 }
 
-type LoadingOverlayData = {
-  id: string;
-  label: string;
-};
-
 export const useAppStore = defineStore("app", () => {
   // Loading
   const loading = ref<boolean>(true);
-  const showLoadingOverlay = ref<boolean>(false);
-  const loadingOverlayData = ref<LoadingOverlayData>();
 
   // Navigation
   const page = ref<Page>(Page.MENU);
@@ -60,20 +53,8 @@ export const useAppStore = defineStore("app", () => {
     page.value = newPage;
   };
 
-  const startLoadingOverlay = (id: string, label: string = "Loading") => {
-    loadingOverlayData.value = { id, label };
-    showLoadingOverlay.value = true;
-  };
-
-  const stopLoadingOverlay = (id?: LoadingOverlayData["id"]) => {
-    if (id && id !== loadingOverlayData.value?.id) return;
-    showLoadingOverlay.value = false;
-  };
-
   return {
     loading,
-    showLoadingOverlay,
-    loadingOverlayData: readonly(loadingOverlayData),
     page: readonly(page),
     user,
     player,
@@ -83,7 +64,5 @@ export const useAppStore = defineStore("app", () => {
     puzzleSummary,
     mainPage,
     navigateTo,
-    startLoadingOverlay,
-    stopLoadingOverlay,
   };
 });

@@ -1,8 +1,9 @@
 import { Devvit } from "@devvit/public-api";
 
-export const Loading = () => {
+export const Loading = ({ id }: { id?: string }) => {
   return (
     <vstack
+      id={id}
       height="100%"
       width="100%"
       alignment="middle center"

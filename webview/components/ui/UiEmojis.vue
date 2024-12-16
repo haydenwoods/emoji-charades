@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { animatePop } from "../utils/animate";
+import { animatePop } from "../../utils/animate";
 
 type Size = "xs" | "sm" | "md";
 

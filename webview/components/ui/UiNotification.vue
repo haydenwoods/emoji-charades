@@ -1,9 +1,12 @@
 <template>
   <div ref="background" :class="cvaBackground({ theme, open })">
     <div ref="modal" :class="cvaModal({ theme })">
-      <span :class="cvaModalIcon({ theme })">
-        <slot name="icon"></slot>
+      <span v-if="icon || $slots.icon" :class="cvaModalIcon({ theme })">
+        <slot name="icon">
+          <props.icon />
+        </slot>
       </span>
+
       <span :class="cvaModalLabel({ theme })">
         {{ label }}
       </span>
@@ -12,24 +15,22 @@
 </template>
 
 <script setup lang="ts">
-import { useTemplateRef, watch } from "vue";
+import { type Component, onMounted, useTemplateRef, watch } from "vue";
 import { animate } from "motion";
 import { cva } from "class-variance-authority";
 
-type Theme = "primary" | "error" | "success";
+export type UiNotificationProps = {
+  label: string;
+  icon?: Component;
+  theme?: "primary" | "error" | "success";
+  open?: boolean;
+};
 
-const props = withDefaults(
-  defineProps<{
-    label?: string;
-    theme?: Theme;
-    open?: boolean;
-  }>(),
-  {
-    label: undefined,
-    open: true,
-    theme: "primary",
-  },
-);
+const props = withDefaults(defineProps<UiNotificationProps>(), {
+  theme: "primary",
+  icon: undefined,
+  open: true,
+});
 
 const background = useTemplateRef<HTMLDivElement>("background");
 const modal = useTemplateRef<HTMLDivElement>("modal");
@@ -58,12 +59,12 @@ const cvaBackground = cva(
   },
 );
 
-const cvaModal = cva(["modal", "px-5 py-4", "rounded-full", "flex items-center gap-x-2"], {
+const cvaModal = cva(["modal", "px-5 py-4", "rounded-full", "flex items-center gap-x-3"], {
   variants: {
     theme: {
       primary: ["bg-amber-300"],
-      error: ["bg-red-300"],
-      success: ["bg-green-300"],
+      error: ["bg-red-200"],
+      success: ["bg-green-200"],
     },
   },
 });
@@ -71,9 +72,9 @@ const cvaModal = cva(["modal", "px-5 py-4", "rounded-full", "flex items-center g
 const cvaModalLabel = cva(["text-2xl", "font-medium"], {
   variants: {
     theme: {
-      primary: ["text-amber-900"],
-      error: ["text-red-900"],
-      success: ["text-green-900"],
+      primary: ["text-amber-950"],
+      error: ["text-red-950"],
+      success: ["text-green-950"],
     },
   },
 });
@@ -81,9 +82,9 @@ const cvaModalLabel = cva(["text-2xl", "font-medium"], {
 const cvaModalIcon = cva(["text-3xl"], {
   variants: {
     theme: {
-      primary: ["text-amber-900"],
-      error: ["text-red-900"],
-      success: ["text-green-900"],
+      primary: ["text-amber-950"],
+      error: ["text-red-950"],
+      success: ["text-green-950"],
     },
   },
 });
@@ -113,8 +114,11 @@ watch(
       animateClosed();
     }
   },
-  {
-    immediate: true,
-  },
 );
+
+onMounted(() => {
+  if (props.open) {
+    animateOpen();
+  }
+});
 </script>

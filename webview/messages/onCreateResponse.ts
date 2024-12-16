@@ -1,8 +1,9 @@
+import { useNotificationStore } from "../stores/notification";
+
 import { MessageHandler } from "../types/message";
 import { CreateResponse } from "../../shared/types/message";
-import { useAppStore } from "../stores/app";
 
 export const onCreateResponse: MessageHandler<CreateResponse> = () => {
-  const appStore = useAppStore();
-  appStore.stopLoadingOverlay("CREATE_REQUEST");
+  const notificationStore = useNotificationStore();
+  notificationStore.hideNotification("CREATE_REQUEST");
 };

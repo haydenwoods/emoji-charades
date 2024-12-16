@@ -37,7 +37,7 @@ Devvit.addMenuItem({
     const post = await context.reddit.submitPost({
       title: "Emoji Charades",
       subredditName: subreddit.name,
-      preview: <Loading />,
+      preview: <Loading id="preview" />,
     });
     context.ui.navigateTo(post);
   },
@@ -72,7 +72,7 @@ Devvit.addCustomPostType({
           }}
         />
 
-        {!webviewMounted && <Loading />}
+        {!webviewMounted && <Loading id="app" />}
       </zstack>
     );
   },

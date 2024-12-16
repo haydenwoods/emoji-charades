@@ -11,7 +11,7 @@
     >
       <p>
         You will be shown a clue made from emojis. Your goal is to try and
-        <span class="font-medium">work out what it means</span>.
+        <span class="font-medium">work out what they represent.</span>
       </p>
 
       <div class="flex flex-col gap-y-3">
