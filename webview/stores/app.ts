@@ -35,11 +35,11 @@ export const useAppStore = defineStore("app", () => {
   const puzzleSummary = ref<PuzzleSummary>();
 
   const mainPage = computed<Page>(() => {
-    if (!puzzle.value || !player.value) {
+    if (!puzzle.value) {
       return Page.MENU;
     }
 
-    const playedPuzzle = player.value.playedPuzzles.find(({ id }) => id === puzzle.value!.id);
+    const playedPuzzle = player.value?.playedPuzzles.find(({ id }) => id === puzzle.value!.id);
     const isPuzzleCompleted = Boolean(playedPuzzle?.completedAt);
 
     if (isPuzzleCompleted) {

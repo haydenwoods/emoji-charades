@@ -7,12 +7,12 @@ import { Player } from "@shared/types/db/player.js";
 import { isGuessCorrect } from "@shared/utils/topics.js";
 import { Puzzle } from "@shared/types/db/puzzle.js";
 import { getPostCompletedCommentText } from "@/utils/comment.js";
-import { addUserXP } from "@/utils/user-xp.js";
+import { addPlayerXP } from "@/utils/player-xp.js";
 import {
   CORRECT_GUESS_XP,
-  POST_CREATOR_CORRECT_GUESS_XP,
+  PUZZLE_CREATOR_CORRECT_GUESS_XP,
   SINGLE_GUESS_XP,
-} from "@/constants/user-xp.js";
+} from "@/constants/player-xp.js";
 import { getPlayerKey, getPuzzleKey } from "@/utils/db/keys.js";
 import { addPuzzleGuess } from "@/utils/puzzle-guesses.js";
 
@@ -21,13 +21,14 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
   if (!userId || !postId) return;
 
   const { input } = message.data;
+  const trimmedInput = input.trim();
 
   const now = new Date().toISOString();
 
   const puzzle = await getObject<Puzzle>(context.redis, getPuzzleKey(postId));
   if (!puzzle?.topic) return;
 
-  const correct = isGuessCorrect(input, puzzle.topic);
+  const correct = isGuessCorrect(trimmedInput, puzzle.topic);
 
   // Find or create the Player
   let player = await getObject<Player>(context.redis, getPlayerKey(userId));
@@ -55,7 +56,7 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
   // Create the guess on the PlayedPuzzle
   playedPuzzle.guesses.push({
     correct,
-    input,
+    input: trimmedInput,
     createdAt: now,
   });
 
@@ -63,27 +64,26 @@ export const onGuessRequest: MessageHandler<GuessRequest> = async ({ message, co
     // Set the PlayedPuzzle to completed
     playedPuzzle.completedAt = now;
 
-    // Add XP to the user
+    // Add XP to guessing player
     let xpGained = CORRECT_GUESS_XP;
     if (playedPuzzle.guesses.length <= 1) xpGained += SINGLE_GUESS_XP;
-    await addUserXP(context.redis, userId, xpGained);
+    await addPlayerXP(context.redis, userId, xpGained);
 
-    await Promise.all([
-      // Add XP to the user that created the post
-      await addUserXP(context.redis, puzzle.createdBy, POST_CREATOR_CORRECT_GUESS_XP),
-      // Add a comment to the post
-      context.reddit.submitComment({
-        id: postId,
-        text: getPostCompletedCommentText(playedPuzzle),
-      }),
-    ]);
+    // Add XP to the puzzle creator
+    await addPlayerXP(context.redis, puzzle.createdBy, PUZZLE_CREATOR_CORRECT_GUESS_XP);
+
+    // Add a comment to the post
+    context.reddit.submitComment({
+      id: postId,
+      text: getPostCompletedCommentText(playedPuzzle),
+    });
   }
 
   // Update the Player
   await setObject<Player>(context.redis, getPlayerKey(userId), player);
 
   // Update the puzzles guesses
-  await addPuzzleGuess(context.redis, postId, correct ? puzzle.topic.name : input);
+  await addPuzzleGuess(context.redis, postId, correct ? puzzle.topic.name : trimmedInput);
 
   sendMessage(context, {
     type: "GUESS_PUZZLE_RESPONSE",

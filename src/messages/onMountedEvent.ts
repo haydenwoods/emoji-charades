@@ -1,7 +1,7 @@
 import { InitialDataEvent, MountedEvent } from "@shared/types/message.js";
 
 import { sendMessage } from "@/utils/message.js";
-import { getUserRank, getUserXP } from "@/utils/user-xp.js";
+import { getPlayerRank, getPlayerXP } from "@/utils/player-xp.js";
 import { getObject } from "@/utils/db/index.js";
 import { getPlayerKey, getPuzzleKey } from "@/utils/db/keys.js";
 
@@ -27,12 +27,12 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
     data.player = await getObject<Player>(context.redis, getPlayerKey(userId));
   };
 
-  const _getUserXP = async () => {
-    data.playerXP = await getUserXP(context.redis, user.username);
+  const _getPlayerXP = async () => {
+    data.playerXP = await getPlayerXP(context.redis, user.id);
   };
 
-  const _getUserRank = async () => {
-    data.playerRank = await getUserRank(context.redis, user.username);
+  const _getPlayerRank = async () => {
+    data.playerRank = await getPlayerRank(context.redis, user.id);
   };
 
   const getPuzzle = async () => {
@@ -45,7 +45,13 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
     data.puzzleSummary = await getPuzzleSummary(context.redis, postId);
   };
 
-  await Promise.all([_getUserXP(), _getUserRank(), getPlayer(), getPuzzle(), _getPuzzleSummary()]);
+  await Promise.all([
+    _getPlayerXP(),
+    _getPlayerRank(),
+    getPlayer(),
+    getPuzzle(),
+    _getPuzzleSummary(),
+  ]);
 
   sendMessage(context, {
     type: "INITIAL_DATA_EVENT",

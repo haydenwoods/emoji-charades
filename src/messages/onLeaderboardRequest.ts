@@ -1,27 +1,23 @@
 import { sendMessage } from "@/utils/message.js";
 
-import { KEY as USER_XP_KEY } from "@/utils/user-xp.js";
+import { PLAYER_XP_SORTED_SET_KEY } from "@/utils/player-xp.js";
 
 import { LeaderboardItem, LeaderboardRequest } from "@shared/types/message.js";
 import { MessageHandler } from "@/types/message.js";
 
 export const onLeaderboardRequest: MessageHandler<LeaderboardRequest> = async ({ context }) => {
-  const { userId } = context;
-  if (!userId) return;
-
-  const elements = await context.redis.zRange(USER_XP_KEY, 0, 9, {
+  const elements = await context.redis.zRange(PLAYER_XP_SORTED_SET_KEY, 0, 9, {
     reverse: true,
-    by: "score",
+    by: "rank",
   });
-  const usernames = await Promise.all(
+  const users = await Promise.all(
     elements.map(async ({ member: userId }) => {
-      const user = await context.reddit.getUserById(userId);
-      return user?.username;
+      return await context.reddit.getUserById(userId);
     }),
   );
 
   const leaderboard = elements.map<LeaderboardItem>(({ score: xp }, index) => ({
-    username: usernames[index] ?? "Unknown username",
+    username: users[index]?.username ?? "Unknown username",
     xp,
     rank: index + 1,
   }));
