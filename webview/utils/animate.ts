@@ -78,7 +78,7 @@ export const animatePop = (
     {
       type: "spring",
       duration: 0.5,
-      delay: staggered ? stagger(0.1, { startDelay: 0.2 }) : undefined,
+      delay: staggered ? stagger(0.05, { startDelay: 0.2 }) : undefined,
     },
   );
 };

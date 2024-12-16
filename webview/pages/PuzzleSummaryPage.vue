@@ -8,26 +8,23 @@
         :key="puzzleGuess.guess"
         class="pop-in py-1.5 px-4 bg-slate-200 w-full relative rounded-full overflow-hidden"
       >
-        <div class="flex items-center relative z-10 gap-x-2">
-          <span class="font-semibold text-slate-900">{{ puzzleGuess.rank }}.</span>
-          <span class="font-semibold text-slate-900">{{ puzzleGuess.guess }}</span>
-          <span class="font-medium text-slate-700"> ({{ puzzleGuess.count }} guesses) </span>
+        <div class="flex items-center relative z-10 gap-x-2.5">
+          <span class="font-medium text-amber-950">{{ puzzleGuess.rank }}.</span>
+          <span class="font-medium text-amber-950">{{ puzzleGuess.guess }}</span>
+          <span class="font-medium text-slate-600 text-sm ml-auto">
+            <template v-if="puzzleGuess.count === 1"> 1 guess </template>
+            <template v-else> {{ puzzleGuess.count }} guesses </template>
+          </span>
         </div>
 
         <div
-          class="absolute z-0 bg-amber-200 h-full top-0 left-0"
+          class="absolute z-0 bg-amber-300 h-full top-0 left-0"
           :style="{ width: `${puzzleGuess.percentage}%` }"
         ></div>
       </div>
     </div>
 
     <ui-buttons-row class="pop-in">
-      <ui-button label="Play another!" @click="appStore.navigateTo(Page.PLAY)">
-        <template #icon>
-          <i-noto-play-button />
-        </template>
-      </ui-button>
-
       <ui-button
         label="Create your own"
         variant="secondary"
@@ -35,6 +32,12 @@
       >
         <template #icon>
           <i-noto-plus />
+        </template>
+      </ui-button>
+
+      <ui-button label="Play another!" @click="appStore.navigateTo(Page.PLAY)">
+        <template #icon>
+          <i-noto-play-button />
         </template>
       </ui-button>
     </ui-buttons-row>

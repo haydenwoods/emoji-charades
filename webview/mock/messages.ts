@@ -5,6 +5,8 @@ import { Message, InitialDataEvent } from "@shared/types/message";
 const IS_PUZZLE = true;
 const IS_PUZZLE_SOLVED = false;
 
+const PLAY_REQUEST_ERROR = true;
+
 const sendMessage = (message: Message) => {
   window.postMessage({
     type: "devvit-message",
@@ -40,6 +42,7 @@ const onMountedEvent = () => {
       topic,
       clue: ["📺", "🛝", "➕", "🏃"],
       createdBy: data.user.id,
+      createdByUsername: "Spleentacular",
       createdAt: now,
     };
   }
@@ -65,7 +68,7 @@ const onMountedEvent = () => {
         { guess: "The Office", count: 482, percentage: 22, rank: 2 },
         { guess: "Community", count: 352, percentage: 8, rank: 3 },
         { guess: "Friends", count: 174, percentage: 4, rank: 4 },
-        { guess: "Mr Robot", count: 24, percentage: 1, rank: 5 },
+        { guess: "Mr Robot", count: 1, percentage: 1, rank: 5 },
       ],
     };
   }
@@ -121,6 +124,14 @@ export const mockMessages = () => {
                 { guess: "Mr Robot", count: 24, percentage: 1, rank: 5 },
               ],
             },
+          },
+        });
+      case "PLAY_REQUEST":
+        await timeout(1000);
+        return sendMessage({
+          type: "PLAY_RESPONSE",
+          data: {
+            success: !PLAY_REQUEST_ERROR,
           },
         });
     }

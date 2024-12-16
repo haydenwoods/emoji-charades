@@ -38,7 +38,7 @@ const modal = useTemplateRef<HTMLDivElement>("modal");
 const cvaBackground = cva(
   [
     "background",
-    "fixed top-0 left-0",
+    "fixed top-0 left-0 z-50",
     "size-full",
     "flex items-center justify-center",
     "opacity-0",

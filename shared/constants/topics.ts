@@ -16,10 +16,6 @@ export const TOPICS: Topic[] = [
     category: Category.MOVIE,
   },
   {
-    name: "Blackberry",
-    category: Category.MOVIE,
-  },
-  {
     name: "The Wolf of Wall Street",
     category: Category.MOVIE,
   },
@@ -65,6 +61,34 @@ export const TOPICS: Topic[] = [
     alternateNames: ["Parks and Rec", "P and R", "P&R"],
     category: Category.TV_SHOW,
   },
+  {
+    name: "The Office",
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "Mr Robot",
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "Breaking Bad",
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "Better Call Saul",
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "Lost",
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "Game of Thrones",
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "Arcane",
+    category: Category.TV_SHOW,
+  },
   // Video Games
   {
     name: "Farming Simulator",
@@ -74,6 +98,16 @@ export const TOPICS: Topic[] = [
   {
     name: "Grand Theft Auto",
     alternateNames: ["GTA"],
+    category: Category.VIDEO_GAME,
+  },
+  {
+    name: "Counter-Strike",
+    alternateNames: ["CS 2", "Global Offensive", "CSGO"],
+    category: Category.VIDEO_GAME,
+  },
+  {
+    name: "Call of Duty",
+    alternateNames: ["COD"],
     category: Category.VIDEO_GAME,
   },
   // Books

@@ -4,4 +4,5 @@ export type Timestamped = {
 
 export type UserCreated = {
   createdBy: string;
+  createdByUsername: string;
 };

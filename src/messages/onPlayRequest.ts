@@ -5,6 +5,7 @@ import { sendMessage } from "@/utils/message.js";
 import { PlayRequest, PlayResponse } from "@shared/types/message.js";
 import { MessageHandler } from "@/types/message.js";
 import { Player } from "@shared/types/db/player.js";
+import { PUZZLE_FLAIR_ID } from "@/constants/flairs.js";
 
 export const onPlayRequest: MessageHandler<PlayRequest> = async ({ context }) => {
   const sendErrorMessage = (error?: PlayResponse["data"]["error"]): void => {
@@ -35,7 +36,9 @@ export const onPlayRequest: MessageHandler<PlayRequest> = async ({ context }) =>
     })
     .all();
 
-  const uncompletedPosts = newPosts.filter(({ id }) => !completedPuzzleIds.includes(id));
+  const uncompletedPosts = newPosts.filter(
+    ({ id, flair }) => !completedPuzzleIds.includes(id) && flair?.templateId === PUZZLE_FLAIR_ID,
+  );
   if (uncompletedPosts.length <= 0) return sendErrorMessage();
 
   const post = uncompletedPosts[0];

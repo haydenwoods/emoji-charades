@@ -11,8 +11,12 @@
 
       <template #title>
         <div class="flex flex-col gap-y-0.5 items-center">
-          <h1 class="text-2xl font-medium text-center">What do these emojis represent?</h1>
-          <h2 class="text-slate-500 text-center">Clue created by u/Spleentacular</h2>
+          <h1 class="text-2xl font-medium text-center text-slate-900">
+            What do these emojis represent?
+          </h1>
+          <h2 class="text-slate-500 text-center">
+            Clue created by u/{{ puzzle?.createdByUsername }}
+          </h2>
         </div>
       </template>
     </ui-page-header>
@@ -20,19 +24,12 @@
     <ui-emojis v-if="puzzle?.clue" :emojis="puzzle.clue" />
 
     <ui-buttons-row id="tools" class="pop-in max-w-2xl">
-      <!-- <ui-button variant="secondary">
-        <template #icon>
-          <i-noto-light-bulb />
-        </template>
-      </ui-button> -->
-
       <ui-input
         v-model="input"
         placeholder="Guess..."
         autofocus
         show-clear
         :maxlength="32"
-        @keydown="onKeydown"
         @keydown.enter="onKeydownEnter"
       />
 
@@ -78,6 +75,16 @@ const submit = () => {
   });
 
   if (correct) {
+    // Update player played puzzles
+    const now = new Date().toISOString();
+    appStore.player?.playedPuzzles.push({
+      id: puzzle.value.id,
+      guesses: [],
+      xpGained: 0,
+      completedAt: now,
+      createdAt: now,
+    });
+
     notificationStore.showNotification(
       {
         id: "CORRECT",
@@ -87,6 +94,7 @@ const submit = () => {
       },
       2000,
     );
+
     setTimeout(() => {
       appStore.navigateTo(Page.PUZZLE_SUMMARY);
     }, 2000);
@@ -100,7 +108,7 @@ const submit = () => {
         icon: NotoBrokenHeart,
         theme: "error",
       },
-      1250,
+      1000,
     );
   }
 

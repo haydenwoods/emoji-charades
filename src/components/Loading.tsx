@@ -1,7 +1,6 @@
 import { Devvit } from "@devvit/public-api";
 
 export const Loading = ({ id }: { id: string }) => {
-  console.log(`Loading - ${id}`);
   return (
     <vstack
       height="100%"

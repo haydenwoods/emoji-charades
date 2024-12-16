@@ -52,7 +52,7 @@ const cvaButton = cva(
       variant: {
         primary: [
           "bg-amber-300",
-          "inset-shadow-sm inset-shadow-amber-400/40",
+          "inset-shadow-sm inset-shadow-amber-400/25",
           "border-2 border-amber-400",
         ],
         secondary: ["bg-white", "border-2 border-slate-300 "],
