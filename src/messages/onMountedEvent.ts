@@ -37,21 +37,22 @@ export const onMountedEvent: MessageHandler<MountedEvent> = async ({ context, ap
 
   const getPuzzle = async () => {
     if (!postId) return;
+
     data.puzzle = await getObject<Puzzle>(context.redis, getPuzzleKey(postId));
+    if (!data.puzzle) return;
+
+    const completedPuzzleIds = data.player?.playedPuzzles
+      .filter(({ completedAt }) => Boolean(completedAt))
+      .map(({ id }) => id);
+    const isPuzzleCompleted = completedPuzzleIds?.includes(data.puzzle.id);
+
+    if (isPuzzleCompleted) {
+      data.puzzleSummary = await getPuzzleSummary(context.redis, postId);
+    }
   };
 
-  const _getPuzzleSummary = async () => {
-    if (!postId) return;
-    data.puzzleSummary = await getPuzzleSummary(context.redis, postId);
-  };
-
-  await Promise.all([
-    _getPlayerXP(),
-    _getPlayerRank(),
-    getPlayer(),
-    getPuzzle(),
-    _getPuzzleSummary(),
-  ]);
+  await Promise.all([_getPlayerXP(), _getPlayerRank(), getPlayer()]);
+  await getPuzzle();
 
   sendMessage(context, {
     type: "INITIAL_DATA_EVENT",
