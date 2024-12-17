@@ -51,6 +51,46 @@ export const TOPICS: Topic[] = [
     name: "Ferris Bueller's Day Off",
     category: Category.MOVIE,
   },
+  {
+    name: "Titanic",
+    category: Category.MOVIE,
+  },
+  {
+    name: "E.T. The Extra-Terrestrial",
+    alternateNames: ["ET", "E.T.", "ET The Extra Terrestrial"],
+    category: Category.MOVIE,
+  },
+  {
+    name: "The Wizard of Oz",
+    alternateNames: ["Wizard of Oz"],
+    category: Category.MOVIE,
+  },
+  {
+    name: "Star Wars",
+    category: Category.MOVIE,
+  },
+  {
+    name: "The Lord of the Rings",
+    alternateNames: ["Lord of the Rings"],
+    category: Category.MOVIE,
+  },
+  {
+    name: "The Lion King",
+    alternateNames: ["Lion King"],
+    category: Category.MOVIE,
+  },
+  {
+    name: "Jurassic Park",
+    category: Category.MOVIE,
+  },
+  {
+    name: "The Dark Knight",
+    category: Category.MOVIE,
+  },
+  {
+    name: "Pirates of the Caribbean",
+    category: Category.MOVIE,
+  },
   // TV Shows
   {
     name: "Silicon Valley",
@@ -89,6 +129,23 @@ export const TOPICS: Topic[] = [
     name: "Arcane",
     category: Category.TV_SHOW,
   },
+  {
+    name: "Stranger Things",
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "The Big Bang Theory",
+    alternateNames: ["Big Bang Theory"],
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "The Simpsons",
+    category: Category.TV_SHOW,
+  },
+  {
+    name: "How I Met Your Mother",
+    category: Category.TV_SHOW,
+  },
   // Video Games
   {
     name: "Farming Simulator",
@@ -102,12 +159,37 @@ export const TOPICS: Topic[] = [
   },
   {
     name: "Counter-Strike",
-    alternateNames: ["CS 2", "Global Offensive", "CSGO"],
+    alternateNames: ["Counter Strike", "CS", "CS2", "CSGO", "Global Offensive"],
     category: Category.VIDEO_GAME,
   },
   {
     name: "Call of Duty",
     alternateNames: ["COD"],
+    category: Category.VIDEO_GAME,
+  },
+  {
+    name: "Super Smash Bros",
+    category: Category.VIDEO_GAME,
+  },
+  {
+    name: "Mario Kart",
+    category: Category.VIDEO_GAME,
+  },
+  {
+    name: "Red Dead Redemption",
+    alternateNames: ["RDR", "RDR2"],
+    category: Category.VIDEO_GAME,
+  },
+  {
+    name: "The Legend of Zelda",
+    category: Category.VIDEO_GAME,
+  },
+  {
+    name: "Portal",
+    category: Category.VIDEO_GAME,
+  },
+  {
+    name: "",
     category: Category.VIDEO_GAME,
   },
   // Books
@@ -124,14 +206,121 @@ export const TOPICS: Topic[] = [
     name: "Darth Vader",
     category: Category.CHARACTER,
   },
+  {
+    name: "Indiana Jones",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "James Bond",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "The Joker",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Batman",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Superman",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Gandalf",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Mario",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Iron Man",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Spider-Man",
+    alternateNames: ["Spiderman"],
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Harry Potter",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Katniss Everdeen",
+    alternateNames: ["Katniss"],
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Yoda",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Ron Burgundy",
+    category: Category.CHARACTER,
+  },
+  {
+    name: "Captain Jack Sparrow",
+    alternateNames: ["Jack Sparrow"],
+    category: Category.CHARACTER,
+  },
   // Famous People
   {
     name: "Tom Hanks",
     category: Category.FAMOUS_PERSON,
   },
+  {
+    name: "Taylor Swift",
+    category: Category.FAMOUS_PERSON,
+  },
+  {
+    name: "Bill Gates",
+    category: Category.FAMOUS_PERSON,
+  },
+  {
+    name: "Barack Obama",
+    category: Category.FAMOUS_PERSON,
+  },
+  {
+    name: "Lionel Messi",
+    category: Category.FAMOUS_PERSON,
+  },
+  {
+    name: "Leonardo DiCaprio",
+    category: Category.FAMOUS_PERSON,
+  },
   // Phrase
   {
     name: "Cost an arm and a leg",
+    category: Category.PHRASE,
+  },
+  {
+    name: "Barking up the wrong tree",
+    category: Category.PHRASE,
+  },
+  {
+    name: "Beat around the bush",
+    category: Category.PHRASE,
+  },
+  {
+    name: "Break the ice",
+    category: Category.PHRASE,
+  },
+  {
+    name: "Hold your horses",
+    category: Category.PHRASE,
+  },
+  {
+    name: "See eye to eye",
+    category: Category.PHRASE,
+  },
+  {
+    name: "Curiosity killed the cat",
+    category: Category.PHRASE,
+  },
+  {
+    name: "Cry over spilt milk",
     category: Category.PHRASE,
   },
 ];
