@@ -24,7 +24,7 @@ export const onCreateRequest: MessageHandler<CreateRequest> = async ({ message, 
   const post = await context.reddit.submitPost({
     title: "What do these emojis represent?",
     subredditName,
-    preview: <Loading id="preview" />,
+    preview: <Loading />,
     flairId: PUZZLE_FLAIR_ID,
   });
 

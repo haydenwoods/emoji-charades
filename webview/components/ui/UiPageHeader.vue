@@ -8,6 +8,7 @@
           variant="plain"
           label="Back"
           :padded="false"
+          class="h-6"
           @click="emit('click:back')"
         >
           <template #icon>

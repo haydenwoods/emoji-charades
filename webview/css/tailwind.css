@@ -3,4 +3,6 @@
 @theme {
   --font-sans: "Quicksand", "sans-serif";
   --font-emoji: "Noto Color Emoji", "sans-serif";
+
+  --breakpoint-xs: 400px;
 }

@@ -1,5 +1,5 @@
 <template>
-  <span class="text-4xl">
+  <span class="text-3xl sm:text-4xl">
     <i-noto-one-oclock v-if="hour === 1" />
     <i-noto-two-oclock v-else-if="hour === 2" />
     <i-noto-three-oclock v-else-if="hour === 3" />

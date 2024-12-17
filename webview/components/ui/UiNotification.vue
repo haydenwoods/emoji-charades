@@ -82,7 +82,7 @@ const cvaModalLabel = cva(["text-xl sm:text-2xl", "font-medium"], {
   },
 });
 
-const cvaModalIcon = cva(["text-2xl sm:text-3xl"], {
+const cvaModalIcon = cva(["text-3xl sm:text-4xl"], {
   variants: {
     theme: {
       primary: ["text-amber-950"],

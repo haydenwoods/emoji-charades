@@ -8,15 +8,21 @@ export const getPostCompletedCommentText = (
   }
 
   const incorrectGuesses = playedPost.guesses.filter(({ correct }) => !correct);
-  const incorrectGuessList = incorrectGuesses.reduce<string>((acc, { input }, index) => {
-    const isFirst = index === 0;
-    const isLast = index === incorrectGuesses.length - 1;
-    if (isLast) {
-      return acc + ` and *"${input}"*`;
-    } else {
-      return acc + `${isFirst ? "" : ", "}*"${input}"*`;
-    }
-  }, "");
 
-  return `I got it correct after **${incorrectGuesses.length} incorrect guesses!** My guesses were ${incorrectGuessList}.`;
+  let incorrectGuessesString = "";
+  if (incorrectGuesses.length === 1) {
+    incorrectGuessesString = `My only guess was *"${incorrectGuesses[0]}"*`;
+  } else {
+    incorrectGuessesString = incorrectGuesses.reduce<string>((acc, { input }, index) => {
+      const isFirst = index === 0;
+      const isLast = index === incorrectGuesses.length - 1;
+      if (isLast) {
+        return acc + ` and *"${input}"*`;
+      } else {
+        return acc + `${isFirst ? "" : ", "}*"${input}"*`;
+      }
+    }, "My guesses were ");
+  }
+
+  return `I got it correct after **${incorrectGuesses.length} incorrect guesses!** ${incorrectGuessesString}.`;
 };

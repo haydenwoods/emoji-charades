@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center gap-y-1">
     <div class="flex items-center gap-x-1.5">
-      <h2 class="text-slate-800 font-medium">
+      <h2 class="text-slate-800 font-medium hidden xs:block">
         {{ pastTense ? "The topic was a" : "Your topic is a" }}
       </h2>
       <ui-topic-category-tag :category="topic.category" />

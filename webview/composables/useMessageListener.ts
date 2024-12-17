@@ -13,7 +13,7 @@ export const useMessageListener = <T extends Message = Message>(
     const message = event.data.data.message as Message;
     if (message.type !== type) return;
 
-    console.log(`Received message (${message.type})`, message);
+    // console.log(`Received message (${message.type})`, message);
     callback(message as T);
   });
 };

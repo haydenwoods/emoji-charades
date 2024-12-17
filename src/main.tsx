@@ -29,16 +29,19 @@ Devvit.configure({
 });
 
 Devvit.addMenuItem({
-  label: "Add Emoji Charades post",
+  label: "Add Emoji Charades menu post",
   location: "subreddit",
   forUserType: "moderator",
   onPress: async (_event, context) => {
-    const subreddit = await context.reddit.getCurrentSubreddit();
+    const { subredditName } = context;
+    if (!subredditName) return;
+
     const post = await context.reddit.submitPost({
       title: "Emoji Charades",
-      subredditName: subreddit.name,
-      preview: <Loading id="preview" />,
+      subredditName,
+      preview: <Loading />,
     });
+
     context.ui.navigateTo(post);
   },
 });
@@ -58,7 +61,7 @@ Devvit.addCustomPostType({
           width={webviewMounted ? "100%" : "0%"}
           onMessage={async (event) => {
             const message = event as Message;
-            console.log(`Received message (${message.type})`, message);
+            // console.log(`Received message (${message.type})`, message);
 
             const messageHandler = MESSAGE_TO_HANDLER[message.type];
             await messageHandler?.({
@@ -72,7 +75,7 @@ Devvit.addCustomPostType({
           }}
         />
 
-        {!webviewMounted && <Loading id="app" />}
+        {!webviewMounted && <Loading />}
       </zstack>
     );
   },
