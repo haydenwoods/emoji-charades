@@ -38,8 +38,8 @@ withDefaults(
 const cvaTag = cva(["inline-flex items-center", "rounded-full", "font-medium"], {
   variants: {
     size: {
-      md: "text-base px-1.5 py-0.5 gap-x-1",
-      lg: "text-xl px-2.5 py-1 gap-x-1.5",
+      md: "text-sm sm:text-base px-1.5 py-0.5 gap-x-1",
+      lg: "text-base sm:text-xl px-2.5 py-1 gap-x-1.5",
     },
     color: {
       blue: "bg-blue-300 text-blue-900",

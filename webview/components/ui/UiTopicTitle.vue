@@ -6,7 +6,7 @@
       </h2>
       <ui-topic-category-tag :category="topic.category" />
     </div>
-    <h1 class="text-2xl text-slate-950 font-semibold text-center">"{{ topic.name }}"</h1>
+    <h1 class="text-xl sm:text-2xl text-slate-950 font-semibold text-center">"{{ topic.name }}"</h1>
   </div>
 </template>
 

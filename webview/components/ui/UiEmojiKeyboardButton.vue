@@ -4,7 +4,7 @@
       <slot name="icon"></slot>
     </span>
 
-    <span v-else-if="emoji" class="font-emoji text-4xl md:text-5xl">
+    <span v-else-if="emoji" class="font-emoji text-3xl sm:text-4xl">
       {{ emoji.value }}
     </span>
   </button>
@@ -53,7 +53,7 @@ const cvaButton = cva(
   },
 );
 
-const cvaIcon = cva(["text-3xl md:text-4xl"], {
+const cvaIcon = cva(["text-3xl sm:text-4xl"], {
   variants: {
     variant: {
       key: ["text-slate-900"],

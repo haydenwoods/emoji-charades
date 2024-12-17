@@ -82,7 +82,7 @@ const cvaButton = cva(
       {
         size: "md",
         padded: true,
-        class: "py-2.5 px-5",
+        class: "py-1.5 px-4 sm:py-2.5 sm:px-5",
       },
     ],
   },
@@ -96,9 +96,9 @@ const cvaLabel = cva(["font-medium whitespace-nowrap"], {
       plain: ["text-slate-800"],
     },
     size: {
-      xs: "text-base",
-      sm: "text-lg",
-      md: "text-xl",
+      xs: "text-sm sm:text-base",
+      sm: "text-base sm:text-lg",
+      md: "text-lg sm:text-xl",
     },
   },
 });

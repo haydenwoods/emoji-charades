@@ -26,6 +26,7 @@ declare module 'vue' {
     INotoSevenOclock: typeof import('~icons/noto/seven-oclock')['default']
     INotoSixOclock: typeof import('~icons/noto/six-oclock')['default']
     INotoTenOclock: typeof import('~icons/noto/ten-oclock')['default']
+    INotoThinkingFace: typeof import('~icons/noto/thinking-face')['default']
     INotoThreeOclock: typeof import('~icons/noto/three-oclock')['default']
     INotoTrophy: typeof import('~icons/noto/trophy')['default']
     INotoTwelveOclock: typeof import('~icons/noto/twelve-oclock')['default']

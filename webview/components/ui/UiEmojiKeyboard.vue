@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid w-full max-w-4xl gap-2 md:gap-3"
+    class="grid w-full max-w-4xl gap-2 sm:gap-3"
     :style="{
       gridTemplateRows: `repeat(${ROWS}, minmax(0, 1fr))`,
       gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))`,
@@ -9,7 +9,7 @@
     <!-- Search -->
     <ui-input
       v-model="search"
-      class="h-[52px] col-span-4 row-start-1 col-start-1 self-end"
+      class="h-[52px] col-span-5 sm:col-span-4 row-start-1 col-start-1 self-end"
       placeholder="Search emojis..."
       maxlength="16"
       autofocus

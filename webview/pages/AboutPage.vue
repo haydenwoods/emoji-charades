@@ -2,12 +2,12 @@
   <div class="size-full flex flex-col items-center gap-y-6">
     <ui-page-header title="What is this?" @click:back="appStore.navigateTo(appStore.mainPage)">
       <template #title:icon>
-        <i-noto-red-question-mark />
+        <i-noto-thinking-face />
       </template>
     </ui-page-header>
 
     <div
-      class="flex flex-col gap-y-5 items-center text-center text-slate-900 my-auto max-w-xl text-xl"
+      class="flex flex-col gap-y-4 sm:gap-y-5 items-center text-center text-slate-900 my-auto max-w-xl text-base sm:text-xl"
     >
       <p>
         You will be shown a clue made from emojis. Your goal is to try and
@@ -21,7 +21,7 @@
 
       <p>It could be anything from categories such as:</p>
 
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap justify-center gap-2">
         <ui-topic-category-tag
           v-for="category in EXAMPLE_CATEGORIES"
           :key="category"

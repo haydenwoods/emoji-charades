@@ -1,14 +1,14 @@
 <template>
-  <transition-group tag="div" class="flex gap-4 flex-wrap" @enter="onEnter">
+  <transition-group tag="div" class="flex justify-center gap-3 sm:gap-4 flex-wrap" @enter="onEnter">
     <span
       v-for="(emoji, i) in emojis"
       :key="i"
       class="pop-in emoji font-emoji select-none"
       :class="
         {
-          xs: 'text-4xl',
-          sm: 'text-5xl',
-          md: 'text-6xl',
+          xs: 'text-3xl sm:text-4xl',
+          sm: 'text-4xl sm:text-5xl',
+          md: 'text-5xl sm:text-6xl',
         }[size]
       "
     >

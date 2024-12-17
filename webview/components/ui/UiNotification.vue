@@ -59,17 +59,20 @@ const cvaBackground = cva(
   },
 );
 
-const cvaModal = cva(["modal", "px-5 py-4", "rounded-full", "flex items-center gap-x-3"], {
-  variants: {
-    theme: {
-      primary: ["bg-amber-300"],
-      error: ["bg-red-200"],
-      success: ["bg-green-200"],
+const cvaModal = cva(
+  ["modal", "px-3 sm:px-5 py-2 sm:py-4", "rounded-full", "flex items-center gap-x-3"],
+  {
+    variants: {
+      theme: {
+        primary: ["bg-amber-300"],
+        error: ["bg-red-200"],
+        success: ["bg-green-200"],
+      },
     },
   },
-});
+);
 
-const cvaModalLabel = cva(["text-2xl", "font-medium"], {
+const cvaModalLabel = cva(["text-xl sm:text-2xl", "font-medium"], {
   variants: {
     theme: {
       primary: ["text-amber-950"],
@@ -79,7 +82,7 @@ const cvaModalLabel = cva(["text-2xl", "font-medium"], {
   },
 });
 
-const cvaModalIcon = cva(["text-3xl"], {
+const cvaModalIcon = cva(["text-2xl sm:text-3xl"], {
   variants: {
     theme: {
       primary: ["text-amber-950"],

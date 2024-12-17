@@ -3,12 +3,14 @@
     <ui-page-header @click:back="appStore.navigateTo(appStore.mainPage)" />
 
     <transition name="fade" mode="out-in">
-      <div :key="topic.name" class="flex flex-col items-center gap-y-4 my-auto">
+      <div :key="topic.name" class="flex flex-col items-center gap-y-2 sm:gap-y-4 my-auto">
         <div class="flex items-center gap-x-2.5">
-          <h2 class="text-xl text-slate-800 font-medium">Your topic is a</h2>
+          <h2 class="text-lg sm:text-xl text-slate-800 font-medium">Your topic is a</h2>
           <ui-topic-category-tag :category="topic.category" size="lg" />
         </div>
-        <h1 class="pop-in text-5xl text-slate-950 font-semibold text-center">"{{ topic.name }}"</h1>
+        <h1 class="pop-in text-3xl sm:text-5xl text-slate-950 font-semibold text-center">
+          "{{ topic.name }}"
+        </h1>
       </div>
     </transition>
 

@@ -1,7 +1,10 @@
 <template>
   <div
     class="flex items-center rounded-full inset-ring-2 inset-ring-slate-300 bg-white gap-3"
-    :class="[Boolean($slots.before) && 'pl-2.5', Boolean($slots.after || showClear) && 'pr-2.5']"
+    :class="[
+      Boolean($slots.before) && 'pl-2 sm:pl-2.5',
+      Boolean($slots.after || showClear) && 'pr-2 sm:pr-2.5',
+    ]"
   >
     <slot name="before"></slot>
 
@@ -9,10 +12,10 @@
       ref="input"
       v-model="modelValue"
       type="text"
-      class="font-medium text-xl min-w-0 placeholder:text-slate-400 !outline-none py-3 w-full"
+      class="font-medium text-lg sm:text-xl min-w-0 placeholder:text-slate-400 !outline-none py-2 sm:py-3 w-full"
       :class="[
-        Boolean($slots.before) ? 'pl-0' : 'pl-5',
-        Boolean($slots.after || showClear) ? 'pr-0' : 'pr-5',
+        Boolean($slots.before) ? 'pl-0' : 'pl-4 sm:pl-5',
+        Boolean($slots.after || showClear) ? 'pr-0' : 'pr-4 sm:pr-5',
       ]"
       :placeholder="placeholder"
       :maxlength="maxlength"

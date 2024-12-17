@@ -4,17 +4,17 @@
       <template #left>
         <ui-button size="xs" variant="plain" @click="appStore.navigateTo(Page.ABOUT)">
           <template #icon>
-            <i-material-symbols-help-outline-rounded class="text-2xl" />
+            <i-material-symbols-help-outline-rounded class="text-xl sm:text-2xl" />
           </template>
         </ui-button>
       </template>
 
       <template #title>
         <div class="flex flex-col gap-y-0.5 items-center">
-          <h1 class="text-2xl font-medium text-center text-slate-900">
+          <h1 class="text-xl sm:text-2xl font-medium text-center text-slate-900">
             What do these emojis represent?
           </h1>
-          <h2 class="text-slate-500 text-center">
+          <h2 class="text-sm sm:text-base text-slate-500 text-center">
             Clue created by u/{{ puzzle?.createdByUsername }}
           </h2>
         </div>
@@ -23,7 +23,7 @@
 
     <ui-emojis v-if="puzzle?.clue" :emojis="puzzle.clue" />
 
-    <ui-buttons-row id="tools" class="pop-in max-w-2xl">
+    <div id="tools" class="pop-in max-w-2xl flex items-center gap-2">
       <ui-input
         v-model="input"
         placeholder="Guess..."
@@ -34,7 +34,7 @@
       />
 
       <ui-button label="Submit" @click="submit" />
-    </ui-buttons-row>
+    </div>
   </div>
 </template>
 

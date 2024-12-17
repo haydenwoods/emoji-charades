@@ -1,5 +1,5 @@
 <template>
-  <div class="size-full p-6 md:p-8">
+  <div class="size-full p-4 sm:p-6">
     <transition v-if="!loading" name="fade" mode="out-in">
       <component :is="PAGE_TO_COMPONENT[page]" :key="page" />
     </transition>
