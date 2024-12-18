@@ -2,8 +2,8 @@ import { TOPICS } from "@shared/constants/topics";
 
 import { Message, InitialDataEvent } from "@shared/types/message";
 
-const IS_PUZZLE = true;
-const IS_PUZZLE_SOLVED = true;
+const IS_PUZZLE = false;
+const IS_PUZZLE_SOLVED = false;
 
 const PLAY_REQUEST_ERROR = true;
 

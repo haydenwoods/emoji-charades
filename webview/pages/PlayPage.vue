@@ -15,8 +15,10 @@ const appStore = useAppStore();
 const notificationStore = useNotificationStore();
 
 useMessageListener<PlayResponse>("PLAY_RESPONSE", (message) => {
+  notificationStore.hideNotification("PLAY_REQUEST");
+  appStore.navigateTo(appStore.mainPage);
+
   if (message.data.success === false) {
-    notificationStore.hideNotification("PLAY_REQUEST");
     notificationStore.showNotification(
       {
         id: "PLAY_FAILED",
@@ -26,7 +28,6 @@ useMessageListener<PlayResponse>("PLAY_RESPONSE", (message) => {
       },
       2000,
     );
-    appStore.navigateTo(appStore.mainPage);
   }
 });
 

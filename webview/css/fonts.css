@@ -1,9 +1,32 @@
+/* Quicksand */
 @font-face {
   font-family: "Quicksand";
-  src: url("../assets/fonts/Quicksand-VariableFont_wght.ttf");
+  font-weight: 400;
+  src:
+    url("../assets/fonts/Quicksand/Regular.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/Quicksand/Regular.woff") format("woff"),
+    url("../assets/fonts/Quicksand/Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  font-weight: 500;
+  src:
+    url("../assets/fonts/Quicksand/Medium.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/Quicksand/Medium.woff") format("woff"),
+    url("../assets/fonts/Quicksand/Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  font-weight: 600;
+  src:
+    url("../assets/fonts/Quicksand/SemiBold.eot?#iefix") format("embedded-opentype"),
+    url("../assets/fonts/Quicksand/SemiBold.woff") format("woff"),
+    url("../assets/fonts/Quicksand/SemiBold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Noto Color Emoji";
-  src: url("../assets/fonts/Noto-COLRv1.ttf");
+  src: url("../assets/fonts/NotoEmoji/Regular.ttf") format("truetype");
 }
