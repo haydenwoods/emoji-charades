@@ -1,6 +1,8 @@
 <template>
   <div class="size-full p-4 sm:p-6">
-    <transition v-if="!loading" name="fade" mode="out-in">
+    <loading-page v-if="loading" />
+
+    <transition v-else name="fade" mode="out-in">
       <component :is="PAGE_TO_COMPONENT[page]" :key="page" />
     </transition>
 
@@ -27,6 +29,8 @@ import { onInitialDataEvent } from "./messages/onInitialDataEvent";
 import { onCreateResponse } from "./messages/onCreateResponse";
 
 import { CreateResponse, InitialDataEvent } from "../shared/types/message";
+
+import LoadingPage from "./pages/LoadingPage.vue";
 
 const appStore = useAppStore();
 const { loading, page } = storeToRefs(appStore);
