@@ -54,11 +54,13 @@ Devvit.addCustomPostType({
 
     return (
       <zstack width="100%" height="100%">
+        <Loading />
+
         <webview
           id={WEBVIEW_ID}
           url="index.html"
-          height={webviewMounted ? "100%" : "0%"}
-          width={webviewMounted ? "100%" : "0%"}
+          height="100%"
+          width="100%"
           onMessage={async (event) => {
             const message = event as Message;
             // console.log(`Received message (${message.type})`, message);
@@ -74,8 +76,6 @@ Devvit.addCustomPostType({
             });
           }}
         />
-
-        {!webviewMounted && <Loading />}
       </zstack>
     );
   },

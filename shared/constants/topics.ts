@@ -188,10 +188,6 @@ export const TOPICS: Topic[] = [
     name: "Portal",
     category: Category.VIDEO_GAME,
   },
-  {
-    name: "",
-    category: Category.VIDEO_GAME,
-  },
   // Books
   {
     name: "Life of Pi",
