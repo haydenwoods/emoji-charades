@@ -11,7 +11,7 @@
 
       <template #title>
         <div class="flex flex-col gap-y-0.5 items-center">
-          <h1 class="text-xl sm:text-2xl font-medium text-center text-slate-900">
+          <h1 class="text-xl sm:text-2xl font-semibold text-center text-slate-900">
             What do these emojis represent?
           </h1>
           <h2 class="text-sm sm:text-base text-slate-500 text-center">

@@ -1,6 +1,21 @@
 <template>
   <div v-if="puzzleSummary" class="size-full flex flex-col gap-y-6 items-center justify-between">
-    <ui-topic-title class="pop-in" :topic="topic" past-tense />
+    <ui-page-header class="pop-in">
+      <template #left>
+        <ui-button size="xs" variant="plain" @click="appStore.navigateTo(Page.ABOUT)">
+          <template #icon>
+            <i-material-symbols-help-outline-rounded class="text-xl sm:text-2xl" />
+          </template>
+        </ui-button>
+      </template>
+
+      <template #title>
+        <div class="flex flex-col gap-y-1">
+          <ui-topic-title :topic="topic" past-tense />
+          <ui-emojis :animate="false" :emojis="puzzle?.clue" size="xs" />
+        </div>
+      </template>
+    </ui-page-header>
 
     <div v-if="puzzleSummary?.mostCommonGuesses.length" class="flex flex-col gap-y-4 w-full">
       <div
@@ -11,7 +26,7 @@
         <div class="flex items-center relative z-10 gap-x-2.5">
           <span class="font-medium text-amber-950">{{ puzzleGuess.rank }}.</span>
           <span class="font-medium text-amber-950">{{ puzzleGuess.guess }}</span>
-          <span class="font-medium text-slate-600 text-sm ml-auto">
+          <span class="font-medium text-slate-800 text-sm ml-auto">
             <template v-if="puzzleGuess.count === 1"> 1 guess </template>
             <template v-else> {{ puzzleGuess.count }} guesses </template>
           </span>

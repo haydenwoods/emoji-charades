@@ -1,16 +1,28 @@
 <template>
-  <transition-group tag="div" class="flex justify-center gap-3 sm:gap-4 flex-wrap" @enter="onEnter">
+  <transition-group
+    tag="div"
+    class="flex justify-center flex-wrap"
+    :class="
+      {
+        xs: 'gap-1 sm:gap-1.5',
+        sm: 'gap-2 sm:gap-3',
+        md: 'gap-3 sm:gap-4',
+      }[size]
+    "
+    @enter="onEnter"
+  >
     <ui-emoji
       v-for="(emoji, i) in emojis"
       :key="i"
-      class="pop-in emoji"
-      :class="
+      class="emoji"
+      :class="[
+        animate ? 'pop-in' : '',
         {
-          xs: 'text-3xl sm:text-4xl',
+          xs: 'text-2xl sm:text-[1.75rem]',
           sm: 'text-4xl sm:text-5xl',
           md: 'text-5xl sm:text-6xl',
-        }[size]
-      "
+        }[size],
+      ]"
     >
       {{ emoji }}
     </ui-emoji>
@@ -22,9 +34,10 @@ import { animatePop } from "../../utils/animate";
 
 type Size = "xs" | "sm" | "md";
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     size?: Size;
+    animate?: boolean;
   }>(),
   {
     size: "md",
@@ -35,6 +48,7 @@ withDefaults(
 const emojis = defineModel<string[]>("emojis");
 
 const onEnter = (element: Element) => {
+  if (!props.animate) return;
   animatePop(element);
 };
 </script>
