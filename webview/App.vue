@@ -7,9 +7,6 @@
     </transition>
 
     <app-notifications />
-
-    <!-- Load the font immediately -->
-    <span class="font-emoji hidden"> 👻 </span>
   </div>
 </template>
 

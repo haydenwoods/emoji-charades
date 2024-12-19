@@ -26,6 +26,7 @@
     url("../assets/fonts/Quicksand/SemiBold.ttf") format("truetype");
 }
 
+/* Noto Color Emoji */
 @font-face {
   font-family: "Noto Color Emoji";
   src: url("../assets/fonts/NotoEmoji/Regular.ttf") format("truetype");

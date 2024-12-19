@@ -32,6 +32,7 @@ declare module 'vue' {
     INotoTwoOclock: typeof import('~icons/noto/two-oclock')['default']
     UiButton: typeof import('./components/ui/UiButton.vue')['default']
     UiButtonsRow: typeof import('./components/ui/UiButtonsRow.vue')['default']
+    UiEmoji: typeof import('./components/ui/UiEmoji.vue')['default']
     UiEmojiKeyboard: typeof import('./components/ui/UiEmojiKeyboard.vue')['default']
     UiEmojiKeyboardButton: typeof import('./components/ui/UiEmojiKeyboardButton.vue')['default']
     UiEmojis: typeof import('./components/ui/UiEmojis.vue')['default']

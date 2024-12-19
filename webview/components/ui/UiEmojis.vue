@@ -1,9 +1,9 @@
 <template>
   <transition-group tag="div" class="flex justify-center gap-3 sm:gap-4 flex-wrap" @enter="onEnter">
-    <span
+    <ui-emoji
       v-for="(emoji, i) in emojis"
       :key="i"
-      class="pop-in emoji font-emoji select-none"
+      class="pop-in emoji"
       :class="
         {
           xs: 'text-3xl sm:text-4xl',
@@ -13,7 +13,7 @@
       "
     >
       {{ emoji }}
-    </span>
+    </ui-emoji>
   </transition-group>
 </template>
 

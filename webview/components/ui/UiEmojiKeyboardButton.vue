@@ -4,9 +4,9 @@
       <slot name="icon"></slot>
     </span>
 
-    <span v-else-if="emoji" class="font-emoji text-3xl sm:text-4xl">
+    <ui-emoji v-else-if="emoji" class="text-3xl sm:text-4xl">
       {{ emoji.value }}
-    </span>
+    </ui-emoji>
   </button>
 </template>
 
