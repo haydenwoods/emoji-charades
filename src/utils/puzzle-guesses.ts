@@ -19,7 +19,7 @@ export const getPuzzleGuessRange = async (
   redis: RedisClient,
   postId: string,
   min: number = 0,
-  max: number,
+  max: number = 4,
 ): Promise<PuzzleGuess[]> => {
   const guessCountString = await redis.get(getPuzzleGuessCountKey(postId));
   if (!guessCountString) return [];
@@ -27,7 +27,7 @@ export const getPuzzleGuessRange = async (
   const guessCount = parseInt(guessCountString);
   const guesses = await redis.zRange(getPuzzleGuessesKey(postId), min, max - 1, {
     reverse: true,
-    by: "score",
+    by: "rank",
   });
 
   return guesses.map<PuzzleGuess>(({ member: guess, score: count }, index) => ({

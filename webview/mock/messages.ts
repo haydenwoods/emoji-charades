@@ -24,7 +24,7 @@ const timeout = (ms: number) => {
 
 const onMountedEvent = () => {
   const now = new Date().toISOString();
-  const topic = TOPICS.find(({ name }) => name === "Parks and Recreation") ?? TOPICS[0];
+  const topic = TOPICS.find(({ name }) => name === "Barking up the wrong tree") ?? TOPICS[0];
 
   const data: InitialDataEvent["data"] = {
     playerXP: 24,
@@ -40,7 +40,7 @@ const onMountedEvent = () => {
     data.puzzle = {
       id: "t3_12345",
       topic,
-      clue: ["📺", "🛝", "➕", "🏃"],
+      clue: ["💬", "🐶", "⬆️", "🚫", "🌳"],
       createdBy: data.user.id,
       createdByUsername: "Spleentacular",
       createdAt: now,

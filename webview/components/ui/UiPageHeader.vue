@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex items-start">
-    <div class="basis-1/6">
+    <div class="basis-1/8">
       <slot name="left">
         <ui-button
           v-if="showBack"
@@ -31,7 +31,7 @@
       </slot>
     </div>
 
-    <div class="basis-1/6">
+    <div class="basis-1/8">
       <slot name="right"></slot>
     </div>
   </div>
