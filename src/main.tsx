@@ -2,49 +2,25 @@ import { Devvit, useState } from "@devvit/public-api";
 
 import { WEBVIEW_ID } from "@/constants/webview.js";
 
+import { sendMessage } from "./utils/message.js";
+
 import { Loading } from "./components/Loading.js";
 
 import { Message } from "@shared/types/message.js";
-import { MessageHandler } from "./types/message-handler.js";
 
-import { onWebviewMountedRequest } from "./messages/onWebviewMountedRequest.js";
-import { onPuzzleCreateRequest } from "./messages/onPuzzleCreateRequest.js";
-import { onPuzzleGuessRequest } from "./messages/onPuzzleGuessRequest.js";
-import { onLeaderboardRequest } from "./messages/onLeaderboardRequest.js";
-import { onPlayRequest } from "./messages/onPlayRequest.js";
-import { onPuzzleSummaryRequest } from "./messages/onPuzzleSummaryRequest.js";
-import { sendMessage } from "./utils/message.js";
+import { MESSAGE_TYPE_TO_HANDLER } from "./messages/index.js";
 
-const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
-  WEBVIEW_MOUNTED_REQUEST: onWebviewMountedRequest,
-  PUZZLE_CREATE_REQUEST: onPuzzleCreateRequest,
-  PUZZLE_GUESS_REQUEST: onPuzzleGuessRequest,
-  LEADERBOARD_REQUEST: onLeaderboardRequest,
-  PLAY_REQUEST: onPlayRequest,
-  PUZZLE_SUMMARY_REQUEST: onPuzzleSummaryRequest,
-};
+// Menu items
+import "./menu-items/addMenuPost.js";
+import "./menu-items/addTopic.js";
+import "./menu-items/addCategory.js";
+// Forms
+import "./forms/addTopic.js";
+import "./forms/addCategory.js";
 
 Devvit.configure({
   redditAPI: true,
   redis: true,
-});
-
-Devvit.addMenuItem({
-  label: "Add Emoji Charades menu post",
-  location: "subreddit",
-  forUserType: "moderator",
-  onPress: async (_event, context) => {
-    const { subredditName } = context;
-    if (!subredditName) return;
-
-    const post = await context.reddit.submitPost({
-      title: "Emoji Charades",
-      subredditName,
-      preview: <Loading />,
-    });
-
-    context.ui.navigateTo(post);
-  },
 });
 
 Devvit.addCustomPostType({
@@ -66,7 +42,7 @@ Devvit.addCustomPostType({
             const message = event as Message;
             console.log(`Received message (${message.type})`, message);
 
-            const handler = MESSAGE_TO_HANDLER[message.type];
+            const handler = MESSAGE_TYPE_TO_HANDLER[message.type];
             if (!handler) return;
 
             const response = await handler({
@@ -79,7 +55,7 @@ Devvit.addCustomPostType({
             });
             if (!response) return;
 
-            sendMessage(context, response);
+            sendMessage(context.ui, response);
           }}
         />
       </zstack>

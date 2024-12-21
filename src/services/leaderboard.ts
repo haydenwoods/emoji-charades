@@ -19,19 +19,17 @@ export class LeaderboardService extends Service {
   }
 
   async getTop(limit: number): Promise<LeaderboardItem[]> {
-    const range = await this.playerXPRepository.getRange(0, limit - 1);
-    console.log(range);
+    const playerXPRange = await this.playerXPRepository.getRange(0, limit - 1);
 
     // Get the all the players from the range members
     const players = await Promise.all(
-      range.map(async ({ member: playerId }) => {
+      playerXPRange.map(async ({ member: playerId }) => {
         return await this.playerRepository.get(playerId);
       }),
     );
-    console.log(players);
 
     // Construct the leaderboard
-    const leaderboard = range.map<LeaderboardItem>(({ score: xp }, index) => ({
+    const leaderboard = playerXPRange.map<LeaderboardItem>(({ score: xp }, index) => ({
       username: players[index]?.username ?? "Unknown Player",
       xp,
       rank: index + 1,

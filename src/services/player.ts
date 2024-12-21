@@ -93,7 +93,9 @@ export class PlayerService extends Service {
     }
 
     const promises: Promise<unknown>[] = [
+      // Update the Player
       this.playerRepository.set(id, player),
+      // Update the Puzzle guesses and guesses count
       this.puzzleGuessesRepository.add(puzzle.id, input),
     ];
 

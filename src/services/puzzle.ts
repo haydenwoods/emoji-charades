@@ -37,10 +37,12 @@ export class PuzzleService extends Service {
   }
 
   async getSummary(id: Puzzle["id"]): Promise<PuzzleSummary> {
-    const guessCount = await this.puzzleGuessesRepository.getCount(id);
+    const [guessCount, guessesRange] = await Promise.all([
+      this.puzzleGuessesRepository.getCount(id),
+      this.puzzleGuessesRepository.getRange(id, 0, 4),
+    ]);
 
-    const mostCommonGuesses = await this.puzzleGuessesRepository.getRange(id, 0, 4);
-    const mostCommonGuessesSummary = mostCommonGuesses.map<PuzzleSummaryGuess>(
+    const mostCommonGuesses = guessesRange.map<PuzzleSummaryGuess>(
       ({ member: guess, score: count }, index) => ({
         guess,
         count,
@@ -51,7 +53,7 @@ export class PuzzleService extends Service {
 
     return {
       guessCount,
-      mostCommonGuesses: mostCommonGuessesSummary,
+      mostCommonGuesses,
     };
   }
 }
