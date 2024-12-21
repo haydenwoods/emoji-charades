@@ -11,7 +11,7 @@ export const getPostCompletedCommentText = (
 
   let incorrectGuessesString = "";
   if (incorrectGuesses.length === 1) {
-    incorrectGuessesString = `My only guess was *"${incorrectGuesses[0]}"*`;
+    incorrectGuessesString = `My only guess was *"${incorrectGuesses[0].input}"*`;
   } else {
     incorrectGuessesString = incorrectGuesses.reduce<string>((acc, { input }, index) => {
       const isFirst = index === 0;

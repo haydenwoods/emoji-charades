@@ -92,29 +92,30 @@ export class PlayerService extends Service {
       player.playedPuzzles.push(playedPuzzle);
     }
 
-    // TODO: Defer some of these tasks to scheduled functions
+    const promises: Promise<unknown>[] = [
+      this.playerRepository.set(id, player),
+      this.puzzleGuessesRepository.add(puzzle.id, input),
+    ];
+
     if (correct) {
+      promises.push(
+        this.reddit.submitComment({
+          id: puzzle.id,
+          text: getPostCompletedCommentText(playedPuzzle),
+        }),
+      );
+
       // Add XP to the guesser
       let xpGained = CORRECT_GUESS_XP;
       const guessesCount = playedPuzzle.guesses.length;
       if (guessesCount <= 1) xpGained += SINGLE_GUESS_XP;
-      await this.playerXPRepository.add(id, xpGained);
+      promises.push(this.playerXPRepository.add(id, xpGained));
 
       // Add XP to the creator
-      await this.playerXPRepository.add(id, PUZZLE_CREATOR_CORRECT_GUESS_XP);
-
-      // Add a comment to the post
-      await this.reddit.submitComment({
-        id: puzzle.id,
-        text: getPostCompletedCommentText(playedPuzzle),
-      });
+      promises.push(this.playerXPRepository.add(puzzle.createdBy, PUZZLE_CREATOR_CORRECT_GUESS_XP));
     }
 
-    // Update the player
-    await this.playerRepository.set(id, player);
-
-    // Track the guess input and count
-    await this.puzzleGuessesRepository.add(puzzle.id, input);
+    await Promise.all(promises);
 
     return {
       updatedPlayer: player,
