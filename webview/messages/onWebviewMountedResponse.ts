@@ -1,11 +1,10 @@
 import { useAppStore } from "@/stores/app";
 
-import { sendMessage } from "@/utils/messages";
-
-import { InitialDataEvent } from "@shared/types/message";
 import { MessageHandler } from "@/types/message";
+import { WebviewMountedResponse } from "@shared/types/message";
 
-export const onInitialDataEvent: MessageHandler<InitialDataEvent> = (message) => {
+export const onWebviewMountedResponse: MessageHandler<WebviewMountedResponse> = (message) => {
+  if (!message.data) return;
   const { user, player, playerXP, playerRank, puzzle, puzzleSummary } = message.data;
 
   const appStore = useAppStore();
@@ -22,8 +21,4 @@ export const onInitialDataEvent: MessageHandler<InitialDataEvent> = (message) =>
 
   appStore.loading = false;
   appStore.navigateTo(appStore.mainPage);
-
-  sendMessage({
-    type: "LOADED_EVENT",
-  });
 };

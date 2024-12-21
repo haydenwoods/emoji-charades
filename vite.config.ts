@@ -19,15 +19,15 @@ export default defineConfig({
       autoInstall: true,
     }),
   ],
-  root: path.resolve(__dirname, "webview"),
+  root: "./webview",
   build: {
-    outDir: path.resolve(__dirname, "webroot"),
+    outDir: "../webroot",
     emptyOutDir: true,
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "webview"),
-      "@shared": path.resolve(__dirname, "shared"),
+      "@": path.resolve(__dirname, "./webview"),
+      "@shared": path.resolve(__dirname, "./shared"),
     },
   },
 });

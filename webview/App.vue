@@ -22,22 +22,27 @@ import { sendMessage } from "./utils/messages";
 
 import { useMessageListener } from "./composables/useMessageListener";
 
-import { onInitialDataEvent } from "./messages/onInitialDataEvent";
-import { onCreateResponse } from "./messages/onCreateResponse";
+import { onPuzzleCreateResponse } from "./messages/onPuzzleCreateResponse";
+import { onWebviewMountedResponse } from "./messages/onWebviewMountedResponse";
 
-import { CreateResponse, InitialDataEvent } from "../shared/types/message";
+import { PuzzleCreateResponse, WebviewMountedResponse } from "../shared/types/message";
 
 import LoadingPage from "./pages/LoadingPage.vue";
 
 const appStore = useAppStore();
 const { loading, page } = storeToRefs(appStore);
 
-useMessageListener<InitialDataEvent>("INITIAL_DATA_EVENT", onInitialDataEvent);
-useMessageListener<CreateResponse>("CREATE_RESPONSE", onCreateResponse);
+useMessageListener<WebviewMountedResponse>("WEBVIEW_MOUNTED_RESPONSE", onWebviewMountedResponse);
+useMessageListener<PuzzleCreateResponse>("PUZZLE_CREATE_RESPONSE", onPuzzleCreateResponse);
+
+useMessageListener("*", (message) => {
+  console.log(`Received message (${message.type})`, message);
+});
 
 onMounted(() => {
   sendMessage({
-    type: "MOUNTED_EVENT",
+    type: "WEBVIEW_MOUNTED_REQUEST",
+    data: undefined,
   });
 });
 </script>

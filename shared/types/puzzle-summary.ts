@@ -1,5 +1,11 @@
-import { PuzzleGuess } from "./puzzle-guess.js";
+export type PuzzleSummaryGuess = {
+  guess: string;
+  count: number;
+  percentage: number;
+  rank: number;
+};
 
 export type PuzzleSummary = {
-  mostCommonGuesses: PuzzleGuess[];
+  guessCount: number;
+  mostCommonGuesses: PuzzleSummaryGuess[];
 };

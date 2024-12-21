@@ -1,11 +1,11 @@
 import { Timestamped } from "./index.js";
 
-type Guess = {
+export type Guess = {
   input: string;
   correct: boolean;
 } & Timestamped;
 
-type PlayedPuzzle = {
+export type PlayedPuzzle = {
   id: string;
   guesses: Guess[];
   xpGained?: number;

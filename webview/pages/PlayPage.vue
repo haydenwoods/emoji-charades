@@ -1,3 +1,7 @@
+<template>
+  <div></div>
+</template>
+
 <script setup lang="ts">
 import { onMounted } from "vue";
 
@@ -18,7 +22,7 @@ useMessageListener<PlayResponse>("PLAY_RESPONSE", (message) => {
   notificationStore.hideNotification("PLAY_REQUEST");
   appStore.navigateTo(appStore.mainPage);
 
-  if (message.data.success === false) {
+  if (message.success === false) {
     notificationStore.showNotification(
       {
         id: "PLAY_FAILED",
@@ -36,6 +40,7 @@ onMounted(() => {
 
   sendMessage({
     type: "PLAY_REQUEST",
+    data: undefined,
   });
 });
 </script>

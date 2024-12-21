@@ -1,8 +1,8 @@
 import { TOPICS } from "@shared/constants/topics";
 
-import { Message, InitialDataEvent } from "@shared/types/message";
+import { Message, WebviewMountedResponse } from "@shared/types/message";
 
-const IS_PUZZLE = true;
+const IS_PUZZLE = false;
 const IS_PUZZLE_SOLVED = false;
 
 const PLAY_REQUEST_ERROR = true;
@@ -26,7 +26,7 @@ const onMountedEvent = () => {
   const now = new Date().toISOString();
   const topic = TOPICS.find(({ name }) => name === "Parks and Recreation") ?? TOPICS[0];
 
-  const data: InitialDataEvent["data"] = {
+  const data: WebviewMountedResponse["data"] = {
     playerXP: 24,
     playerRank: 17593,
   };
@@ -74,7 +74,8 @@ const onMountedEvent = () => {
   }
 
   sendMessage({
-    type: "INITIAL_DATA_EVENT",
+    type: "WEBVIEW_MOUNTED_RESPONSE",
+    success: true,
     data,
   });
 };
@@ -84,17 +85,19 @@ export const mockMessages = () => {
     const message = event.data as Message;
 
     switch (message.type) {
-      case "MOUNTED_EVENT":
+      case "WEBVIEW_MOUNTED_REQUEST":
         return onMountedEvent();
-      case "CREATE_REQUEST":
+      case "PUZZLE_CREATE_REQUEST":
         await timeout(2000);
         return sendMessage({
-          type: "CREATE_RESPONSE",
+          type: "PUZZLE_CREATE_RESPONSE",
+          success: true,
         });
       case "LEADERBOARD_REQUEST":
         await timeout(1500);
         return sendMessage({
           type: "LEADERBOARD_RESPONSE",
+          success: true,
           data: {
             leaderboard: [
               { username: "Spleentacular", xp: 6392, rank: 1 },
@@ -114,8 +117,10 @@ export const mockMessages = () => {
         await timeout(1000);
         return sendMessage({
           type: "PUZZLE_SUMMARY_RESPONSE",
+          success: true,
           data: {
             puzzleSummary: {
+              guessCount: 2498,
               mostCommonGuesses: [
                 { guess: "Parks and Recreation", count: 1892, percentage: 72, rank: 1 },
                 { guess: "The Office", count: 482, percentage: 22, rank: 2 },
@@ -130,9 +135,7 @@ export const mockMessages = () => {
         await timeout(1000);
         return sendMessage({
           type: "PLAY_RESPONSE",
-          data: {
-            success: !PLAY_REQUEST_ERROR,
-          },
+          success: !PLAY_REQUEST_ERROR,
         });
     }
   });

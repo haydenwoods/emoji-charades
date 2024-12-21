@@ -50,10 +50,10 @@ const onClickBackspace = () => {
 const onClickSubmit = () => {
   if (clue.value.length <= 0) return;
 
-  notificationStore.showLoading("CREATE_REQUEST", "Creating");
+  notificationStore.showLoading("PUZZLE_CREATE_REQUEST", "Creating");
 
   sendMessage({
-    type: "CREATE_REQUEST",
+    type: "PUZZLE_CREATE_REQUEST",
     data: {
       topic: toRaw(topic.value),
       clue: toRaw(clue.value),

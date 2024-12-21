@@ -5,19 +5,20 @@ import { WEBVIEW_ID } from "@/constants/webview.js";
 import { Loading } from "./components/Loading.js";
 
 import { Message } from "@shared/types/message.js";
-import { MessageHandler } from "./types/message.js";
+import { MessageHandler } from "./types/message-handler.js";
 
-import { onMountedEvent } from "./messages/onMountedEvent.js";
-import { onCreateRequest } from "./messages/onCreateRequest.js";
-import { onGuessRequest } from "./messages/onGuessRequest.js";
+import { onWebviewMountedRequest } from "./messages/onWebviewMountedRequest.js";
+import { onPuzzleCreateRequest } from "./messages/onPuzzleCreateRequest.js";
+import { onPuzzleGuessRequest } from "./messages/onPuzzleGuessRequest.js";
 import { onLeaderboardRequest } from "./messages/onLeaderboardRequest.js";
 import { onPlayRequest } from "./messages/onPlayRequest.js";
 import { onPuzzleSummaryRequest } from "./messages/onPuzzleSummaryRequest.js";
+import { sendMessage } from "./utils/message.js";
 
 const MESSAGE_TO_HANDLER: Partial<Record<Message["type"], MessageHandler<any>>> = {
-  MOUNTED_EVENT: onMountedEvent,
-  CREATE_REQUEST: onCreateRequest,
-  GUESS_PUZZLE_REQUEST: onGuessRequest,
+  WEBVIEW_MOUNTED_REQUEST: onWebviewMountedRequest,
+  PUZZLE_CREATE_REQUEST: onPuzzleCreateRequest,
+  PUZZLE_GUESS_REQUEST: onPuzzleGuessRequest,
   LEADERBOARD_REQUEST: onLeaderboardRequest,
   PLAY_REQUEST: onPlayRequest,
   PUZZLE_SUMMARY_REQUEST: onPuzzleSummaryRequest,
@@ -63,10 +64,12 @@ Devvit.addCustomPostType({
           width="100%"
           onMessage={async (event) => {
             const message = event as Message;
-            // console.log(`Received message (${message.type})`, message);
+            console.log(`Received message (${message.type})`, message);
 
-            const messageHandler = MESSAGE_TO_HANDLER[message.type];
-            await messageHandler?.({
+            const handler = MESSAGE_TO_HANDLER[message.type];
+            if (!handler) return;
+
+            const response = await handler({
               message,
               context,
               app: {
@@ -74,6 +77,9 @@ Devvit.addCustomPostType({
                 setWebviewMounted,
               },
             });
+            if (!response) return;
+
+            sendMessage(context, response);
           }}
         />
       </zstack>

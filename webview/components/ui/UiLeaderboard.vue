@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { LeaderboardItem } from "../../../shared/types/message";
+import { LeaderboardItem } from "../../../shared/types/leaderboard";
 
 const MAX_ITEMS: number = 10;
 

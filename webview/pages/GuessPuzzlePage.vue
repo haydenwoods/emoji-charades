@@ -33,7 +33,11 @@
         @keydown.enter="onKeydownEnter"
       />
 
-      <ui-button label="Submit" @click="submit" />
+      <ui-button label="Submit" @click="submit">
+        <template #icon>
+          <i-noto-outbox-tray />
+        </template>
+      </ui-button>
     </div>
   </div>
 </template>
@@ -68,7 +72,7 @@ const submit = () => {
   const correct = isGuessCorrect(trimmedInput, topic);
 
   sendMessage({
-    type: "GUESS_PUZZLE_REQUEST",
+    type: "PUZZLE_GUESS_REQUEST",
     data: {
       input: trimmedInput,
     },

@@ -140,6 +140,7 @@ export const TOPICS: Topic[] = [
   },
   {
     name: "The Simpsons",
+    alternateNames: ["Simpsons"],
     category: Category.TV_SHOW,
   },
   {

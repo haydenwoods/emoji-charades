@@ -19,7 +19,8 @@ import { useNotificationStore } from "../stores/notification";
 
 import { sendMessage } from "../utils/messages";
 
-import { LeaderboardResponse, LeaderboardItem } from "../../shared/types/message";
+import { LeaderboardResponse } from "../../shared/types/message";
+import { LeaderboardItem } from "../../shared/types/leaderboard";
 import { useMessageListener } from "../composables/useMessageListener";
 
 const appStore = useAppStore();
@@ -30,6 +31,11 @@ const { leaderboard } = storeToRefs(leaderboardStore);
 
 const you = computed<LeaderboardItem | undefined>(() => {
   if (!player.value || !playerXP.value || !playerRank.value) return;
+
+  const leaderboardUsernames = leaderboard.value?.map(({ username }) => username) ?? [];
+  const isOnLeaderboard = leaderboardUsernames.includes(player.value.username);
+  if (isOnLeaderboard) return;
+
   return {
     username: "You",
     xp: playerXP.value,
