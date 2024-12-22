@@ -11,12 +11,12 @@ import { Message } from "@shared/types/message.js";
 import { MESSAGE_TYPE_TO_HANDLER } from "./messages/index.js";
 
 // Menu items
-import "./menu-items/addMenuPost.js";
+import "./menu-items/install.js";
 import "./menu-items/addTopic.js";
-import "./menu-items/addCategory.js";
+import "./menu-items/addTopicCategory.js";
 // Forms
 import "./forms/addTopic.js";
-import "./forms/addCategory.js";
+import "./forms/addTopicCategory.js";
 
 Devvit.configure({
   redditAPI: true,

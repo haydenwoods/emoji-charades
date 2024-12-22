@@ -1,6 +1,6 @@
 import { Context } from "@devvit/public-api";
 
-import { CreatePuzzleData, PuzzleRepository } from "@/repositories/puzzle.js";
+import { SetPuzzleData, PuzzleRepository } from "@/repositories/puzzle.js";
 
 import { Service } from "./index.js";
 
@@ -26,9 +26,9 @@ export class PuzzleService extends Service {
     return this.puzzleRepository.get(id);
   }
 
-  async create(subredditName: string, puzzleData: CreatePuzzleData) {
+  async create(subredditName: string, puzzleData: SetPuzzleData) {
     const post = await createPuzzlePost(this.reddit, subredditName);
-    const puzzle = await this.puzzleRepository.create(post.id, puzzleData);
+    const puzzle = await this.puzzleRepository.set(post.id, puzzleData);
 
     return {
       post,

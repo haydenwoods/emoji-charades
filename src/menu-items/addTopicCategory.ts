@@ -1,12 +1,12 @@
 import { Devvit } from "@devvit/public-api";
 
-import { addCategoryForm } from "@/forms/addCategory.js";
+import { addTopicCategoryForm } from "@/forms/addTopicCategory.js";
 
 Devvit.addMenuItem({
-  label: "Emoji Charades: Add category",
+  label: "Emoji Charades: Add topic category",
   location: "subreddit",
   forUserType: "moderator",
   onPress: async (_, context) => {
-    context.ui.showForm(addCategoryForm);
+    context.ui.showForm(addTopicCategoryForm);
   },
 });
