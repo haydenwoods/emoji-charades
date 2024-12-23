@@ -11,7 +11,7 @@
 
       <template #title>
         <div class="flex flex-col gap-y-1">
-          <ui-topic-title :topic="topic" past-tense />
+          <ui-topic-title :topic="topic" :topic-category="topicCategory" past-tense />
           <ui-emojis :animate="false" :emojis="puzzle?.clue" size="xs" />
         </div>
       </template>
@@ -81,8 +81,12 @@ const topic = computed(() => {
   return puzzle.value?.topic;
 });
 
+const topicCategory = computed(() => {
+  return appStore.topicCategories.find(({ name }) => name === topic.value.category);
+});
+
 useMessageListener<PuzzleSummaryResponse>("PUZZLE_SUMMARY_RESPONSE", (message) => {
-  puzzleSummary.value = message.data.puzzleSummary;
+  puzzleSummary.value = message.data?.puzzleSummary;
   notificationStore.hideNotification("PUZZLE_SUMMARY_REQUEST");
 
   nextTick(() => {
@@ -96,6 +100,7 @@ onMounted(() => {
 
     sendMessage({
       type: "PUZZLE_SUMMARY_REQUEST",
+      data: undefined,
     });
   } else {
     animatePop(".pop-in", "in", true);

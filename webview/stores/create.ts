@@ -1,13 +1,21 @@
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 
-import { Topic } from "../../shared/types/topic";
-import { getRandomTopic } from "../../shared/utils/topics";
+import { useAppStore } from "./app";
+
+import { getRandomTopic } from "../utils/topic";
+
+import { Topic } from "@shared/types/db/topic";
 
 export const REROLL_TOPIC_MAX: number = 5;
 
 export const useCreateStore = defineStore("create", () => {
-  const topic = ref<Topic>(getRandomTopic().topic);
+  const appStore = useAppStore();
+
+  const topic = ref<Topic>(getRandomTopic(appStore.topics));
+  const topicCategory = computed(() => {
+    return appStore.topicCategories.find(({ name }) => name === topic.value.category);
+  });
 
   const rerollTopicExclude = ref<Topic[]>([]);
   const rerollTopicCount = ref<number>(0);
@@ -20,24 +28,14 @@ export const useCreateStore = defineStore("create", () => {
   });
 
   const rerollTopic = () => {
-    // Add the current topic to the excludes (so it doesn't come up again)
     rerollTopicExclude.value.push(topic.value);
-
-    // Get the next topic randomly
-    const { topic: randomTopic, remaining } = getRandomTopic({
-      exclude: rerollTopicExclude.value,
-    });
-
-    if (!topic.value) return;
-    topic.value = randomTopic;
-
-    // Check if there is no other topics remaining, set hasTopicsRemaining accordingly
+    topic.value = getRandomTopic(appStore.topics, rerollTopicExclude.value);
     rerollTopicCount.value += 1;
-    rerollTopicRemaining.value = remaining;
   };
 
   return {
     topic,
+    topicCategory,
 
     rerollTopicCount,
     rerollTopicDisabled,

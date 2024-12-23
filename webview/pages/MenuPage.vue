@@ -41,7 +41,7 @@
           class="bg-slate-200 border-2 border-slate-300 p-1.5 sm:p-2 rounded-xl flex gap-x-2 items-center justify-center text-slate-800 not-disabled:cursor-pointer hover:scale-103 transition-transform col-span-2 active:scale-97"
           @click="appStore.navigateTo(Page.ABOUT)"
         >
-          <i-noto-question-mark class="text-xl sm:text-2xl" />
+          <i-noto-thinking-face class="text-xl sm:text-2xl" />
           <span class="text-lg sm:text-xl font-medium text-slate-900">What is this?</span>
         </button>
       </div>

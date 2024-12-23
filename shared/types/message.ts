@@ -1,7 +1,8 @@
 import { User } from "./user.js";
 import { Puzzle } from "./db/puzzle.js";
 import { Player } from "./db/player.js";
-import { Topic } from "./topic.js";
+import { Topic } from "./db/topic.js";
+import { TopicCategory } from "./db/topic-category.js";
 import { PuzzleSummary } from "./puzzle-summary.js";
 import { LeaderboardItem } from "./leaderboard.js";
 
@@ -26,6 +27,8 @@ export type WebviewMountedResponse = Response<
     playerRank?: number;
     puzzle?: Puzzle;
     puzzleSummary?: PuzzleSummary;
+    topics: Topic[];
+    topicCategories: TopicCategory[];
   }
 >;
 

@@ -22,7 +22,6 @@ declare module 'vue' {
     INotoPersonShrugging: typeof import('~icons/noto/person-shrugging')['default']
     INotoPlayButton: typeof import('~icons/noto/play-button')['default']
     INotoPlus: typeof import('~icons/noto/plus')['default']
-    INotoQuestionMark: typeof import('~icons/noto/question-mark')['default']
     INotoSevenOclock: typeof import('~icons/noto/seven-oclock')['default']
     INotoSixOclock: typeof import('~icons/noto/six-oclock')['default']
     INotoTenOclock: typeof import('~icons/noto/ten-oclock')['default']

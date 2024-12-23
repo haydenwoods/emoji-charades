@@ -23,10 +23,10 @@
 
       <div class="flex flex-wrap justify-center gap-2">
         <ui-topic-category-tag
-          v-for="category in EXAMPLE_CATEGORIES"
-          :key="category"
+          v-for="topicCategory in EXAMPLE_TOPIC_CATEGORIES"
+          :key="topicCategory.name"
+          :topic-category="topicCategory"
           size="lg"
-          :category="category"
         />
       </div>
 
@@ -38,9 +38,9 @@
 <script setup lang="ts">
 import { useAppStore } from "../stores/app";
 
-import { Category } from "../../shared/types/category";
+import { DEFAULT_TOPIC_CATEGORIES } from "../../shared/constants/topic-categories";
 
-const EXAMPLE_CATEGORIES: Category[] = [Category.MOVIE, Category.TV_SHOW, Category.PHRASE];
+const EXAMPLE_TOPIC_CATEGORIES = DEFAULT_TOPIC_CATEGORIES.slice(0, 3);
 
 const appStore = useAppStore();
 </script>

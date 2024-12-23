@@ -5,6 +5,8 @@ import { Player } from "../../shared/types/db/player";
 import { Puzzle } from "../../shared/types/db/puzzle";
 import { PuzzleSummary } from "../../shared/types/puzzle-summary";
 import { User } from "../../shared/types/user";
+import { Topic } from "../../shared/types/db/topic";
+import { TopicCategory } from "../../shared/types/db/topic-category";
 
 export enum Page {
   MENU,
@@ -24,7 +26,11 @@ export const useAppStore = defineStore("app", () => {
   // Navigation
   const page = ref<Page>(Page.MENU);
 
-  // User
+  // Config
+  const topics = ref<Topic[]>([]);
+  const topicCategories = ref<TopicCategory[]>([]);
+
+  // User / Player
   const user = ref<User>();
   const player = ref<Player>();
   const playerXP = ref<number>();
@@ -56,6 +62,8 @@ export const useAppStore = defineStore("app", () => {
   return {
     loading,
     page: readonly(page),
+    topics,
+    topicCategories,
     user,
     player,
     playerXP,

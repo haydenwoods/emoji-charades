@@ -6,6 +6,8 @@ import { PlayerService } from "@/services/player.js";
 import { PuzzleService } from "@/services/puzzle.js";
 
 import { isPlayerPuzzleCompleted } from "@/utils/player.js";
+import { TopicsService } from "@/services/topics.js";
+import { TopicCategoriesService } from "@/services/topic-categories.js";
 
 export const onWebviewMountedRequest: MessageHandler<
   WebviewMountedRequest,
@@ -33,8 +35,10 @@ export const onWebviewMountedRequest: MessageHandler<
 
   const playerService = new PlayerService(context);
   const puzzleService = new PuzzleService(context);
+  const topicsService = new TopicsService(context);
+  const topicCategoriesService = new TopicCategoriesService(context);
 
-  const [player, playerXP, playerRank, puzzle] = await Promise.all([
+  const [player, playerXP, playerRank, puzzle, topics, topicCategories] = await Promise.all([
     playerService.getOrCreate(userId, {
       username: user.username,
       playedPuzzles: [],
@@ -42,6 +46,8 @@ export const onWebviewMountedRequest: MessageHandler<
     playerService.getXP(userId),
     playerService.getRank(userId),
     puzzleService.get(postId),
+    topicsService.get(),
+    topicCategoriesService.get(),
   ]);
 
   const isPuzzleCompleted = isPlayerPuzzleCompleted(player, postId);
@@ -57,6 +63,8 @@ export const onWebviewMountedRequest: MessageHandler<
       playerRank,
       puzzle,
       puzzleSummary,
+      topics: topics ?? [],
+      topicCategories: topicCategories ?? [],
     },
   };
 };

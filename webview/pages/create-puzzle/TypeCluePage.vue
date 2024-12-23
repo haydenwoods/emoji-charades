@@ -2,7 +2,7 @@
   <div class="size-full flex flex-col items-center">
     <ui-page-header @click:back="appStore.navigateTo(appStore.mainPage)">
       <template #title>
-        <ui-topic-title :topic="topic" />
+        <ui-topic-title :topic="topic" :topic-category="topicCategory" />
       </template>
     </ui-page-header>
 
@@ -34,7 +34,7 @@ const appStore = useAppStore();
 const notificationStore = useNotificationStore();
 const createStore = useCreateStore();
 
-const { topic } = storeToRefs(createStore);
+const { topic, topicCategory } = storeToRefs(createStore);
 
 const clue = ref<string[]>([]);
 

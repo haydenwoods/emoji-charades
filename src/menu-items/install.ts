@@ -1,15 +1,17 @@
 import { Devvit } from "@devvit/public-api";
 
+import { FlairService } from "@/services/flairs.js";
+
 import { TopicCategoriesService } from "@/services/topic-categories.js";
+import { TopicsService } from "@/services/topics.js";
+import { ConfigService } from "@/services/config.js";
 
 import { createMenuPost } from "@/utils/posts/menu.js";
 
-import { TOPIC_CATEGORIES } from "@/seed/topic-categories.js";
-import { TopicsService } from "@/services/topics.js";
-import { TOPICS } from "@/seed/topics.js";
-import { ConfigService } from "@/services/config.js";
 import { PUZZLE_FLAIR } from "@/flairs/puzzle.js";
-import { FlairService } from "@/repositories/flairs.js";
+
+import { DEFAULT_TOPICS } from "@shared/constants/topics.js";
+import { DEFAULT_TOPIC_CATEGORIES } from "@shared/constants/topic-categories.js";
 
 Devvit.addMenuItem({
   label: "Emoji Charades: Install",
@@ -27,8 +29,8 @@ Devvit.addMenuItem({
     const config = await configService.get();
 
     // Seed Topics and TopicCategories
-    await topicsService.add(...TOPICS);
-    await topicCategoriesService.add(...TOPIC_CATEGORIES);
+    await topicsService.add(...DEFAULT_TOPICS);
+    await topicCategoriesService.add(...DEFAULT_TOPIC_CATEGORIES);
 
     // Create or edit the exisiting flairs and store the ID in config
     const puzzleFlair = await flairService.createOrEdit(

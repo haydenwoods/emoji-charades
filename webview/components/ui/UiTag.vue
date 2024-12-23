@@ -1,6 +1,6 @@
 <template>
   <span :class="cvaTag({ size, color })">
-    <span v-if="$slots.icon">
+    <span v-if="$slots.icon" class="font-emoji">
       <slot name="icon"></slot>
     </span>
     <span>

@@ -1,6 +1,6 @@
 import { TopicCategory } from "@shared/types/db/topic-category.js";
 
-export const TOPIC_CATEGORIES: Omit<TopicCategory, "createdAt">[] = [
+export const DEFAULT_TOPIC_CATEGORIES: Omit<TopicCategory, "createdAt">[] = [
   {
     name: "Movie",
     emoji: "🎬",

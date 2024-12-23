@@ -5,9 +5,13 @@ import { WebviewMountedResponse } from "@shared/types/message";
 
 export const onWebviewMountedResponse: MessageHandler<WebviewMountedResponse> = (message) => {
   if (!message.data) return;
-  const { user, player, playerXP, playerRank, puzzle, puzzleSummary } = message.data;
+  const { user, player, playerXP, playerRank, puzzle, puzzleSummary, topics, topicCategories } =
+    message.data;
 
   const appStore = useAppStore();
+
+  appStore.topics = topics;
+  appStore.topicCategories = topicCategories;
 
   appStore.user = user;
   appStore.player = player;

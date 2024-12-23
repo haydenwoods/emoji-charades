@@ -1,323 +1,322 @@
-import { Category } from "@shared/types/category.js";
-import { Topic } from "@shared/types/topic.js";
+import { Topic } from "@shared/types/db/topic.js";
 
-export const TOPICS: Topic[] = [
+export const DEFAULT_TOPICS: Omit<Topic, "createdAt">[] = [
   // Movies
   {
     name: "There Will be Blood",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Dune",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "In Bruges",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "The Wolf of Wall Street",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Fight Club",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Alien",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "The Godfather",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Goodfellas",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Saving Private Ryan",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "The Truman Show",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Die Hard",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Ferris Bueller's Day Off",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Titanic",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "E.T. The Extra-Terrestrial",
     alternateNames: ["ET", "E.T.", "ET The Extra Terrestrial"],
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "The Wizard of Oz",
     alternateNames: ["Wizard of Oz"],
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Star Wars",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "The Lord of the Rings",
     alternateNames: ["Lord of the Rings"],
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "The Lion King",
     alternateNames: ["Lion King"],
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Jurassic Park",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "The Dark Knight",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   {
     name: "Pirates of the Caribbean",
-    category: Category.MOVIE,
+    category: "Movie",
   },
   // TV Shows
   {
     name: "Silicon Valley",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "Parks and Recreation",
     alternateNames: ["Parks and Rec", "P and R", "P&R"],
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "The Office",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "Mr Robot",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "Breaking Bad",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "Better Call Saul",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "Lost",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "Game of Thrones",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "Arcane",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "Stranger Things",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "The Big Bang Theory",
     alternateNames: ["Big Bang Theory"],
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "The Simpsons",
     alternateNames: ["Simpsons"],
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   {
     name: "How I Met Your Mother",
-    category: Category.TV_SHOW,
+    category: "TV Show",
   },
   // Video Games
   {
     name: "Farming Simulator",
     alternateNames: ["Farming Sim"],
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   {
     name: "Grand Theft Auto",
     alternateNames: ["GTA"],
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   {
     name: "Counter-Strike",
     alternateNames: ["Counter Strike", "CS", "CS2", "CSGO", "Global Offensive"],
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   {
     name: "Call of Duty",
     alternateNames: ["COD"],
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   {
     name: "Super Smash Bros",
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   {
     name: "Mario Kart",
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   {
     name: "Red Dead Redemption",
     alternateNames: ["RDR", "RDR2"],
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   {
     name: "The Legend of Zelda",
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   {
     name: "Portal",
-    category: Category.VIDEO_GAME,
+    category: "Video Game",
   },
   // Books
   {
     name: "Life of Pi",
-    category: Category.BOOK,
+    category: "Book",
   },
   {
     name: "Moby Dick",
-    category: Category.BOOK,
+    category: "Book",
   },
   // Characters
   {
     name: "Darth Vader",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Indiana Jones",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "James Bond",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "The Joker",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Batman",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Superman",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Gandalf",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Mario",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Iron Man",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Spider-Man",
     alternateNames: ["Spiderman"],
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Harry Potter",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Katniss Everdeen",
     alternateNames: ["Katniss"],
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Yoda",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Ron Burgundy",
-    category: Category.CHARACTER,
+    category: "Character",
   },
   {
     name: "Captain Jack Sparrow",
     alternateNames: ["Jack Sparrow"],
-    category: Category.CHARACTER,
+    category: "Character",
   },
   // Famous People
   {
     name: "Tom Hanks",
-    category: Category.FAMOUS_PERSON,
+    category: "Famous Person",
   },
   {
     name: "Taylor Swift",
-    category: Category.FAMOUS_PERSON,
+    category: "Famous Person",
   },
   {
     name: "Bill Gates",
-    category: Category.FAMOUS_PERSON,
+    category: "Famous Person",
   },
   {
     name: "Barack Obama",
-    category: Category.FAMOUS_PERSON,
+    category: "Famous Person",
   },
   {
     name: "Lionel Messi",
-    category: Category.FAMOUS_PERSON,
+    category: "Famous Person",
   },
   {
     name: "Leonardo DiCaprio",
-    category: Category.FAMOUS_PERSON,
+    category: "Famous Person",
   },
   // Phrase
   {
     name: "Cost an arm and a leg",
-    category: Category.PHRASE,
+    category: "Idiom",
   },
   {
     name: "Barking up the wrong tree",
-    category: Category.PHRASE,
+    category: "Idiom",
   },
   {
     name: "Beat around the bush",
-    category: Category.PHRASE,
+    category: "Idiom",
   },
   {
     name: "Break the ice",
-    category: Category.PHRASE,
+    category: "Idiom",
   },
   {
     name: "Hold your horses",
-    category: Category.PHRASE,
+    category: "Idiom",
   },
   {
     name: "See eye to eye",
-    category: Category.PHRASE,
+    category: "Idiom",
   },
   {
     name: "Curiosity killed the cat",
-    category: Category.PHRASE,
+    category: "Idiom",
   },
   {
     name: "Cry over spilt milk",
-    category: Category.PHRASE,
+    category: "Idiom",
   },
 ];

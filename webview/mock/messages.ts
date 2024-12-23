@@ -1,4 +1,5 @@
-import { TOPICS } from "@shared/constants/topics";
+import { DEFAULT_TOPICS } from "@shared/constants/topics";
+import { DEFAULT_TOPIC_CATEGORIES } from "@shared/constants/topic-categories";
 
 import { Message, WebviewMountedResponse } from "@shared/types/message";
 
@@ -24,11 +25,17 @@ const timeout = (ms: number) => {
 
 const onMountedEvent = () => {
   const now = new Date().toISOString();
-  const topic = TOPICS.find(({ name }) => name === "Parks and Recreation") ?? TOPICS[0];
+  const topic =
+    DEFAULT_TOPICS.find(({ name }) => name === "Parks and Recreation") ?? DEFAULT_TOPICS[0];
 
   const data: WebviewMountedResponse["data"] = {
     playerXP: 24,
     playerRank: 17593,
+    topics: DEFAULT_TOPICS.map((topic) => ({ ...topic, createdAt: now })),
+    topicCategories: DEFAULT_TOPIC_CATEGORIES.map((topicCategory) => ({
+      ...topicCategory,
+      createdAt: now,
+    })),
   };
 
   data.user = {
