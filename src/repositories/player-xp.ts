@@ -17,7 +17,7 @@ export class PlayerXPRepository extends Repository {
   }
 
   async getXP(id: Player["id"]) {
-    return await this.redis.zScore(this.KEYS.playerXP, id);
+    return this.redis.zScore(this.KEYS.playerXP, id);
   }
 
   async getRank(id: Player["id"]) {

@@ -12,7 +12,7 @@ export class PuzzleGuessesRepository extends Repository {
   }
 
   async getRange(id: Puzzle["id"], minIndex: number, maxIndex: number) {
-    return await this.redis.zRange(this.KEYS.puzzleGuesses(id), minIndex, maxIndex, {
+    return this.redis.zRange(this.KEYS.puzzleGuesses(id), minIndex, maxIndex, {
       reverse: true,
       by: "rank",
     });

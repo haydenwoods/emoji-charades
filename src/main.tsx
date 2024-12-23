@@ -12,6 +12,7 @@ import { MESSAGE_TYPE_TO_HANDLER } from "./messages/index.js";
 
 // Menu items
 import "./menu-items/install.js";
+import "./menu-items/logConfig.js";
 import "./menu-items/addTopic.js";
 import "./menu-items/addTopicCategory.js";
 // Forms

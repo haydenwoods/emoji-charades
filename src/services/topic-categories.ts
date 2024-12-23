@@ -15,6 +15,10 @@ export class TopicCategoriesService extends Service {
     this.topicCategoriesRepository = new TopicCategoriesRepository(context.redis);
   }
 
+  async get() {
+    return this.topicCategoriesRepository.get();
+  }
+
   async add(...newTopicCategories: Omit<TopicCategory, "createdAt">[]) {
     let existingTopicCategories = await this.topicCategoriesRepository.get();
     if (!existingTopicCategories) existingTopicCategories = [];
@@ -32,8 +36,6 @@ export class TopicCategoriesService extends Service {
     const updatedTopicCategories = [...existingTopicCategories, ...newWithTimestamps];
     await this.topicCategoriesRepository.set(updatedTopicCategories);
 
-    return {
-      updatedTopicCategories,
-    };
+    return updatedTopicCategories;
   }
 }

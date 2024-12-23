@@ -96,7 +96,7 @@ export class PlayerService extends Service {
       // Update the Player
       this.playerRepository.set(id, player),
       // Update the Puzzle guesses and guesses count
-      this.puzzleGuessesRepository.add(puzzle.id, input),
+      this.puzzleGuessesRepository.add(puzzle.id, correct ? puzzle.topic.name : input),
     ];
 
     if (correct) {

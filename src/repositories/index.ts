@@ -8,6 +8,7 @@ export class Repository {
   }
 
   KEYS = {
+    config: "config",
     topics: "topics",
     topicCategories: "topic-categories",
     player: (playerId: string) => `player:${playerId}`,
